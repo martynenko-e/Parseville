@@ -1,0 +1,30 @@
+@font-face {
+    font-family: 'Conv_Facunda';
+    src: url('../fonts/Facunda.eot');
+    src: local('☺'), url('../fonts/Facunda.woff') format('woff'), url('../fonts/Facunda.ttf') format('truetype'), url('../fonts/Facunda.svg') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Conv_Facunda_Shadow';
+    src: url('../fonts/Facunda Shadow.eot');
+    src: local('☺'), url('../fonts/Facunda Shadow.woff') format('woff'), url('../fonts/Facunda Shadow.ttf') format('truetype'), url('../fonts/Facunda Shadow.svg') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Conv_BebasNeue_Book';
+    src: url('../fonts/BebasNeue Book.eot');
+    src: local('☺'), url('../fonts/BebasNeue Book.woff') format('woff'), url('../fonts/BebasNeue Book.ttf') format('truetype'), url('../fonts/BebasNeue Book.svg') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Conv_BebasNeue_Regular';
+    src: url('../fonts/BebasNeue Regular.eot');
+    src: local('☺'), url('../fonts/BebasNeue Regular.woff') format('woff'), url('../fonts/BebasNeue Regular.ttf') format('truetype'), url('../fonts/BebasNeue Regular.svg') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
