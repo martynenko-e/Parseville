@@ -23,4 +23,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.index, name='index'),
     url(r'^test/', views.test, name='test'),
+    url(r'^api/link/', views.api_link, name='api_link'),
+    url(r'^api/vacancy/', views.api_vacancy, name='api_vacancy'),
+    url(r'^api/company/', views.api_company, name='api_company'),
     ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
