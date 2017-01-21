@@ -5,6 +5,9 @@ class MetaModel(models.Model):
     def __str__(self):
         return self.name.replace(" ", "-")
 
+    class Meta:
+        abstract = True
+
 
 class Country(MetaModel):
     name = models.CharField(max_length=200, null=False, blank=False, db_index=True)
