@@ -1,25 +1,30 @@
 from django.db import models
 
 
-class Country(models.Model):
+class MetaModel(models.Model):
+    def __str__(self):
+        return self.name.replace(" ", "-")
+
+
+class Country(MetaModel):
     name = models.CharField(max_length=200, null=False, blank=False, db_index=True)
     alias = models.CharField(max_length=200)
     show = models.BooleanField(default=False)
 
 
-class City(models.Model):
+class City(MetaModel):
     name = models.CharField(max_length=200, null=False, blank=False, db_index=True)
     alias = models.CharField(max_length=200)
     show = models.BooleanField(default=False)
 
 
-class ProgrammingLanguage(models.Model):
+class ProgrammingLanguage(MetaModel):
     name = models.CharField(max_length=200, null=False, blank=False, db_index=True)
     alias = models.CharField(max_length=200)
     show = models.BooleanField(default=False)
 
 
-class Company(models.Model):
+class Company(MetaModel):
     name = models.CharField(max_length=200)
     alias = models.CharField(max_length=200)
     description = models.TextField(blank=True, null=True)
@@ -31,7 +36,7 @@ class Company(models.Model):
     show_on_main = models.BooleanField(default=False)
 
 
-class Vacancy(models.Model):
+class Vacancy(MetaModel):
     name = models.CharField(max_length=200)
     alias = models.CharField(max_length=200)
     description = models.TextField(blank=True, null=True)
@@ -44,7 +49,7 @@ class Vacancy(models.Model):
     programming_language = models.ForeignKey(ProgrammingLanguage)
 
 
-class UsefullLinks(models.Model):
+class UsefullLinks(MetaModel):
     name = models.CharField(max_length=200)
     alias = models.CharField(max_length=200)
     description = models.TextField(blank=True, null=True)

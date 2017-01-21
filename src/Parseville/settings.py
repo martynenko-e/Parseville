@@ -28,6 +28,7 @@ DEBUG = True
 ALLOWED_HOSTS = [
     '192.168.99.100',
 	'localhost',
+    '138.68.77.7',
 ]
 
 
@@ -80,13 +81,13 @@ WSGI_APPLICATION = 'Parseville.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',  # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'ENGINE': 'django.db.backends.sqlite3',  # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
         'NAME': os.environ["DB_NAME"],  # Or path to database file if using
         # The following settings are not used with sqlite3:
-        'USER': os.environ["DB_USER"],
-        'PASSWORD': os.environ["DB_PASS"],
-        'HOST': os.environ["DB_HOST"],  # Name of docker container
-        'PORT': os.environ["DB_PORT"],  # Set to empty string for default.
+        # 'USER': os.environ["DB_USER"],
+        # 'PASSWORD': os.environ["DB_PASS"],
+        # 'HOST': os.environ["DB_HOST"],  # Name of docker container
+        # 'PORT': os.environ["DB_PORT"],  # Set to empty string for default.
     }
 }
 

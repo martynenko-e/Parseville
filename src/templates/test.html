@@ -1,10 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <script src="http://code.jquery.com/jquery-1.4.2.min.js"></script>
+    <script type="text/javascript">
+        $.ajaxSetup({
+//            headers: {
+//                'Origin': 'http://138.68.77.7:8000',
+//            }
+        });
+        $.getJSON('http://138.68.77.7:8000/api/vacancy/', function (json) {
+            $("h1")[0].innerText = json[0].name;
+        });
+    </script>
 </head>
 <body>
-
+<h1>Some Text</h1>
 </body>
 </html>
