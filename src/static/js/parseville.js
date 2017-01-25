@@ -15,52 +15,51 @@ function getJsonOfVacancies() {
     };
     xhr.send(null);
 }
-
-//todo try to use jQuery Template plug in to parse vacancy with below method
-/*dummy realisation*/
 function parseVacancies(arrayOfVacancies) {
-    let div = document.getElementById('vacancies');
     for (let i = 0; i < arrayOfVacancies.length; i++) {
-        div.appendChild(document.createTextNode('Programming language: ' + arrayOfVacancies[i].programming_language));
-        div.appendChild(document.createTextNode('city: ' + arrayOfVacancies[i].city));
-        div.appendChild(document.createTextNode('name: ' + arrayOfVacancies[i].name));
-        div.appendChild(document.createTextNode('url: ' + arrayOfVacancies[i].url));
-        div.appendChild(document.createTextNode('company: ' + arrayOfVacancies[i].company));
-        div.appendChild(document.createTextNode('description: ' + arrayOfVacancies[i].description));
+        renderHTML(arrayOfVacancies[i]);
     }
-    let test = document.getElementById('button');
-    test.style.color = 'red';
 }
+//todo try to use jQuery Template plug in to parse vacancy with below method
 function renderHTML(vacancy) {
-    let div = document.getElementById('vacancies');
-    /*for (let property in vacancy) {
-        /!*switch (vacancy[property]) {
+    let div = document.getElementById('vacancies'),
+        divVacancy = document.createElement('div');
+    divVacancy.className = 'vacancy';
+    div.appendChild(divVacancy);
+    for (let property in vacancy) {
+        switch (property) {
             case ('programming_language'):
-                let programmingLanguage = div.appendChild(document.createElement('p'));
-                programmingLanguage.innerHTML = vacancy[property];
+                let programmingLanguage = divVacancy.appendChild(document.createElement('p'));
+                programmingLanguage.className = 'vacancy-prog-lang';
+                programmingLanguage.innerHTML = "Programming language: " + vacancy[property];
                 break;
             case ('city'):
-                let city = div.appendChild(document.createElement('p'));
-                city.innerHTML = vacancy[property];
+                let city = divVacancy.appendChild(document.createElement('p'));
+                city.className = 'vacancy-city';
+                city.innerHTML = "City: " + vacancy[property];
                 break;
             case ('name'):
-                let name = div.appendChild(document.createElement('p'));
-                name.innerHTML = vacancy[property];
+                let name = divVacancy.appendChild(document.createElement('p'));
+                name.className = 'vacancy-name';
+                name.innerHTML = "Name: " + vacancy[property];
                 break;
             case ('url'):
-                let url = div.appendChild(document.createElement('p'));
-                url.innerHTML = vacancy[property];
+                let url = divVacancy.appendChild(document.createElement('p'));
+                url.className = 'vacancy-url';
+                url.innerHTML = "Url: " + vacancy[property];
                 break;
             case ('company'):
-                let company = div.appendChild(document.createElement('p'));
-                company.innerHTML = vacancy[property];
+                let company = divVacancy.appendChild(document.createElement('p'));
+                company.className = 'vacancy-company';
+                company.innerHTML = "Company: " + vacancy[property];
                 break;
             case ('description'):
-                let description = div.appendChild(document.createElement('p'));
-                description.innerHTML = vacancy[property];
+                let description = divVacancy.appendChild(document.createElement('p'));
+                description.className = 'vacancy-description';
+                description.innerHTML = "Description: " + vacancy[property];
                 break;
             default:
                 throw new Error('There is no proper item in vacancy found');
-        }*!/
-    }*/
+        }
+    }
 }
