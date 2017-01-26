@@ -35,13 +35,21 @@ def test(save):
                     company_url = company.a['href'][:-5]
                     soup = get_soup_from_url(company_url, save)
                     if soup:
-                        company_name = soup.find('div', class_="g-company-wrapper").h1.text.strip()
-                        company_logo = soup.find('div', class_="g-company-wrapper").img['src']
+                        company_name = soup.find('div', class_="g-company-wrapper")
+                        if company_name:
+                            company_name = company_name.h1.text.strip()
+                        company_logo = soup.find('div', class_="g-company-wrapper")
+                        if company_logo:
+                            company_logo = company_logo.img['src']
                         company_offices = soup.find('div', class_="offices")
                         if company_offices:
                             company_offices = company_offices.text.strip()
-                        compamy_site = soup.find('div', class_="site").a['href']
-                        company_description = soup.find('div', class_="b-company-about").find('div', class_="b-typo").div
+                        company_site = soup.find('div', class_="site")
+                        if company_site:
+                            company_site = company_site.a['href']
+                        company_description = soup.find('div', class_="b-company-about").find('div', class_="b-typo")
+                        if company_description:
+                            company_description = company_description.div
                         company_obj, created = Company.objects.get_or_create(name=company_name)
                         if created:
                             print "company added: %s" % company_name
@@ -50,7 +58,7 @@ def test(save):
                                 company_obj.description = company_description.encode('utf-8')
                             except Exception as e:
                                 print "description is fail for company: %s" % company_name
-                            company_obj.site_url = compamy_site
+                            company_obj.site_url = company_site
                             company_obj.country = "Ukraine"
                             company_obj.office = company_offices
                             company_obj.save()

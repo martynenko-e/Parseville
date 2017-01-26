@@ -25,7 +25,7 @@ def test(request):
 @csrf_exempt
 def api_link(request):
     data = []
-    link_objects = UsefullLink.objects.all()
+    link_objects = UsefullLink.objects.filter(show=True)
     for link_obj in link_objects:
         data.append({
             "name": link_obj.name,
@@ -40,14 +40,15 @@ def api_link(request):
 @csrf_exempt
 def api_company(request):
     data = []
-    company_objects = Company.objects.all()
+    company_objects = Company.objects.filter(show=True)
     for company_obj in company_objects:
         data.append({
             "name": company_obj.name,
             "description": company_obj.description,
             "site_url": company_obj.site_url,
-            "country": company_obj.country.name,
-            "city": company_obj.city.name,
+            "country": company_obj.country,
+            "office": company_obj.office,
+            "logo": company_obj.logo.url,
         })
     response = HttpResponse(json.dumps(data), content_type='application/json')
     response["Access-Control-Allow-Origin"] = '*'
@@ -57,7 +58,7 @@ def api_company(request):
 @csrf_exempt
 def api_vacancy(request):
     data = []
-    vacancy_objects = Vacancy.objects.all()
+    vacancy_objects = Vacancy.objects.filter(show=True)
     for vacancy_obj in vacancy_objects:
         data.append({
             "name": vacancy_obj.name,
