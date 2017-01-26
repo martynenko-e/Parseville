@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'Parseville',
+    'parseville',
 ]
 
 MIDDLEWARE = [
@@ -55,7 +55,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'Parseville.urls'
+ROOT_URLCONF = 'parseville.urls'
 
 TEMPLATES = [
     {
@@ -73,7 +73,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'Parseville.wsgi.application'
+WSGI_APPLICATION = 'parseville.wsgi.application'
 
 
 # Database
@@ -82,7 +82,7 @@ WSGI_APPLICATION = 'Parseville.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',  # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': os.environ["DB_NAME"],  # Or path to database file if using
+        'NAME': os.path.join(BASE_DIR, 'db/parseville.db'),  # Or path to database file if using
         # The following settings are not used with sqlite3:
         # 'USER': os.environ["DB_USER"],
         # 'PASSWORD': os.environ["DB_PASS"],
@@ -128,10 +128,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
 STATIC_URL = '/static/'
-
-# STATIC_ROOT = '/static/'
-
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
     '/code/static/',

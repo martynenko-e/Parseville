@@ -26,5 +26,5 @@ urlpatterns = [
     url(r'^api/link/', views.api_link, name='api_link'),
     url(r'^api/vacancy/', views.api_vacancy, name='api_vacancy'),
     url(r'^api/company/', views.api_company, name='api_company'),
-    url(r'^api/test/', views.add_test_data),
-    ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) \
+      + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
