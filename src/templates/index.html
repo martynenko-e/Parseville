@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load staticfiles %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -6,8 +7,11 @@
     <link rel="stylesheet" href="../static/css/reset.css">
     <link rel="stylesheet" href="../static/css/fonts.css">
     <link rel="stylesheet" href="../static/css/style.css">
-    <!--<script src="../static/js/parseville.js" type="text/javascript" defer></script>-->
-    <!--<script src="../static/js/parseville.js" type="text/javascript" defer></script>-->
+    <script src="{% static 'js/parseville.js' %}"></script>
+
+    <!--Add bootstrap-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
 
     <!--
         Wanna see some info on index page?
@@ -16,43 +20,47 @@
     -->
 </head>
 <body>
-    <header class="header">
-        <div class="container">
-            <div class="header-logo">
-                <a href="#" class="header-logo-link">
-                    <img src="../static/images/parseville.jpg" alt="nema" class="header-logo-img">
-                    <p class="logo-text"></p>
-                </a>
-            </div>
-            <div class="header-searchbar">
-                    <form class="header-searchbar-form" action="" method="">
-                        <input type="search" placeholder="tick and search -- >">
-                        <button>Search</button>
-                    </form>
-                <!--<input type="text" name="search" placeholder="Search..">-->
-            </div>
-            <div class="header-menu">
-                <ul class="header-menu-list">
-                    <li class="header-menu-list-item"><a href="#" class="menu-list-item-link">Home</a></li>
-                    <li class="header-menu-list-item"><a href="#" class="menu-list-item-link">About</a></li>
-                    <li class="header-menu-list-item"><a href="#" class="menu-list-item-link">For more</a></li>
-                    <li class="header-menu-list-item"><a href="#" class="menu-list-item-link">Contacts</a></li>
-                </ul>
-            </div>
+
+<header class="header">
+    <div class="header-logo">
+        <a href="#" class="header-logo-link">
+            <img src="../static/images/parseville.jpg" alt="nema" class="header-logo-img">
+            <p class="logo-text"></p>
+        </a>
+    </div>
+    <div class="header-searchbar">
+        <form class="header-searchbar-form" action="" method="">
+            <input type="search" placeholder="tick and search -- >">
+            <button>Search</button>
+        </form>
+        <!--<input type="text" name="search" placeholder="Search..">-->
+    </div>
+    <div class="header-menu">
+        <ul class="header-menu-list">
+            <li class="header-menu-list-item"><a href="#" class="menu-list-item-link">Home</a></li>
+            <li class="header-menu-list-item"><a href="#" class="menu-list-item-link">About</a></li>
+            <li class="header-menu-list-item"><a href="#" class="menu-list-item-link">For more</a></li>
+            <li class="header-menu-list-item"><a href="#" class="menu-list-item-link">Contacts</a></li>
+        </ul>
+    </div>
+
+</header>
+<div class="container">
+    <div class="content row">
+        <!--<h1>CONTENT Free</h1>-->
+        <!--<button id="button-vacancy" onclick="getJsonOfVacancies()">Wanna some Vacancies info?</button>-->
+        <button id="button-company" onclick="getJsonOfCompanies()">Wanna some Company info?</button>
+        <div id="usefull-links" class="row">
+            <!--generate data from api/links here-->
         </div>
-    </header>
-    <div class="content">
-        <div class="container">
-            <h1>CONTENT Free</h1>
-            <!--<button id="button-vacancy" onclick="getJsonOfVacancies()">Wanna some Vacancies info?</button>
-            <button id="button-company" onclick="getJsonOfCompanies()">Wanna some Company info?</button>
-
-            <div id="vacancies"></div>
-
-            <div id="companies"></div>-->
+        <div id="vacancies" class="row">
+            <!--generate data from api/vacancy here-->
+        </div>
+        <div id="companies" class="row">
+            <!--generate data from api/company here-->
         </div>
     </div>
-    <div class="footer">
+    <div class="row">
         <div class="footer-get-in-touch">
             <div class="map">
                 <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d2540.0244182976703!2d30.416830679721098!3d50.459269979577!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1suk!2sua!4v1478846918907"
@@ -71,14 +79,15 @@
             </div>
         </div>
         <div class="social">
-            <div class="container">
-                <div class="social-wrapper">
-                    <div class="copyright-text">
-                        Copyright. © 2017 No Name. All rights are Outsouce. Designed by why.
-                    </div>
+
+            <div class="social-wrapper">
+                <div class="copyright-text">
+                    Copyright. © 2017 No Name. All rights are Outsouce. Designed by why.
                 </div>
             </div>
+
         </div>
     </div>
+</div>
 </body>
 </html>
