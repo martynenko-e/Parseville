@@ -137,7 +137,29 @@ h1 {
     letter-spacing: 10px;
 }
 
+/*    ------====--- Links Style ------======-------    */
+
+/*
+
+    todo --->
+     1. divide page into 3 parts //links//companies//vacancies//
+     2. make it to look like:
+           ________   ________   ________   ________
+          |        | |        | |        | |        |
+          |        | |        | |        | |        |
+           --------   --------   --------   --------
+     3. in the end of each "part"  apply button "more"
+
+*/
+
+
+
+/*    ------====--- END OF Links Style ------======-------    */
+
 /* -------- END OF CONTENT STYLE --------- */
+
+
+
 /* ----==== FOOTER STYLE ===----  */
 
 .footer-get-in-touch {
