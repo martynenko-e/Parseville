@@ -1,5 +1,7 @@
 <html>
 <head>
+    <link rel="stylesheet" href="../static/css/reset.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script src="http://code.jquery.com/jquery-1.4.2.min.js"></script>
     <script src="../static/js/jquery.loadTemplate-1.4.4.js"></script>
     <script src="../static/js/jquery.loadTemplate-1.4.4.min.js"></script>
@@ -17,10 +19,29 @@
 </head>
 <body>
 <h1>Some Text</h1>
-<button id="button" onclick="getJsonOfVacancies()">Red Button. Dont push me!</button>
+<button id="button-vacancy" onclick="getJsonOfVacancies()">Wanna some Vacancies info?</button>
+<button id="button-company" onclick="getJsonOfCompanies()">Wanna some Company info?</button>
 
-<div id="vacancies">
-
+<div class="form">
+    <form name="form" id="form">
+        <label for="female">Female</label>
+        <input type="radio" id="female" name="sex" value="female"/>
+        <label for="male">Male</label>
+        <input type="radio" id="male" name="sex" value="male">
+        </br>
+        </br>
+        <span id="message"></span>
+        <input type="button" id="done" value="Done!">
+    </form>
 </div>
+
+<div id="vacancies"></div>
+
+<div id="companies"></div>
+<script>
+
+
+
+</script>
 </body>
 </html>

@@ -1,6 +1,7 @@
+ /* ==============    Vacancies Parser ==================*/
 function getJsonOfVacancies() {
-    let xhr = new XMLHttpRequest();
-    let url = "http://138.68.77.7:8000/api/vacancy/";
+    let xhr = new XMLHttpRequest(),
+        url = "http://138.68.77.7:8000/api/vacancy/";
     xhr.open("GET", url, true);
     xhr.onreadystatechange = () => {
         if (xhr.readyState === 4) {
@@ -17,11 +18,11 @@ function getJsonOfVacancies() {
 }
 function parseVacancies(arrayOfVacancies) {
     for (let i = 0; i < arrayOfVacancies.length; i++) {
-        renderHTML(arrayOfVacancies[i]);
+        renderVacancyHTML(arrayOfVacancies[i]);
     }
 }
 //todo try to use jQuery Template plug in to parse vacancy with below method
-function renderHTML(vacancy) {
+function renderVacancyHTML(vacancy) {
     let div = document.getElementById('vacancies'),
         divVacancy = document.createElement('div');
     divVacancy.className = 'vacancy';
@@ -63,3 +64,74 @@ function renderHTML(vacancy) {
         }
     }
 }
+ /* ==============  END OF   ---- >   Vacancies Parser ==================*/
+
+  /* ==============    Companies  Parser ==================*/
+function getJsonOfCompanies() {
+    let xhr = new XMLHttpRequest(),
+        url = "http://138.68.77.7:8000/api/company/";
+    xhr.open("GET", url, true);
+    xhr.onreadystatechange = () => {
+        if (xhr.readyState === 4) {
+            let status = xhr.status;
+            if (status >= 200 && status < 300 || status === 304) {
+                let companies = JSON.parse(xhr.responseText); // returns string of JSON
+                parseCompanies(companies);
+            } else {
+                console.log(xhr.status + ":" + xhr.statusText);
+            }
+        }
+    };
+    xhr.send(null);
+}
+function parseCompanies(arrayOfCompanies) {
+    for (let i = 0; i < arrayOfCompanies.length; i++) {
+        renderCompanyHTML(arrayOfCompanies[i]);
+    }
+
+}
+function renderCompanyHTML(company) {
+    let div = document.getElementById('companies'),
+        divCompany = document.createElement('div');
+    divCompany.className = 'company';
+    div.appendChild(divCompany);
+    for (let property in company) {
+        switch (property) {
+            case ('name'):
+                let name = divCompany.appendChild(document.createElement('p'));
+                name.className = 'company-name';
+                name.innerHTML = "Name: " + company[property];
+                break;
+            case ('office'):
+                let office = divCompany.appendChild(document.createElement('p'));
+                office.className = 'company-office';
+                office.innerHTML = "Office: " + company[property];
+                break;
+            case ('country'):
+                let country = divCompany.appendChild(document.createElement('p'));
+                country.className = 'company-name';
+                country.innerHTML = "Name: " + company[property];
+                break;
+            case ('site_url'):
+                let site_url = divCompany.appendChild(document.createElement('p'));
+                site_url.className = 'company-url';
+                site_url.innerHTML = "Url: " + company[property];
+                break;
+            case ('logo'):
+                let logo = divCompany.appendChild(document.createElement('img'));
+                logo.className = 'company-company';
+                logo.src = "http://138.68.77.7:8000" + company[property];
+                break;
+            case ('description'):
+                let description = divCompany.appendChild(document.createElement('p'));
+                description.className = 'company-description';
+                description.innerHTML = "Description: " + company[property];
+                break;
+            default:
+                throw new Error('There is no proper item in Company found');
+        }
+    }
+}
+  /* ==============  END OF --->   Companies  Parser ==================*/
+
+/* ---------   jQuery Testing --------------*/
