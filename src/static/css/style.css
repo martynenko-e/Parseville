@@ -147,6 +147,9 @@ font-family: 'Conv_BebasNeue_Book';
     position: relative;
     top: -70px;
 }
+.company-name {
+    text-decoration: underline;
+}
 /*    ------====--- Links Style ------======-------    */
 
 /*
