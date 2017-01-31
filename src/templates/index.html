@@ -6,15 +6,11 @@
 	<link rel="stylesheet" href="../static/css/reset.css">
 	<link rel="stylesheet" href="../static/css/fonts.css">
 	<link rel="stylesheet" href="../static/css/style.css">
-	<link rel="stylesheet" href="../static/css/ajaxpagination.css">
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>
 	<script src="../static/js/parseville.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-	<script src="../static/js/ajaxpagination.js"></script>
 	<!--Add bootstrap-->
 	<script src="../static/js/bootstrap.min.js"></script>
-	<script>
+	<!--<script>
 		$(document).ready(() => {
 			$('body').restive({
 				breakpoints: ['240', '320', '480', '640', '960', '1024', '1280'],
@@ -36,7 +32,7 @@
 		});
 		
 		$.restive.endMulti();
-	</script>
+	</script>-->
 </head>
 <body>
 <header class="header">
@@ -69,25 +65,28 @@
 
 <div class="content">
 	<div class="container">
-		<button id="button-company" onclick="getJsonOfCompanies()">Wanna some Company info?</button>
-		<div id="usefull-links" class="row">
-			<div class="links-date"></div>
-			<div class="links-title"></div>
-			<!--generate data from api/links here-->
-			<div class="links-show-all" id="links-show-all">
-				<p>More</p>
-				<input type="button" value="View more">
+		<div class="wrapper">
+			<div id="usefull-links" class="row">
+				<div class="links-date"></div>
+				<div class="links-title"></div>
+				<!--generate data from api/links here-->
+				<div class="links-show-all" id="links-show-all">
+					<!--<p>More</p>
+					<input type="button" value="View more">-->
+				</div>
 			</div>
-		</div>
-		<div id="vacancies" class="row">
-			<!--generate data from api/vacancy here-->
-		</div>
-		<div id="companies" class="row">
-			<!--generate data from api/company here-->
-			<!--<div id="paginate-top"> </div>
-			<div id="bookcontent"> </div>
-			<div id="paginate-bottom"> </div>-->
-		
+			<div id="vacancies" class="row">
+				<button id="button-vacancy" onclick="">Wanna see some street magic?</button>
+				<!--generate data from api/vacancy here-->
+			</div>
+			<div id="companies" class="row">
+				<button id="button-company" onclick="getJsonOfCompanies()">Wanna some Company info?</button>
+				<!--generate data from api/company here-->
+				<!--<div id="paginate-top"> </div>
+				<div id="bookcontent"> </div>
+				<div id="paginate-bottom"> </div>-->
+			
+			</div>
 		</div>
 	</div>
 </div>

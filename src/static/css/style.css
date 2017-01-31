@@ -127,15 +127,25 @@ font-family: 'Conv_BebasNeue_Book';
 .content {
     min-height:500px !important;
 }
-/*
-.row {
-    background-color: aquamarine;
+
+.row:first-child {
+    min-height: 100px;
 }
-*/
+.row {
+    min-height: 500px;
+    border: 1px solid black;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
 
-#usefull-links {
-    text-align: center;
-
+#companies .company-param {
+    margin: 2px 0 2px 3px;
+    font-family: 'Conv_BebasNeue_Regular', sans-serif;
+    letter-spacing: 1px;
+}
+.company-logo {
+    position: relative;
+    top: -70px;
 }
 /*    ------====--- Links Style ------======-------    */
 
@@ -163,12 +173,18 @@ font-family: 'Conv_BebasNeue_Book';
 
 
 /*    ------====--- END OF Links Style ------======-------    */
+/* --------==== VACANCY STYLE   =====-------*/
+/* --------==== END OF VACANCY STYLE   =====-------*/
+
+/* --------==== COMPANY STYLE   =====-------*/
+/* --------==== END OF COMPANY STYLE   =====-------*/
+
 
 /* -------- END OF CONTENT STYLE --------- */
 
 
 
-/* ----==== FOOTER STYLE ===----  */
+/* ----=== FOOTER STYLE ===----  */
 
 .footer-get-in-touch {
     overflow: hidden;

@@ -87,64 +87,69 @@ function getJsonOfCompanies() {
 }
 function parseCompanies(arrayOfCompanies) {
     for (let i = 0; i < arrayOfCompanies.length; i++) {
-        showInfoOfSingleCompany(arrayOfCompanies[i]);
+        renderCompanyHTML(arrayOfCompanies[i]);
     }
 
 }
 function renderCompanyHTML(company) {
     let div = document.getElementById('companies'),
-        divCompany = document.createElement('div');
+        divCompany = document.createElement('div'),
+        divider = document.createElement('hr');
     divCompany.className = 'company';
     div.appendChild(divCompany);
     for (let property in company) {
         switch (property) {
+            case ('logo'):
+                let logo = divCompany.appendChild(document.createElement('img'));
+                logo.className = 'company-logo company-param';
+                logo.src = "http://138.68.77.7:8000" + company[property];
+                logo.style.float = 'right';
+                break;
             case ('name'):
                 let name = divCompany.appendChild(document.createElement('p'));
-                name.className = 'company-name';
+                name.className = 'company-name company-param';
                 name.innerHTML = "Name: " + company[property];
                 break;
             case ('office'):
                 let office = divCompany.appendChild(document.createElement('p'));
-                office.className = 'company-office';
+                office.className = 'company-office company-param';
                 office.innerHTML = "Office: " + company[property];
                 break;
             case ('country'):
                 let country = divCompany.appendChild(document.createElement('p'));
-                country.className = 'company-name';
-                country.innerHTML = "Name: " + company[property];
+                country.className = 'company-country company-param';
+                country.innerHTML = "Country: " + company[property];
                 break;
             case ('site_url'):
                 let site_url = divCompany.appendChild(document.createElement('p'));
-                site_url.className = 'company-url';
+                site_url.className = 'company-url company-param';
                 site_url.innerHTML = "Url: " + company[property];
                 break;
-            case ('logo'):
-                let logo = divCompany.appendChild(document.createElement('img'));
-                logo.className = 'company-company';
-                logo.src = "http://138.68.77.7:8000" + company[property];
-                break;
-            case ('description'):r
+            case ('description'):
                 let description = divCompany.appendChild(document.createElement('p'));
-                description.className = 'company-description';
-                description.innerHTML = "Description: " + company[property];
+                description.className = 'company-description company-param';
+                description.innerHTML = "Description: " + company[property].substr(8, 107);
                 break;
             default:
                 throw new Error('There is no proper item in Company found');
         }
+
+        divCompany.appendChild(divider);
     }
 }
 
-function showInfoOfSingleCompany(company) {
-    var out = "<div>";
-    out += '<p id="company-logo"><img src="http://138.68.77.7:8000' + company.logo + '"/></p>'; // id=picture
-    out += "<p id='company-name'><h2>Name: " + company.name + "</h2></p>";
-    out += "<p id='company-office'>Office: " + company.office + "</p>";
-    out += "<p id='company-country'>Country: " + company.country + "</p>";
-    out += "<p id='company-url'>URL: " + company.site_url + "</p>";
-    out += "<p id='company-description'> Description" + company.description + "</p>";
+/*function showInfoOfSingleCompany(company) {
+    var out = "<div class='company-item'>";
+
+    out += '<p class="company-logo"><img src="http://138.68.77.7:8000' + company.logo + '"/></p>'; // id=picture
+    out += "<p class='company-name'><h2>Name: " + company.name + "</h2></p>";
+    out += "<p class='company-office'>Office: " + company.office + "</p>";
+    out += "<p class='company-country'>Country: " + company.country + "</p>";
+    out += "<p class='company-url'>URL: " + company.site_url + "</p>";
+    out += "<p class='company-description'> Description" + company.description + "</p>";
     out += "</div>";
     document.getElementById("vacancies").innerHTML = out;
-}
+}*/
 /* ==============  END OF --->   Companies  Parser ==================*/
 
 /* ---------   jQuery Testing --------------*/
