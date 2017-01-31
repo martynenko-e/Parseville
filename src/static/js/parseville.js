@@ -1,9 +1,10 @@
- /* ==============    Vacancies Parser ==================*/
+/* ==============    Vacancies Parser ==================*/
+;
 function getJsonOfVacancies() {
     let xhr = new XMLHttpRequest(),
         url = "http://138.68.77.7:8000/api/vacancy/";
     xhr.open("GET", url, true);
-    xhr.onreadystatechange = () => {
+    xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
             let status = xhr.status;
             if (status >= 200 && status < 300 || status === 304) {
@@ -23,7 +24,7 @@ function parseVacancies(arrayOfVacancies) {
 }
 //todo try to use jQuery Template plug in to parse vacancy with below method
 function renderVacancyHTML(vacancy) {
-    let div = document.getElementById('vacancies'),
+    var div = document.getElementById('vacancies'),
         divVacancy = document.createElement('div');
     divVacancy.className = 'vacancy';
     div.appendChild(divVacancy);
@@ -64,14 +65,14 @@ function renderVacancyHTML(vacancy) {
         }
     }
 }
- /* ==============  END OF   ---- >   Vacancies Parser ==================*/
+/* ==============  END OF   ---- >   Vacancies Parser ==================*/
 
-  /* ==============    Companies  Parser ==================*/
+/* ==============    Companies  Parser ==================*/
 function getJsonOfCompanies() {
     let xhr = new XMLHttpRequest(),
         url = "http://138.68.77.7:8000/api/company/";
     xhr.open("GET", url, true);
-    xhr.onreadystatechange = () => {
+    xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
             let status = xhr.status;
             if (status >= 200 && status < 300 || status === 304) {
@@ -86,7 +87,7 @@ function getJsonOfCompanies() {
 }
 function parseCompanies(arrayOfCompanies) {
     for (let i = 0; i < arrayOfCompanies.length; i++) {
-        renderCompanyHTML(arrayOfCompanies[i]);
+        showInfoOfSingleCompany(arrayOfCompanies[i]);
     }
 
 }
@@ -122,7 +123,7 @@ function renderCompanyHTML(company) {
                 logo.className = 'company-company';
                 logo.src = "http://138.68.77.7:8000" + company[property];
                 break;
-            case ('description'):
+            case ('description'):r
                 let description = divCompany.appendChild(document.createElement('p'));
                 description.className = 'company-description';
                 description.innerHTML = "Description: " + company[property];
@@ -132,6 +133,18 @@ function renderCompanyHTML(company) {
         }
     }
 }
-  /* ==============  END OF --->   Companies  Parser ==================*/
+
+function showInfoOfSingleCompany(company) {
+    var out = "<div>";
+    out += '<p id="company-logo"><img src="http://138.68.77.7:8000' + company.logo + '"/></p>'; // id=picture
+    out += "<p id='company-name'><h2>Name: " + company.name + "</h2></p>";
+    out += "<p id='company-office'>Office: " + company.office + "</p>";
+    out += "<p id='company-country'>Country: " + company.country + "</p>";
+    out += "<p id='company-url'>URL: " + company.site_url + "</p>";
+    out += "<p id='company-description'> Description" + company.description + "</p>";
+    out += "</div>";
+    document.getElementById("vacancies").innerHTML = out;
+}
+/* ==============  END OF --->   Companies  Parser ==================*/
 
 /* ---------   jQuery Testing --------------*/

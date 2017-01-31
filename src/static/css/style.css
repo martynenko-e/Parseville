@@ -127,23 +127,31 @@ font-family: 'Conv_BebasNeue_Book';
 .content {
     min-height:500px !important;
 }
-
-h1 {
-    text-align: center;
-    font-size: 170px;
-    font-weight: 500;
-    margin-top: 50px;
-    font-family: 'Conv_Facunda_Shadow', sans-serif;
-    letter-spacing: 10px;
+/*
+.row {
+    background-color: aquamarine;
 }
+*/
 
+#usefull-links {
+    text-align: center;
+
+}
 /*    ------====--- Links Style ------======-------    */
 
 /*
 
     todo --->
      1. divide page into 3 parts //links//companies//vacancies//
+
+
+
      2. make it to look like:
+           ________   ________   ________   ________
+          |        | |        | |        | |        |
+          |        | |        | |        | |        |
+           --------   --------   --------   --------
+
            ________   ________   ________   ________
           |        | |        | |        | |        |
           |        | |        | |        | |        |
