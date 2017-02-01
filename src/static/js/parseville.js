@@ -96,6 +96,11 @@ function renderCompanyHTML(company) {
         divCompany = document.createElement('div'),
         divider = document.createElement('hr');
     divCompany.className = 'company';
+
+    String.prototype.trunc = String.prototype.trunc ||  // sot sure if this function has to be here
+        function(n){
+            return (this.length > n) ? this.substr(0,n-1)+'&hellip;' : this;
+        };
     div.appendChild(divCompany);
     for (let property in company) {
         switch (property) {
@@ -128,28 +133,14 @@ function renderCompanyHTML(company) {
             case ('description'):
                 let description = divCompany.appendChild(document.createElement('p'));
                 description.className = 'company-description company-param';
-                description.innerHTML = "Description: " + company[property].substr(8, 107);
+                description.innerHTML = "Description: " + company[property].trunc(100);
                 break;
             default:
                 throw new Error('There is no proper item in Company found');
         }
-
         divCompany.appendChild(divider);
     }
 }
-
-/*function showInfoOfSingleCompany(company) {
-    var out = "<div class='company-item'>";
-
-    out += '<p class="company-logo"><img src="http://138.68.77.7:8000' + company.logo + '"/></p>'; // id=picture
-    out += "<p class='company-name'><h2>Name: " + company.name + "</h2></p>";
-    out += "<p class='company-office'>Office: " + company.office + "</p>";
-    out += "<p class='company-country'>Country: " + company.country + "</p>";
-    out += "<p class='company-url'>URL: " + company.site_url + "</p>";
-    out += "<p class='company-description'> Description" + company.description + "</p>";
-    out += "</div>";
-    document.getElementById("vacancies").innerHTML = out;
-}*/
 /* ==============  END OF --->   Companies  Parser ==================*/
 
 /* ---------   jQuery Testing --------------*/
