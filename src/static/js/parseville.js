@@ -1,5 +1,11 @@
-/* ==============    Vacancies Parser ==================*/
 ;
+/* ==============    Vacancies Parser ==================*/
+/* -- a chance to cut descriptions -- */
+String.prototype.trunc = String.prototype.trunc ||
+    function(n){
+        return (this.length > n) ? this.substr(0,n-1)+'&hellip;' : this;
+    };
+
 function getJsonOfVacancies() {
     let xhr = new XMLHttpRequest(),
         url = "http://138.68.77.7:8000/api/vacancy/";
@@ -25,7 +31,8 @@ function parseVacancies(arrayOfVacancies) {
 //todo try to use jQuery Template plug in to parse vacancy with below method
 function renderVacancyHTML(vacancy) {
     var div = document.getElementById('vacancies'),
-        divVacancy = document.createElement('div');
+        divVacancy = document.createElement('div'),
+        divider = document.createElement('hr');
     divVacancy.className = 'vacancy';
     div.appendChild(divVacancy);
     for (let property in vacancy) {
@@ -58,16 +65,17 @@ function renderVacancyHTML(vacancy) {
             case ('description'):
                 let description = divVacancy.appendChild(document.createElement('p'));
                 description.className = 'vacancy-description';
-                description.innerHTML = "Description: " + vacancy[property];
+                description.innerHTML = "Description: " + vacancy[property].trunc(120);
                 break;
             default:
                 throw new Error('There is no proper item in vacancy found');
         }
+        divVacancy.appendChild(divider);
     }
 }
 /* ==============  END OF   ---- >   Vacancies Parser ==================*/
 
-/* ==============    Companies  Parser ==================*/
+/* ==============    Companies  Parser    ==================*/
 function getJsonOfCompanies() {
     let xhr = new XMLHttpRequest(),
         url = "http://138.68.77.7:8000/api/company/";
@@ -96,11 +104,6 @@ function renderCompanyHTML(company) {
         divCompany = document.createElement('div'),
         divider = document.createElement('hr');
     divCompany.className = 'company';
-
-    String.prototype.trunc = String.prototype.trunc ||  // sot sure if this function has to be here
-        function(n){
-            return (this.length > n) ? this.substr(0,n-1)+'&hellip;' : this;
-        };
     div.appendChild(divCompany);
     for (let property in company) {
         switch (property) {
@@ -143,4 +146,4 @@ function renderCompanyHTML(company) {
 }
 /* ==============  END OF --->   Companies  Parser ==================*/
 
-/* ---------   jQuery Testing --------------*/
+/* ---------   jQuery Testing    --------------*/
