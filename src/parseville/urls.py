@@ -13,18 +13,21 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url
-from django.contrib import admin
 from django.conf import settings
+from django.conf.urls import url
 from django.conf.urls.static import static
-from . import views
+from django.contrib import admin
+
+from parseville.views import my_views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$', views.index, name='index'),
-    url(r'^test/', views.test, name='test'),
-    url(r'^api/link/', views.api_link, name='api_link'),
-    url(r'^api/vacancy/', views.api_vacancy, name='api_vacancy'),
-    url(r'^api/company/', views.api_company, name='api_company'),
+    url(r'^$', my_views.bootstrap_test, name='bootstrap'),
+    url(r'^test/', my_views.test, name='test'),
+    url(r'^index/', my_views.index, name='index'),
+    url(r'^api/init/', my_views.api_init, name='api_init'),
+    url(r'^api/link/', my_views.api_link, name='api_link'),
+    url(r'^api/vacancy/', my_views.api_vacancy, name='api_vacancy'),
+    url(r'^api/company/', my_views.api_company, name='api_company'),
     ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) \
       + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

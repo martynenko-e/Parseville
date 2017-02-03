@@ -8,7 +8,7 @@ String.prototype.trunc = String.prototype.trunc ||
 
 function getJsonOfVacancies() {
     let xhr = new XMLHttpRequest(),
-        url = "http://138.68.77.7:8000/api/vacancy/";
+        url = "http://localhost:8000/api/vacancy/";
     xhr.open("GET", url, true);
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
