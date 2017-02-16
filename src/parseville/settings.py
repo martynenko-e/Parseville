@@ -82,7 +82,7 @@ WSGI_APPLICATION = 'parseville.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',  # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': os.path.join(BASE_DIR, 'db/parseville.db'),  # Or path to database file if using
+        'NAME': os.path.join(BASE_DIR, 'parseville.db'),  # Or path to database file if using
         # The following settings are not used with sqlite3:
         # 'USER': os.environ["DB_USER"],
         # 'PASSWORD': os.environ["DB_PASS"],
