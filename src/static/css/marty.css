@@ -51,6 +51,10 @@ aside div p {
     margin: 0 0 15px;
     font-size: .92em
 }
+#map {
+    height: 400px;
+    width: 100%;
+}
 
 
 
