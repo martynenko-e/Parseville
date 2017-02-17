@@ -24,7 +24,8 @@ pip install -r requirements.txt
 ##### Don't forget setup 'src' as working directory
 
 #### Run migration commands
-*In case when cannot found db, create empty folder 'db' inside src
+
+* In case when cannot found db, create empty folder 'db' inside src
 ```cmd
 python manage.py migrate
 python manage.py makemigrations parseville
@@ -37,25 +38,26 @@ python manage.py runserver 0.0.0.0:8000
 ```
 
 ## Management commands
-** Setup first queries to db
+* Setup first queries to db
 ```cmd
 python manage.py initialization
 ```
 
-** Parse companies info
+* Parse companies info
 ```cmd
 python manage.py parse
 ```
 
-** Parse vacancy info
+* Parse vacancy info
 ```cmd
 python manage.py parsevacancy
 ```
 
 ## API description
 * GET or POST request to /api/company/(count)
-###Example for request /api/company/1
-####Response
+
+### Example for request /api/company/1
+#### Response
 ```json
 {
     "company_list": [
@@ -87,8 +89,8 @@ python manage.py parsevacancy
 }
 ```
 
-###Example for request /api/vacancy/1
-####Response
+### Example for request /api/vacancy/1
+#### Response
 ```json
 {
     "vacancy_list": [
@@ -126,11 +128,11 @@ python manage.py parsevacancy
 }
 ```
 
-###Example for request /api/link/1
-####Response
+### Example for request /api/link/1
+#### Response
 ```json
 {
-    link_list": [
+    "link_list": [
     {
         "url": "https://tproger.ru/",
         "description": "Какие методологии разработки применяются в различных IT-компаниях — Tproger собирает рассказы представителей индустрии ...",
@@ -141,8 +143,8 @@ python manage.py parsevacancy
 }
 ```
 
-###Example for request /api/init/
-####Response
+### Example for request /api/init/
+#### Response
 ```json
 {
 
