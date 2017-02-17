@@ -2,6 +2,7 @@
 
 #### Helpful links
 [Install virtualenvwrapper for ubuntu](http://roundhere.net/journal/virtualenv-ubuntu-12-10/)
+
 [Install virtualenvwrapper for windows](https://pypi.python.org/pypi/virtualenvwrapper-win/)
 
 
@@ -20,10 +21,10 @@ workon parserville
 pip install -r requirements.txt
 ```
 
-**Go to src folder
+##### Don't forget setup 'src' as working directory
 
 #### Run migration commands
-**In case when cannot found db, create empty folder 'db' inside src
+*In case when cannot found db, create empty folder 'db' inside src
 ```cmd
 python manage.py migrate
 python manage.py makemigrations parseville
