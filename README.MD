@@ -36,6 +36,22 @@ python manage.py migrate parseville
 python manage.py runserver 0.0.0.0:8000
 ```
 
+## Management commands
+** Setup first queries to db
+```cmd
+python manage.py initialization
+```
+
+** Parse companies info
+```cmd
+python manage.py parse
+```
+
+** Parse vacancy info
+```cmd
+python manage.py parsevacancy
+```
+
 ## API description*
 * / index page
 * /api/get-vacancies 
