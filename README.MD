@@ -102,7 +102,7 @@ python manage.py parsevacancy
             "p_language": null,
             "pub_date": null,
             "id": 4,
-            "description": "<div class=\"content-vacancy\"></div>,
+            "description": "<div class=\"content-vacancy\"></div>",
         },
         {
             "name": "Intermediate Strong Scala Software Engineer",
@@ -112,7 +112,7 @@ python manage.py parsevacancy
             "p_language": null,
             "pub_date": null,
             "id": 5,
-            "description": "<div class=\"content-vacancy\"></div>,
+            "description": "<div class=\"content-vacancy\"></div>",
         },
         {
             "name": "Intermediate Strong/Senior Web UI (React.js) Software Engineer",
@@ -122,7 +122,7 @@ python manage.py parsevacancy
             "p_language": null,
             "pub_date": null,
             "id": 6,
-            "description": "<div class=\"content-vacancy\"></div>,
+            "description": "<div class=\"content-vacancy\"></div>",
         }
     ]
 }
@@ -157,7 +157,7 @@ python manage.py parsevacancy
             "p_language": null,
             "pub_date": null,
             "id": 1,
-            "description": "":
+            "description": ""
         },
         {
             "name": "Senior Test Automation Engineer (Python)",
@@ -167,7 +167,7 @@ python manage.py parsevacancy
             "p_language": null,
             "pub_date": null,
             "id": 2,
-            "description": "":
+            "description": ""
         },
         {
             "name": "Career Adviser",
