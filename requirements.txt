@@ -1,6 +1,5 @@
 django==1.10.5
 requests
-MySQL-python
 Pillow
 bs4
 lxml
