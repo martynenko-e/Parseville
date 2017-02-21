@@ -1,124 +1,176 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>Parseville</title>
-	<link rel="stylesheet" href="../static/css/reset.css">
-	<link rel="stylesheet" href="../static/css/fonts.css">
-	<link rel="stylesheet" href="../static/css/style.css">
-	<script src="../static/js/parseville.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-	<!--Add bootstrap-->
-	<script src="../static/js/bootstrap.min.js"></script>
-	<!--<script>
-		$(document).ready(() => {
-			$('body').restive({
-				breakpoints: ['240', '320', '480', '640', '960', '1024', '1280'],
-				classes: ['css-240', 'css-320', 'css-480', 'css-640', 'css-960', 'css-1024', 'css-1280']
-			});
-		});
-		$.restive.startMulti();
-		
-		$('body').restive({
-			platform: 'ios',
-			breakpoints: ['240', '320', '480', '640', '960', '1024'],
-			classes: ['css-i-240', 'css-i-320', 'css-i-480', 'css-i-640', 'css-i-960', 'css-i-1024']
-		});
-		
-		$('body').restive({
-			platform: 'android',
-			breakpoints: ['240', '320', '480', '640', '960', '1024'],
-			classes: ['css-a-240', 'css-a-320', 'css-a-480', 'css-a-640', 'css-a-960', 'css-a-1024']
-		});
-		
-		$.restive.endMulti();
-	</script>-->
+    <meta charset="UTF-8">
+    <title>Parseville</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!--Add bootstrap-->
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/indexCss.css">
+    <script src="../static/js/bootstrap.min.js"></script>
+    <script src="../static/js/marty.js"></script>
+    <script async src="../static/js/mapInit.js"></script>
 </head>
+
 <body>
-<header class="header">
-	<div class="container">
-		<div class="wrapper">
-			<div class="header-logo">
-				<a href="#" class="header-logo-link">
-					<img src="../static/images/parseville.jpg" alt="nema" class="header-logo-img">
-					<p class="logo-text"></p>
-				</a>
-			</div>
-			<div class="header-searchbar">
-				<form class="header-searchbar-form" action="" method="">
-					<input type="search" placeholder="tick and search -- >">
-					<button>Search</button>
-				</form>
-				<!--<input type="text" name="search" placeholder="Search..">-->
-			</div>
-			<div class="header-menu">
-				<ul class="header-menu-list">
-					<li class="header-menu-list-item"><a href="#" class="menu-list-item-link">Home</a></li>
-					<li class="header-menu-list-item"><a href="#" class="menu-list-item-link">About</a></li>
-					<li class="header-menu-list-item"><a href="#" class="menu-list-item-link">For more</a></li>
-					<li class="header-menu-list-item"><a href="#" class="menu-list-item-link">Contacts</a></li>
-				</ul>
-			</div>
-		</div>
-	</div>
-</header>
+<aside class="side-bar">
+    <div class="col-xs-12">
+        <div class="title-box">
+            <h4>Title</h4>
+        </div>
+        <div class="entry-image"></div>
+        <div class="entry-container">Description</div>
+    </div>
+</aside>
+<main class="main-content">
+    <nav class="navbar navbar-default">
+        <div class="col-xs-12">
+            <div class="navbar-header">
+                <a class="navbar-logo" href="#">
+                    <img class="navbar-logo-img" alt="Logo" src="../static/images/parseville.png">
+                </a>
+                <i>
+                    <span class="navbar-text">Vacancy searcher</span>
+                </i>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="content">
+            <div class="col-xs-12">
+                <div class="row" id="link-block">
+                    <!-- обьяснить что происходит внизу -->
+                    {% for link in link_list %}
+                    <div class="col-xs-12">
+                        <div id="link-{{ link.id }}" class="usefull-link">
+                            <a href="{{ link.url }}"><h6>{{ link.name }}</h6></a>
+                            <p>{{link.description}}</p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <div class="btn-group btn-group-justified" role="group" aria-label="...">
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-default" id="btn-load-link">More usefull links ...</button>
+                    </div>
+                </div>
+                <hr>
+                <div class="row" id="vacancy-block">
+                    {% for vacancy in vacancy_list %}
+                    <div class="col-xs-4" id="vacancy-{{ vacancy.id }}" onclick="show_more('vacancy', this.id)"
+                         style="cursor: pointer">
+                        <div class="title-box">
+                            <h4>
+                                {{ vacancy.name }}
+                            </h4>
+                        </div>
+                        <div class="entry-lank" style="">
+                            <h5>{{ vacancy.programming_language }}</h5>
+                        </div>
+                        <div class="entry-container ">
+                            <div class="entry-content"><p>{{ vacancy.description|truncatechars_html:100|safe }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <div class="btn-group btn-group-justified" role="group" aria-label="...">
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-default" id="btn-load-vacancy">More vacancies ...</button>
+                    </div>
+                </div>
+                <hr>
+                <div class="row" id="company-block">
+                    {% for company in company_list %}
+                    <div class="col-xs-4" id="company-{{ company.id }}" onclick="show_more('company', this.id)"
+                         style="cursor: pointer">
+                        <div class="title-box">
+                            <h4>
+                                {{ comany.name }}
+                            </h4>
+                        </div>
+                        <div class="entry-image" style="">
+                            <img src="/media/{{ company.logo }}">
+                        </div>
+                        <div class="entry-container ">
+                            <div class="entry-content"><p>
+                                {{company.description|truncatechars_html:100|safe}}
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <div class="btn-group btn-group-justified" role="group" aria-label="...">
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-default" id="btn-load-company">More companies ...</button>
+                    </div>
+                </div>
+                </br>
+                <div id="map">
+                    <!--<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d2540.0244182976703!2d30.416830679721098!3d50.459269979577!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1suk!2sua!4v1478846918907"
+                            width="100%" height="400" frameborder="0" style="border:0" allowfullscreen></iframe>-->
+                </div>
+            </div>
 
-<div class="content">
-	<div class="container">
-		<div class="wrapper">
-			<div id="usefull-links" class="row">
-				<div class="links-date"></div>
-				<div class="links-title"></div>
-				<!--generate data from api/links here-->
-				<div class="links-show-all" id="links-show-all">
-					<!--<p>More</p>
-					<input type="button" value="View more">-->
-				</div>
-			</div>
-			<div id="vacancies" class="row">
-				<button id="button-vacancy" onclick="getJsonOfVacancies()">Vacancies--></button>
-				<!--generate data from api/vacancy here-->
-			</div>
-			<div id="companies" class="row">
-				<button id="button-company" onclick="getJsonOfCompanies()">Companies --></button>
-				<!--generate data from api/company here-->
-				<!--<div id="paginate-top"> </div>
-				<div id="bookcontent"> </div>
-				<div id="paginate-bottom"> </div>-->
-			</div>
-		</div>
-	</div>
-</div>
-
-<div class="footer">
-	<!--<div class="row">-->
-	<div class="footer-get-in-touch">
-		<div class="map">
-			<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d2540.0244182976703!2d30.416830679721098!3d50.459269979577!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1suk!2sua!4v1478846918907"
-			        width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
-		</div>
-		<div class="get-in-touch-content">
-			<h4 class="get-in-touch-head">get in touch</h4>
-			<ul class="get-in-touch-list">
-				<li class="get-in-touch-list-item phone">
-					<a class="footer-block-item-link" href=""> 007 </a>
-				</li>
-				<!--<li class="get-in-touch-list-item email">
-					<a class="footer-block-item-link" href="mailto:support@longwave.com">support@longwave.com</a>
-				</li>-->
-			</ul>
-		</div>
-	</div>
-	<div class="social">
-		<div class="social-wrapper">
-			<div class="copyright-text">
-				Copyright. © 2017 No Name. All rights are Outsouce. Designed by why.
-			</div>
-		</div>
-	</div>
-	<!--</div>-->
-</div>
-
-
+        </div>
+    </div>
+</main>
 </body>
+<!--<div class="footer">
+    <div class="social">
+        <div class="social-wrapper">
+            <div class="copyright-text">
+                Copyright. © 2017 No Name. All rights are Outsouce. Designed by why.
+            </div>
+        </div>
+    </div>
+</div>-->
+<script>
+
+//    document.getElementById("btn-load-link").onclick = loadMoreLink;
+//
+//    document.getElementById("btn-load-vacancy").onclick = loadMoreVacancy;
+//
+//    document.getElementById("btn-load-company").onclick = loadMoreCompany;
+
+    $(document).ready(function () {
+
+        function postProcessing(data) {
+            var myArray = data;
+            for (var dict in myArray) {
+                switch (dict) {
+                    case ("vacancy_list"):
+                        for (var elem in myArray[dict]) {
+                            vacancies.push(Vacancy.createFromData(myArray[dict][elem]));
+                        }
+                        break;
+                    case ("company_list"):
+                        for (var elem in myArray[dict]) {
+                            companies.push(Company.createFromData(myArray[dict][elem]));
+                        }
+                        break;
+                    case ("link_list"):
+                        for (var elem in myArray[dict]) {
+                            links.push(Link.createFromData(myArray[dict][elem]));
+                        }
+                        break;
+                }
+            }
+        }
+
+        getInit();
+
+        function getInit() {
+            $.ajax({
+                url: 'http://' + window.location.hostname + ":" + window.location.port + '/api/init/',
+                type: 'post',
+                dataType: 'json',
+                cache: false,
+                success: postProcessing,
+                async: true,
+            });
+        }
+    });
+</script>
+<script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBvnIFhL4lkBp6gqzbtIxP2cfZEIwBMCjw&callback=initMap"></script>
 </html>

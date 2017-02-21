@@ -1,7 +1,7 @@
-let Vacancy = () => {
+let Vacancy = function () {
 };
 
-Vacancy.prototype.createFromData = (data) => {
+Vacancy.createFromData = function (data) {
     let object = new Vacancy;
     object.id = data.id;
     object.name = data.name;
@@ -13,13 +13,13 @@ Vacancy.prototype.createFromData = (data) => {
     return object;
 };
 
-let Company = () => {
+let Company = function () {
 };
 
-Company.prototype.addToHtml = () => {
+Company.prototype.addToHtml = function () {
 };
 
-Company.prototype.createFromData = (data) => {
+Company.createFromData = function (data) {
     let object = new Company;
     object.id = data.id;
     object.name = data.name;
@@ -30,10 +30,10 @@ Company.prototype.createFromData = (data) => {
     return object;
 };
 
-let Link = () => {
+let Link = function () {
 };
 
-Link.prototype.createFromData = (data) => {
+Link.createFromData = function (data) {
     let object = new Link;
     object.id = data.id;
     object.name = data.name;
@@ -43,7 +43,7 @@ Link.prototype.createFromData = (data) => {
     return object;
 };
 
-Link.prototype.addToHtml = () => {
+Link.addToHtml = function () {
 };
 
 let links = [],
