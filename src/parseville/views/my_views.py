@@ -24,7 +24,7 @@ def test(request):
 
 
 def bootstrap_test(request):
-    return render(request, 'marty-index.html', {
+    return render(request, 'index.html', {
     })
 
 

@@ -1,0 +1,195 @@
+/* FONTS we are using:
+font-family: 'Conv_Facunda_Shadow';
+font-family: 'Conv_Facunda';
+font-family: 'Conv_BebasNeue_Regular';
+font-family: 'Conv_BebasNeue_Book';
+*/
+html, body {
+    height: 100%;
+}
+.container {
+    width: 95%;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+img {
+    max-width: 100%;
+}
+/* ======== SIDE BAR ================ */
+
+.side-bar {
+    background-color: #528286;
+    text-align: center;
+}
+
+.side-bar, .side-bar a {
+    color: #FFF;
+}
+
+.side-bar .col-xs-12 {
+    padding: 5px;
+    margin: 0
+}
+
+.entry-image {
+    border-radius: 0;
+    max-width: 140px;
+}
+/* todo in JS file while creating on h1 -- gice in proper class name*/
+.entry-container h1 {
+    margin: 5px 0 5px;
+}
+/* todo in JS file while creating on p -- gice in proper class name*/
+.entry-container p {
+    margin: 0 0 15px;
+    font-size: .92em;
+}
+/* ======== END of SIDE BAR ========= */
+
+/* --==--  MAIN   --==--*/
+/* ========   HEADER STYLE =========  */
+
+.navbar-logo-img {
+    float: left;
+    padding: 13px 13px 0 29px;
+}
+
+.navbar-text {
+    color: #8c8c8c;
+}
+/* ======== END of HEADER STYLE ===== */
+
+/* ------ MAIN STYLE ------- */
+body {
+    min-height: 100%;
+    width: 100%;
+}
+
+#wrap {
+  min-height: 100%;
+  height: auto;
+  /* Negative indent footer by its height */
+  margin: 0 auto -60px;
+  /* Pad bottom by footer height */
+  padding: 0 0 60px;
+}
+
+#footer {
+    min-height: 60px;
+    background-color: orange;
+}
+
+.copyright-text {
+    text-align: center;
+    font-family: 'Raleway', sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 24px;
+    color: rgb(153, 153, 153);
+    padding-top: 45px;
+}
+
+/* --==-- END of MAIN --==-- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ======== MAP ========*/
+#map {
+    height: 300px;
+    width: 100%;
+}
+/* == END of MAP ==*/
+
+@media screen and (min-width: 769px) {
+    .side-bar {
+        width: 25%;
+        height: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        overflow-y: auto;
+    }
+    /* ask Eugene what kind of div ment to be styled */
+    .side-bar div {
+        padding: 10px 10px;
+    }
+    /* ask Eugene what kind of elements ment to be styled */
+    aside div nav ul li {
+        padding: 0 !important;
+        display: block
+    }
+    aside div ul.social {
+        padding-top: 32px
+    }
+
+    .main-content {
+        width: 75%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 25%
+    }
+
+    main article.single {
+        min-height: 80%
+    }
+
+    main article.single {
+        min-height: 80%
+    }
+
+    main article ul.list li {
+        padding: 2px
+    }
+
+    .ads-aside {
+        height: 250px
+    }
+
+    .ads-responsive {
+        height: 90px
+    }
+}
