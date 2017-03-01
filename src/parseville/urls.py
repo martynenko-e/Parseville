@@ -18,16 +18,16 @@ from django.conf.urls import url
 from django.conf.urls.static import static
 from django.contrib import admin
 
-from parseville.views import my_views
+from parseville.views import main, api
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$', my_views.bootstrap_test, name='bootstrap'),
-    url(r'^test/', my_views.test, name='test'),
-    url(r'^index/', my_views.index, name='index'),
-    url(r'^api/init/', my_views.api_init, name='api_init'),
-    url(r'^api/link/', my_views.api_link, name='api_link'),
-    url(r'^api/vacancy/', my_views.api_vacancy, name='api_vacancy'),
-    url(r'^api/company/', my_views.api_company, name='api_company'),
+    url(r'^$', main.bootstrap_test, name='bootstrap'),
+    url(r'^test/', main.test, name='test'),
+    url(r'^index/', main.index, name='index'),
+    url(r'^api/init/', api.api_init, name='api_init'),
+    url(r'^api/link/(?P<count>[\d]+)?/?', api.api_link, name='api_link'),
+    url(r'^api/vacancy/(?P<count>[\d]+)?/?', api.api_vacancy, name='api_vacancy'),
+    url(r'^api/company/(?P<count>[\d]+)?/?', api.api_company, name='api_company'),
     ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) \
       + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -158,7 +158,7 @@
 
         function getInit() {
             $.ajax({
-                url: 'http://localhost:8000/api/init/',
+                url: 'http://' + window.location.hostname + ":" + window.location.port + '/api/init/',
                 type: 'post',
                 dataType: 'json',
                 cache: false,
