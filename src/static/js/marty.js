@@ -67,9 +67,9 @@ function getJsonOfVacancies() {
     xhr.open("GET", url, true);
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
-            let status = xhr.status;
+            var status = xhr.status;
             if (status >= 200 && status < 300 || status === 304) {
-                let vacancies = JSON.parse(xhr.responseText); // returns string of JSON
+                var vacancies = JSON.parse(xhr.responseText); // returns string of JSON
                 parseVacancies(vacancies);
             } else {
                 console.log(xhr.status + ":" + xhr.statusText);
