@@ -1,11 +1,13 @@
 /**
  * Created by Martynenko on 03.02.2017.
  */
+;
+
 var Vacancy = function () {
 
 };
 
-Vacancy.createFromData = function (data) {
+Vacancy.prototype.createFromData = function (data) {
     var object = new Vacancy;
     object.id = data.id;
     object.name = data.name;
@@ -22,11 +24,11 @@ var Company = function () {
 
 };
 
-Company.addToHtml = function () {
+Company.prototype.addToHtml = function () {
 
 };
 
-Company.createFromData = function (data) {
+Company.prototype.createFromData = function (data) {
     var object = new Company;
     object.id = data.id;
     object.name = data.name;
@@ -41,7 +43,7 @@ var Link = function () {
 
 };
 
-Link.createFromData = function (data) {
+Link.prototype.createFromData = function (data) {
     var object = new Link;
     object.id = data.id;
     object.name = data.name;
@@ -51,7 +53,7 @@ Link.createFromData = function (data) {
     return object;
 };
 
-Link.addToHtml = function () {
+Link.prototype.addToHtml = function () {
 
 };
 
@@ -60,7 +62,7 @@ var vacancies = [];
 var companies = [];
 
 function getJsonOfVacancies() {
-    let xhr = new XMLHttpRequest(),
+    var xhr = new XMLHttpRequest(),
         url = "http://138.68.77.7:8000/api/vacancy/";
     xhr.open("GET", url, true);
     xhr.onreadystatechange = function () {
@@ -87,8 +89,7 @@ function addVacancyElement(obj) {
     newDiv.setAttribute("id", "vacancy-" + obj.id);
     newDiv.innerHTML = '<div class="title-box"><h4>' + obj.name + '</h4></div><div class="entry-container "><div class="entry-content"><p>' + obj.description.substr(0, 200) + '...</p></div></div></div>';
     // добавляем только что созданый элемент в дерево DOM
-    my_div = document.getElementById("vacancy-block");
-    my_div.appendChild(newDiv);
+    document.getElementById("vacancy-block").appendChild(newDiv);
 }
 
 function addLinkElement(obj) {
@@ -99,8 +100,7 @@ function addLinkElement(obj) {
     newDiv.setAttribute("id", "link-" + obj.id);
     newDiv.innerHTML = '<div class="usefull-link"><a href="' + obj.url + '"><p>' + obj.name + '</p></a><h6>' + obj.description.substr(0, 200) + '...</h6></div>';
     // добавляем только что созданый элемент в дерево DOM
-    my_div = document.getElementById("link-block");
-    my_div.appendChild(newDiv);
+    document.getElementById("link-block").appendChild(newDiv);
 }
 
 
@@ -114,8 +114,7 @@ function addCompanyElement(obj) {
     newDiv.setAttribute("id", "company-" + obj.id);
     newDiv.innerHTML = '<div class="title-box"><h4>' + obj.name + '</h4></div><div class="entry-logo"><img src="' + obj.logo + '"></div><div class="entry-content">' + obj.description.substr(0, 200) + '...</div></div>';
     // добавляем только что созданый элемент в дерево DOM
-    my_div = document.getElementById("company-block");
-    my_div.appendChild(newDiv);
+    document.getElementById("company-block").appendChild(newDiv);
 }
 
 function show_more(type_api, id) {
@@ -145,8 +144,7 @@ function showCompanyElement(obj) {
         '<div class="entry-image"><img src="/'+ obj.logo +'"></div>' +
         '<div class="entry-content">' + obj.description + '</div>';
     // добавляем только что созданый элемент в дерево DOM
-    my_div = document.getElementById("full-view");
-    my_div.innerHTML = newDiv.innerHTML;
+    document.getElementById("full-view").innerHTML = newDiv.innerHTML;
 }
 
 function showVacancyElement(obj) {
@@ -158,6 +156,5 @@ function showVacancyElement(obj) {
         '<div><p>'+ obj.company_name +'</p></div>' +
         '<div class="entry-content">' + obj.description + '</div>';
     // добавляем только что созданый элемент в дерево DOM
-    my_div = document.getElementById("full-view");
-    my_div.innerHTML = newDiv.innerHTML;
+    document.getElementById("full-view").innerHTML = newDiv.innerHTML;
 }

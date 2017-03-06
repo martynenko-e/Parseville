@@ -17,7 +17,7 @@
 <aside id="full-view">
     <div class="col-xs-12">
         <div class="title-box">
-            <h4>Here will title of full view</h4>
+            <h4>Here will be title of full view</h4>
         </div>
         <div class="entry-image" style=""></div>
         <div class="entry-container">Here will be description</div>
@@ -42,13 +42,13 @@
 
         <div class="col-xs-12">
             <div class="row" id="link-block">
-                {% for link in link_list %}
+                {% comment %}{% for link in link_list %}
                 <div class="col-xs-12">
                     <div id="link-{{ link.id }}" class="usefull-link">
                         <a href="{{ link.url }}"><h6>{{ link.name }}</h6></a> <p>{{link.description}}</p>
                     </div>
                 </div>
-                {% endfor %}
+                {% endfor %}{% endcomment %}
             </div>
             <div class="btn-group btn-group-justified" role="group" aria-label="...">
                 <div class="btn-group" role="group">
@@ -57,7 +57,7 @@
             </div>
             <hr>
             <div class="row" id="vacancy-block">
-                {% for vacancy in vacancy_list %}
+                {% comment %}{% for vacancy in vacancy_list %}
                 <div class="col-xs-4" id="vacancy-{{ vacancy.id }}" onclick="show_more('vacancy', this.id)" style="cursor: pointer">
                     <div class="title-box">
                         <h4>
@@ -71,7 +71,7 @@
                         <div class="entry-content"><p>{{ vacancy.description|truncatechars_html:100|safe }}</p></div>
                     </div>
                 </div>
-                {% endfor %}
+                {% endfor %}{% endcomment %}
             </div>
             <div class="btn-group btn-group-justified" role="group" aria-label="...">
                 <div class="btn-group" role="group">
@@ -80,7 +80,7 @@
             </div>
             <hr>
             <div class="row" id="company-block">
-                {% for company in company_list %}
+                {% comment %}{% for company in company_list %}
                 <div class="col-xs-4" id="company-{{ company.id }}" onclick="show_more('company', this.id)" style="cursor: pointer">
                     <div class="title-box">
                         <h4>
@@ -96,7 +96,7 @@
                         </div>
                     </div>
                 </div>
-                {% endfor %}
+                {% endfor %}{% endcomment %}
             </div>
             <div class="btn-group btn-group-justified" role="group" aria-label="...">
                 <div class="btn-group" role="group">
@@ -139,17 +139,17 @@
                 switch (dict) {
                     case ("vacancy_list"):
                         for (var elem in myArray[dict]) {
-                            vacancies.push(Vacancy.createFromData(myArray[dict][elem]));
+                            vacancies.push(Vacancy.prototype.createFromData(myArray[dict][elem]));
                         }
                         break;
                     case ("company_list"):
                         for (var elem in myArray[dict]) {
-                            companies.push(Company.createFromData(myArray[dict][elem]));
+                            companies.push(Company.prototype.createFromData(myArray[dict][elem]));
                         }
                         break;
                     case ("link_list"):
                         for (var elem in myArray[dict]) {
-                            links.push(Link.createFromData(myArray[dict][elem]));
+                            links.push(Link.prototype.createFromData(myArray[dict][elem]));
                         }
                         break;
                 }
@@ -160,12 +160,12 @@
 
         function getInit() {
             $.ajax({
-                url: 'http://localhost:8000/api/init/',
+                url: 'http://138.68.77.7:8000/api/init/',
                 type: 'post',
                 dataType: 'json',
                 cache: false,
                 success: postProcessing,
-                async: true,
+                async: true
             });
         }
     });
