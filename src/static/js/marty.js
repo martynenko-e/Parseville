@@ -57,9 +57,9 @@ Link.prototype.addToHtml = function () {
 
 };
 
-var links = [];
-var vacancies = [];
-var companies = [];
+var links = [],
+    vacancies = [],
+    companies = [];
 
 function getJsonOfVacancies() {
     var xhr = new XMLHttpRequest(),
@@ -103,7 +103,6 @@ function addLinkElement(obj) {
     document.getElementById("link-block").appendChild(newDiv);
 }
 
-
 function addCompanyElement(obj) {
     // создаем новый элемент div
     // и добавляем в него немного контента
@@ -134,14 +133,13 @@ function show_more(type_api, id) {
     }
 }
 
-
 function showCompanyElement(obj) {
     // создаем новый элемент div
     // и добавляем в него немного контента
     var newDiv = document.createElement("div");
     newDiv.setAttribute("class", "col-xs-4");
     newDiv.innerHTML = '<div class="title-box"><h4>' + obj.name + '</h4></div>' +
-        '<div class="entry-image"><img src="/'+ obj.logo +'"></div>' +
+        '<div class="entry-image"><img src="/' + obj.logo + '"></div>' +
         '<div class="entry-content">' + obj.description + '</div>';
     // добавляем только что созданый элемент в дерево DOM
     document.getElementById("full-view").innerHTML = newDiv.innerHTML;
@@ -153,8 +151,9 @@ function showVacancyElement(obj) {
     var newDiv = document.createElement("div");
     newDiv.setAttribute("class", "col-xs-4");
     newDiv.innerHTML = '<div class="title-box"><h4>' + obj.name + '</h4></div>' +
-        '<div><p>'+ obj.company_name +'</p></div>' +
+        '<div><p>' + obj.company_name + '</p></div>' +
         '<div class="entry-content">' + obj.description + '</div>';
     // добавляем только что созданый элемент в дерево DOM
     document.getElementById("full-view").innerHTML = newDiv.innerHTML;
 }
+

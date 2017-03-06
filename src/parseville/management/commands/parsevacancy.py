@@ -49,15 +49,13 @@ def test(save):
                                 city = dd[2].text
                             # print desc
                                 print title, lang, country, city
-                            comp = Company.objects.get(alias="3shape_ukraine")
+                            comp = Company.objects.get(alias="softserve")
 
                             vacancy_obj, created = Vacancy.objects.get_or_create(name=title, company=comp)
                             vacancy_obj.alias = re.sub(" ", "-", title.lower())
                             vacancy_obj.description = desc.encode("utf-8")
                             vacancy_obj.vacancy_url = vacancy_url
-
-                            vacancy_obj.city = city
-                            vacancy_obj.programming_language = lang
+                            vacancy_obj.extra = city + " languages " + lang
                             vacancy_obj.save()
 
                     # name = models.CharField(max_length=200)

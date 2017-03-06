@@ -12,7 +12,7 @@ from StringIO import StringIO
 
 from django.utils.text import slugify
 
-from parseville.models import Company
+from parseville.models import Company, Country
 
 
 class Command(BaseCommand):
@@ -42,6 +42,7 @@ def test(save):
                         if company_logo:
                             company_logo = company_logo.img['src']
                         company_offices = soup.find('div', class_="offices")
+                        # TODO make offices
                         if company_offices:
                             company_offices = company_offices.text.strip()
                         company_site = soup.find('div', class_="site")
@@ -59,8 +60,8 @@ def test(save):
                             except Exception as e:
                                 print "description is fail for company: %s" % company_name
                             company_obj.site_url = company_site
-                            company_obj.country = "Ukraine"
-                            company_obj.office = company_offices
+                            company_obj.country = Country.objects.filter(alias="ukraine")[0]
+                            company_obj.extra = company_offices
                             company_obj.save()
                             download_image(company_obj, company_logo)
 

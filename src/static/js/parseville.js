@@ -75,7 +75,7 @@ function renderVacancyHTML(vacancy) {
 }
 /* ==============  END OF   ---- >   Vacancies Parser ==================*/
 
-/* ==============    Companies  Parser    ==================*/
+/* ==============           Companies  Parser       ==================*/
 function getJsonOfCompanies() {
     let xhr = new XMLHttpRequest(),
         url = "http://138.68.77.7:8000/api/company/";
