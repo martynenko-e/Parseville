@@ -117,7 +117,7 @@
     <div id="wrap"></div>
     <footer id="footer">
         <div class="copyright-text">
-            Copyright. © 2017 No Name. All rights are Outsouce. Designed by .
+            Copyright. © 2017 No Name. All rights are Outsource. Designed by .
         </div>
     </footer>
 </main>
@@ -140,17 +140,17 @@
                 switch (dict) {
                     case ("vacancy_list"):
                         for (var elem in myArray[dict]) {
-                            vacancies.push(Vacancy.createFromData(myArray[dict][elem]));
+                            vacancies.push(Vacancy.prototype.createFromData(myArray[dict][elem]));
                         }
                         break;
                     case ("company_list"):
                         for (var elem in myArray[dict]) {
-                            companies.push(Company.createFromData(myArray[dict][elem]));
+                            companies.push(Company.prototype.createFromData(myArray[dict][elem]));
                         }
                         break;
                     case ("link_list"):
                         for (var elem in myArray[dict]) {
-                            links.push(Link.createFromData(myArray[dict][elem]));
+                            links.push(Link.prototype.createFromData(myArray[dict][elem]));
                         }
                         break;
                 }

@@ -7,6 +7,7 @@ font-family: 'Conv_BebasNeue_Book';
 html, body {
     height: 100%;
 }
+
 .container {
     width: 95%;
     margin: 0 auto;
@@ -76,8 +77,8 @@ body {
 }
 
 #footer {
-    min-height: 60px;
-    background-color: orange;
+    min-height: 40px;
+    background-color: #e7e7e7;
 }
 
 .copyright-text {
@@ -86,8 +87,8 @@ body {
     font-size: 12px;
     font-weight: 400;
     line-height: 24px;
-    color: rgb(153, 153, 153);
-    padding-top: 45px;
+    color: black;
+    padding-top: 36px;
 }
 
 /* --==-- END of MAIN --==-- */

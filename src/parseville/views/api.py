@@ -40,7 +40,7 @@ def api_init(request):
             "id": element[0],
             "name": element[1],
             "description": element[2],
-            "pub_date": element[3],
+            "pub_date": '',
             "company_name": element[4],
             "p_language": element[5],
             "url": element[6],

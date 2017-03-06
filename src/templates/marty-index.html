@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="{% static 'css/marty.css' %}">
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
     <script src="{% static 'js/marty.js' %}"></script>
-    <script async src="{% static 'js/mapInit.js' %}"></script>
 
 </head>
 
@@ -18,7 +17,7 @@
 <aside id="full-view">
     <div class="col-xs-12">
         <div class="title-box">
-            <h4>Here will title of full view</h4>
+            <h4>Here will be title of full view</h4>
         </div>
         <div class="entry-image" style=""></div>
         <div class="entry-container">Here will be description</div>
@@ -26,6 +25,7 @@
 </aside>
 <main>
     <nav class="navbar navbar-default">
+
         <div class="col-xs-12">
             <div class="navbar-header">
                 <a class="navbar-brand" href="#">
@@ -39,15 +39,16 @@
     </nav>
 
     <div class="content">
+
         <div class="col-xs-12">
             <div class="row" id="link-block">
-                {% for link in link_list %}
+                {% comment %}{% for link in link_list %}
                 <div class="col-xs-12">
                     <div id="link-{{ link.id }}" class="usefull-link">
                         <a href="{{ link.url }}"><h6>{{ link.name }}</h6></a> <p>{{link.description}}</p>
                     </div>
                 </div>
-                {% endfor %}
+                {% endfor %}{% endcomment %}
             </div>
             <div class="btn-group btn-group-justified" role="group" aria-label="...">
                 <div class="btn-group" role="group">
@@ -56,7 +57,7 @@
             </div>
             <hr>
             <div class="row" id="vacancy-block">
-                {% for vacancy in vacancy_list %}
+                {% comment %}{% for vacancy in vacancy_list %}
                 <div class="col-xs-4" id="vacancy-{{ vacancy.id }}" onclick="show_more('vacancy', this.id)" style="cursor: pointer">
                     <div class="title-box">
                         <h4>
@@ -70,7 +71,7 @@
                         <div class="entry-content"><p>{{ vacancy.description|truncatechars_html:100|safe }}</p></div>
                     </div>
                 </div>
-                {% endfor %}
+                {% endfor %}{% endcomment %}
             </div>
             <div class="btn-group btn-group-justified" role="group" aria-label="...">
                 <div class="btn-group" role="group">
@@ -79,7 +80,7 @@
             </div>
             <hr>
             <div class="row" id="company-block">
-                {% for company in company_list %}
+                {% comment %}{% for company in company_list %}
                 <div class="col-xs-4" id="company-{{ company.id }}" onclick="show_more('company', this.id)" style="cursor: pointer">
                     <div class="title-box">
                         <h4>
@@ -95,7 +96,7 @@
                         </div>
                     </div>
                 </div>
-                {% endfor %}
+                {% endfor %}{% endcomment %}
             </div>
             <div class="btn-group btn-group-justified" role="group" aria-label="...">
                 <div class="btn-group" role="group">
@@ -103,15 +104,16 @@
                 </div>
             </div>
             </br>
-            <div id="map">
-                <!--<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d2540.0244182976703!2d30.416830679721098!3d50.459269979577!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1suk!2sua!4v1478846918907"
-                        width="100%" height="400" frameborder="0" style="border:0" allowfullscreen></iframe>-->
+            <div class="map">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d2540.0244182976703!2d30.416830679721098!3d50.459269979577!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1suk!2sua!4v1478846918907"
+                        width="100%" height="400" frameborder="0" style="border:0" allowfullscreen></iframe>
             </div>
         </div>
 
     </div>
     <hr>
     <footer class="footer">
+
         <div class="col-xs-12">
             <div class="copyright-text">
                 Copyright. © 2017 No Name. All rights are Outsouce. Designed by .
@@ -137,17 +139,17 @@
                 switch (dict) {
                     case ("vacancy_list"):
                         for (var elem in myArray[dict]) {
-                            vacancies.push(Vacancy.createFromData(myArray[dict][elem]));
+                            vacancies.push(Vacancy.prototype.createFromData(myArray[dict][elem]));
                         }
                         break;
                     case ("company_list"):
                         for (var elem in myArray[dict]) {
-                            companies.push(Company.createFromData(myArray[dict][elem]));
+                            companies.push(Company.prototype.createFromData(myArray[dict][elem]));
                         }
                         break;
                     case ("link_list"):
                         for (var elem in myArray[dict]) {
-                            links.push(Link.createFromData(myArray[dict][elem]));
+                            links.push(Link.prototype.createFromData(myArray[dict][elem]));
                         }
                         break;
                 }
@@ -158,15 +160,14 @@
 
         function getInit() {
             $.ajax({
-                url: 'http://' + window.location.hostname + ":" + window.location.port + '/api/init/',
+                url: 'http://138.68.77.7:8000/api/init/',
                 type: 'post',
                 dataType: 'json',
                 cache: false,
                 success: postProcessing,
-                async: true,
+                async: true
             });
         }
     });
 </script>
-<script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBvnIFhL4lkBp6gqzbtIxP2cfZEIwBMCjw&callback=initMap"></script>
 </html>
