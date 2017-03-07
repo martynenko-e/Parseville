@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 import json
 
+from datetime import datetime
+import datetime as my_date
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from parseville.models import *
@@ -14,7 +16,7 @@ def api_init(request):
                                                                                                  "logo",
                                                                                                  "site_url",
                                                                                                  "short_text")
-    vacancy_query_set = Vacancy.objects.filter(show=True).order_by('added_date')[:3].values_list("id",
+    vacancy_query_set = Vacancy.objects.filter(show=True, date_of_publication__isnull=False, date_of_publication__lte=datetime.now()).order_by('date_of_publication')[:3].values_list("id",
                                                                                                  "name",
                                                                                                  "description",
                                                                                                  "date_of_publication",
@@ -22,7 +24,7 @@ def api_init(request):
                                                                                                  "programming_language",
                                                                                                  "vacancy_url",
                                                                                                  "short_text")
-    link_query_set = UsefullLink.objects.filter(show=True).order_by('added_date')[:3].values_list("id",
+    link_query_set = UsefullLink.objects.filter(show=True, added_date__isnull=False, added_date__lte=datetime.now()).order_by('added_date')[:3].values_list("id",
                                                                                                   "name",
                                                                                                   "description",
                                                                                                   "url")
@@ -32,7 +34,7 @@ def api_init(request):
             "id": element[0],
             "name": element[1],
             "description": element[2],
-            "logo": "media/" + element[3],
+            "logo": "/media/" + element[3],
             "site_url": element[4],
             "short_text": element[5],
         }, company_query_set),
@@ -40,7 +42,7 @@ def api_init(request):
             "id": element[0],
             "name": element[1],
             "description": element[2],
-            "pub_date": '',
+            "pub_date": element[3].strftime("%B %d, %Y"),
             "company_name": element[4],
             "p_language": element[5],
             "url": element[6],
@@ -98,7 +100,7 @@ def api_company(request, count=1):
                 "id": element[0],
                 "name": element[1],
                 "description": element[2],
-                "logo": "media/" + element[3],
+                "logo": "/media/" + element[3],
                 "site_url": element[4],
                 "short_text": element[5],
         }, company_query_set)}
@@ -113,7 +115,7 @@ def api_vacancy(request, count="1"):
         count = 1
     else:
         count = int(count)
-    vacancy_query_set = Vacancy.objects.filter(show=True).order_by('added_date')[3 * count:3 * count + 3].values_list("id",
+    vacancy_query_set = Vacancy.objects.filter(show=True, date_of_publication__isnull=False, date_of_publication__lte=datetime.now()).order_by('date_of_publication')[3 * count:3 * count + 3].values_list("id",
                                                                                                  "name",
                                                                                                  "description",
                                                                                                  "date_of_publication",
@@ -127,7 +129,7 @@ def api_vacancy(request, count="1"):
             "id": element[0],
             "name": element[1],
             "description": element[2],
-            "pub_date": element[3],
+            "pub_date": element[3].strftime("%B %d, %Y"),
             "company_name": element[4],
             "p_language": element[5],
             "url": element[6],
