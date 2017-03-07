@@ -67,9 +67,9 @@ function getJsonOfVacancies() {
     xhr.open("GET", url, true);
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
-            var status = xhr.status;
+            let status = xhr.status;
             if (status >= 200 && status < 300 || status === 304) {
-                var vacancies = JSON.parse(xhr.responseText); // returns string of JSON
+                let vacancies = JSON.parse(xhr.responseText); // returns string of JSON
                 parseVacancies(vacancies);
             } else {
                 console.log(xhr.status + ":" + xhr.statusText);
@@ -146,7 +146,7 @@ function showCompanyElement(obj) {
         '<div class="entry-image"><img src="/'+ obj.logo +'"></div>' +
         '<div class="entry-content">' + obj.description + '</div>';
     // добавляем только что созданый элемент в дерево DOM
-    document.getElementById("full-view").innerHTML = newDiv.innerHTML;
+    document.getElementById("side-bar").innerHTML = newDiv.innerHTML;
 }
 
 function showVacancyElement(obj) {
@@ -158,5 +158,5 @@ function showVacancyElement(obj) {
         '<div><p>'+ obj.company_name +'</p></div>' +
         '<div class="entry-content">' + obj.description + '</div>';
     // добавляем только что созданый элемент в дерево DOM
-    document.getElementById("full-view").innerHTML = newDiv.innerHTML;
+    document.getElementById("side-bar").innerHTML = newDiv.innerHTML;
 }
