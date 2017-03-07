@@ -19,21 +19,21 @@ img {
 }
 /* ======== SIDE BAR ================ */
 
-.side-bar {
+#side-bar {
     background-color: #528286;
     text-align: center;
 }
 
-.side-bar, .side-bar a {
+#side-bar, #side-bar a {
     color: #FFF;
 }
 
-.side-bar .col-xs-12 {
+#side-bar .col-xs-12 {
     padding: 5px;
     margin: 0
 }
 
-.entry-image {
+#side-bar .entry-image {
     border-radius: 0;
     max-width: 140px;
 }
@@ -102,7 +102,7 @@ body {
 /* == END of MAP ==*/
 
 @media screen and (min-width: 769px) {
-    .side-bar {
+    #side-bar {
         width: 25%;
         height: 100%;
         position: fixed;
@@ -111,7 +111,7 @@ body {
         overflow-y: auto;
     }
     /* ask Eugene what kind of div ment to be styled */
-    .side-bar div {
+    #side-bar div {
         padding: 10px 10px;
     }
     /* ask Eugene what kind of elements ment to be styled */

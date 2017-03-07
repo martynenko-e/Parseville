@@ -1,3 +1,4 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,15 +7,15 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!--Add bootstrap-->
 
-    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../static/css/indexCss.css">
-    <script src="../static/js/bootstrap.min.js"></script>
-    <script src="../static/js/marty.js"></script>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/indexCss.css' %}">
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/script.js' %}"></script>
     <script async src="../static/js/mapInit.js"></script>
 </head>
 
 <body>
-<aside class="side-bar">
+<aside id="side-bar">
     <div class="col-xs-12">
         <div class="title-box">
             <h4>Title</h4>
@@ -40,7 +41,6 @@
         <div class="content">
             <div class="col-xs-12">
                 <div class="row" id="link-block">
-                    <!-- обьяснить что происходит внизу -->
                     {% for link in link_list %}
                     <div class="col-xs-12">
                         <div id="link-{{ link.id }}" class="usefull-link">
@@ -82,7 +82,7 @@
                 </div>
                 <hr>
                 <div class="row" id="company-block">
-                    {% for company in company_list %}
+                    {% comment %}{% for company in company_list %}
                     <div class="col-xs-4" id="company-{{ company.id }}" onclick="show_more('company', this.id)"
                          style="cursor: pointer">
                         <div class="title-box">
@@ -99,7 +99,7 @@
                             </div>
                         </div>
                     </div>
-                    {% endfor %}
+                    {% endfor %}{% endcomment %}
                 </div>
                 <div class="btn-group btn-group-justified" role="group" aria-label="...">
                     <div class="btn-group" role="group">
