@@ -24,25 +24,28 @@ img {
     text-align: center;
 }
 
+#side-bar div {
+    padding: 5px;
+    margin: 0;
+}
+
 #side-bar, #side-bar a {
     color: #FFF;
 }
 
-#side-bar .col-xs-12 {
-    padding: 5px;
-    margin: 0
-}
 
-#side-bar .entry-image {
+
+
+#side-bar img {
     border-radius: 0;
     max-width: 140px;
 }
 /* todo in JS file while creating on h1 -- gice in proper class name*/
-.entry-container h1 {
+.entry-content h1 {
     margin: 5px 0 5px;
 }
 /* todo in JS file while creating on p -- gice in proper class name*/
-.entry-container p {
+.entry-content p {
     margin: 0 0 15px;
     font-size: .92em;
 }
