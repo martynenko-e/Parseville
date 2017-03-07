@@ -1,6 +1,3 @@
-/**
- * Created by Martynenko on 03.02.2017.
- */
 ;
 
 var Vacancy = function () {
@@ -104,7 +101,7 @@ function addLinkElement(obj) {
     document.getElementById("link-block").appendChild(newDiv);
 }
 
-
+/*---------------================----------------to play with===============------------===========-=-=*/
 function addCompanyElement(obj) {
     // создаем новый элемент div
     // и добавляем в него немного контента
@@ -143,7 +140,7 @@ function showCompanyElement(obj) {
     var newDiv = document.createElement("div");
     newDiv.setAttribute("class", "col-xs-4");
     newDiv.innerHTML = '<div class="title-box"><h4>' + obj.name + '</h4></div>' +
-        '<div class="entry-image"><img src="/'+ obj.logo +'"></div>' +
+        '<div class="entry-image"><img src="' + obj.logo + '"></div>' +
         '<div class="entry-content">' + obj.description + '</div>';
     // добавляем только что созданый элемент в дерево DOM
     document.getElementById("side-bar").innerHTML = newDiv.innerHTML;

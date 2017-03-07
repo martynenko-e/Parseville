@@ -133,7 +133,6 @@
     //    document.getElementById("btn-load-company").onclick = loadMoreCompany;
 
     $(document).ready(function () {
-
         function postProcessing(data) {
             var myArray = data;
             for (var dict in myArray) {
@@ -153,6 +152,8 @@
                             links.push(Link.prototype.createFromData(myArray[dict][elem]));
                         }
                         break;
+                    default:
+                        throw new Error('---------------------------failed to parse input data----------------------------------------');
                 }
             }
         }
@@ -166,7 +167,7 @@
                 dataType: 'json',
                 cache: false,
                 success: postProcessing,
-                async: true,
+                async: true
             });
         }
     });
