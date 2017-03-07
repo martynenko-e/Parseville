@@ -143,7 +143,7 @@ function showCompanyElement(obj) {
     var newDiv = document.createElement("div");
     newDiv.setAttribute("class", "col-xs-4");
     newDiv.innerHTML = '<div class="title-box"><h4>' + obj.name + '</h4></div>' +
-        '<div class="entry-image"><img src="/'+ obj.logo +'"></div>' +
+        '<div class="entry-image"><img src="'+ obj.logo +'"></div>' +
         '<div class="entry-content">' + obj.description + '</div>';
     // добавляем только что созданый элемент в дерево DOM
     document.getElementById("full-view").innerHTML = newDiv.innerHTML;
