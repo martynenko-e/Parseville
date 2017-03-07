@@ -32,7 +32,7 @@ def api_init(request):
             "id": element[0],
             "name": element[1],
             "description": element[2],
-            "logo": "/media/" + element[3],
+            "logo": "media/" + element[3],
             "site_url": element[4],
             "short_text": element[5],
         }, company_query_set),
@@ -98,7 +98,7 @@ def api_company(request, count=1):
                 "id": element[0],
                 "name": element[1],
                 "description": element[2],
-                "logo": "/media/" + element[3],
+                "logo": "media/" + element[3],
                 "site_url": element[4],
                 "short_text": element[5],
         }, company_query_set)}
