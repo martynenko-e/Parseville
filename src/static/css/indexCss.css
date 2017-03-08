@@ -70,6 +70,15 @@ body {
     width: 100%;
 }
 
+.company {
+    cursor: pointer;
+    border: 1px solid #1b6d85;
+    border-radius: 30px 10px;
+    min-height: 255px;
+    margin: 0 5px 10px;
+    width: 32.333333%
+}
+
 #wrap {
   min-height: 15%;
   height: auto;

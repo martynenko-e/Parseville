@@ -103,7 +103,9 @@
                 </div>
                 <div class="btn-group btn-group-justified" role="group" aria-label="...">
                     <div class="btn-group" role="group">
-                        <button type="button" class="btn btn-default" id="btn-load-company">More companies ...</button>
+                        <button type="button" class="btn btn-default" id="btn-load-company" onclick="testPostScript()">
+                            More companies ...
+                        </button>
                     </div>
                 </div>
                 </br>
@@ -168,6 +170,18 @@
                 cache: false,
                 success: postProcessing,
                 async: true
+            });
+        }
+
+        function testPost() {
+            var index = 1;
+            $.ajax({
+                type: "POST",
+                url: 'http://localhost:8000/api/company/' + index,
+                data: data,
+                success: postProcessing,
+                dataType: 'json',
+                cache: false
             });
         }
     });
