@@ -1,7 +1,11 @@
 ;
 
-var Vacancy = function () {
+var links = [],
+    vacancies = [],
+    companies = [],
+    counter = 1;
 
+var Vacancy = function () {
 };
 
 Vacancy.prototype.createFromData = function (data) {
@@ -16,13 +20,10 @@ Vacancy.prototype.createFromData = function (data) {
     return object;
 };
 
-
 var Company = function () {
-
 };
 
 Company.prototype.addToHtml = function () {
-
 };
 
 Company.prototype.createFromData = function (data) {
@@ -37,7 +38,6 @@ Company.prototype.createFromData = function (data) {
 };
 
 var Link = function () {
-
 };
 
 Link.prototype.createFromData = function (data) {
@@ -51,12 +51,9 @@ Link.prototype.createFromData = function (data) {
 };
 
 Link.prototype.addToHtml = function () {
-
 };
 
-var links = [];
-var vacancies = [];
-var companies = [];
+
 
 /*function getJsonOfVacancies() {
     var xhr = new XMLHttpRequest(),
@@ -103,13 +100,12 @@ function addLinkElement(obj) {
 }
 
 function addCompanyElement(obj) {
-    //todo have a talk with Eugene if there is a reason to rewrite this method to (for in) and switch statement <-- could be cool validation for Object properties, so we could display a bit more info in case such opportunity will be given
     // create general div for Company Entity
     var companyDiv = document.createElement("div");
     companyDiv.setAttribute("class", "company col-xs-4");
     companyDiv.setAttribute("onclick", "show_more('company', this.id)");
     companyDiv.setAttribute("id", "company-" + obj.id);
-    //todo there is need in NULL validation doe description
+    //todo swap desciption to short-text
     var desc = obj.description || '';
     //create div for company Title
     var companyTitleDiv = document.createElement("div");
@@ -128,14 +124,10 @@ function addCompanyElement(obj) {
     //create div for company Description
     var companyDescDiv = document.createElement("div");
     companyDescDiv.setAttribute("class", "entry-content");
-    //create p for company Description
-    var companyDescDivP = document.createElement("p");
-    companyDescDivP.setAttribute("class", "entry-content-text");
-    companyDescDivP.innerHTML = desc.substr(0, 200) + "...";
+    companyDescDiv.innerHTML = desc.substr(0, 200) + "...";
 
     companyTitleDiv.appendChild(companyTitleDivH);
     companyLogoDiv.appendChild(companyLogoDivImg);
-    companyDescDiv.appendChild(companyDescDivP);
 
     companyDiv.appendChild(companyTitleDiv);
     companyDiv.appendChild(companyLogoDiv);
@@ -189,23 +181,45 @@ function showVacancyElement(obj) {
     // добавляем только что созданый элемент в дерево DOM
     document.getElementById("side-bar").innerHTML = newDiv.innerHTML;
 }
-
+// todo make below function work for vacancies and companies
 function testPostScript() {
     var xhr = new XMLHttpRequest(),
-        counter = String(1),
-        url = 'http://' + window.location.hostname + ":" + window.location.port + '/api/company/' + counter;
+        url = 'http://' + window.location.hostname + ":" + window.location.port + '/api/company/' + counter++;
     xhr.open("POST", url, true);
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
             var status = xhr.status;
             if (status >= 200 && status < 300 || status === 304) {
-                var companies = JSON.parse(xhr.responseText); // returns string of JSON
-                addCompanyElement(companies);
+                var companiesJson = JSON.parse(xhr.responseText),
+                    vacancy = new Vacancy(),
+                    company = new Company(),
+                    link = new Link();
+                for (var dict in companiesJson) {
+                    switch (dict) {
+                        case ("vacancy_list"):
+                            for (var elem in companiesJson[dict]) {
+                                vacancies.push(vacancy.createFromData(companiesJson[dict][elem]));
+                            }
+                            break;
+                        case ("company_list"):
+                            for (var elem in companiesJson[dict]) {
+                                companies.push(company.createFromData(companiesJson[dict][elem]));
+                            }
+                            break;
+                        case ("link_list"):
+                            for (var elem in companiesJson[dict]) {
+                                links.push(link.createFromData(companiesJson[dict][elem]));
+                            }
+                            break;
+                        default:
+                            throw new Error('---------------------------failed to parse input data----------------------------------------');
+                    }
+                }
             } else {
                 console.log(xhr.status + ":" + xhr.statusText);
             }
         }
     };
-    xhr.send(counter);
+    xhr.send();
 }
