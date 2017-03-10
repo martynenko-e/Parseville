@@ -2,7 +2,6 @@
 import json
 
 from datetime import datetime
-import datetime as my_date
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from parseville.models import *
@@ -10,50 +9,10 @@ from parseville.models import *
 
 @csrf_exempt
 def api_init(request):
-    company_query_set = Company.objects.filter(show=True).order_by('added_date')[:3].values_list("id",
-                                                                                                 "name",
-                                                                                                 "description",
-                                                                                                 "logo",
-                                                                                                 "site_url",
-                                                                                                 "short_text")
-    vacancy_query_set = Vacancy.objects.filter(show=True, date_of_publication__isnull=False, date_of_publication__lte=datetime.now()).order_by('date_of_publication')[:3].values_list("id",
-                                                                                                 "name",
-                                                                                                 "description",
-                                                                                                 "date_of_publication",
-                                                                                                 "company__name",
-                                                                                                 "programming_language",
-                                                                                                 "vacancy_url",
-                                                                                                 "short_text")
-    link_query_set = UsefullLink.objects.filter(show=True, added_date__isnull=False, added_date__lte=datetime.now()).order_by('added_date')[:3].values_list("id",
-                                                                                                  "name",
-                                                                                                  "description",
-                                                                                                  "url")
-
     data = {
-        "company_list": map(lambda element: {
-            "id": element[0],
-            "name": element[1],
-            "description": element[2],
-            "logo": "/media/" + element[3],
-            "site_url": element[4],
-            "short_text": element[5],
-        }, company_query_set),
-        "vacancy_list": map(lambda element: {
-            "id": element[0],
-            "name": element[1],
-            "description": element[2],
-            "pub_date": element[3].strftime("%B %d, %Y"),
-            "company_name": element[4],
-            "p_language": element[5],
-            "url": element[6],
-            "short_text": element[7],
-        }, vacancy_query_set),
-        "link_list": map(lambda element: {
-            "id": element[0],
-            "name": element[1],
-            "description": element[2],
-            "url": element[3],
-        }, link_query_set),
+        "company_list": get_company_batch(0),
+        "vacancy_list": get_vacancy_batch(0),
+        "link_list": get_link_batch(0),
     }
     response = HttpResponse(json.dumps(data), content_type='application/json')
     response["Access-Control-Allow-Origin"] = '*'
@@ -66,17 +25,8 @@ def api_link(request, count=1):
         count = 1
     else:
         count = int(count)
-    link_query_set = UsefullLink.objects.filter(show=True).order_by('added_date')[3 * count:3 * count + 3].values_list("id",
-                                                                                                  "name",
-                                                                                                  "description",
-                                                                                                  "url")
     data = {
-        "link_list": map(lambda element: {
-            "id": element[0],
-            "name": element[1],
-            "description": element[2],
-            "url": element[3],
-        }, link_query_set),
+        "link_list": get_link_batch(count)
     }
     response = HttpResponse(json.dumps(data), content_type='application/json')
     response["Access-Control-Allow-Origin"] = '*'
@@ -89,21 +39,7 @@ def api_company(request, count=1):
         count = 1
     else:
         count = int(count)
-    company_query_set = Company.objects.filter(show=True).order_by('added_date')[3 * count:3 * count + 3].values_list("id",
-                                                                                                 "name",
-                                                                                                 "description",
-                                                                                                 "logo",
-                                                                                                 "site_url",
-                                                                                                 "short_text")
-
-    data = {"company_list": map(lambda element: {
-                "id": element[0],
-                "name": element[1],
-                "description": element[2],
-                "logo": "/media/" + element[3],
-                "site_url": element[4],
-                "short_text": element[5],
-        }, company_query_set)}
+    data = {"company_list": get_company_batch(count)}
     response = HttpResponse(json.dumps(data), content_type='application/json')
     response["Access-Control-Allow-Origin"] = '*'
     return response
@@ -115,27 +51,76 @@ def api_vacancy(request, count="1"):
         count = 1
     else:
         count = int(count)
-    vacancy_query_set = Vacancy.objects.filter(show=True, date_of_publication__isnull=False, date_of_publication__lte=datetime.now()).order_by('date_of_publication')[3 * count:3 * count + 3].values_list("id",
-                                                                                                 "name",
-                                                                                                 "description",
-                                                                                                 "date_of_publication",
-                                                                                                 "company__name",
-                                                                                                 "programming_language",
-                                                                                                 "vacancy_url",
-                                                                                                 "short_text")
 
     data = {
-        "vacancy_list": map(lambda element: {
-            "id": element[0],
-            "name": element[1],
-            "description": element[2],
-            "pub_date": element[3].strftime("%B %d, %Y"),
-            "company_name": element[4],
-            "p_language": element[5],
-            "url": element[6],
-            "short_text": element[7],
-        }, vacancy_query_set),
+        "vacancy_list": get_vacancy_batch(count)
     }
     response = HttpResponse(json.dumps(data), content_type='application/json')
     response["Access-Control-Allow-Origin"] = '*'
     return response
+
+
+def get_company_batch(count):
+    company_query_set = Company.objects.filter(show=True).order_by('added_date')[3 * count:3 * count + 3] \
+        .values_list("id",
+                     "name",
+                     "description",
+                     "logo",
+                     "url",
+                     "short_text")
+
+    data = map(lambda element: {
+        "id": element[0],
+        "name": element[1],
+        "description": element[2],
+        "logo": "/media/" + element[3],
+        "url": element[4],
+        "short_text": element[5],
+    }, company_query_set)
+    return data
+
+
+def get_vacancy_batch(count):
+    vacancy_query_set = Vacancy.objects.filter(show=True,
+                                               date_of_publication__isnull=False,
+                                               date_of_publication__lte=datetime.now()
+                                               ).order_by('date_of_publication')[3 * count:3 * count + 3] \
+        .values_list("id",
+                     "name",
+                     "description",
+                     "date_of_publication",
+                     "company__name",
+                     "programming_language",
+                     "url",
+                     "short_text")
+
+    data = map(lambda element: {
+        "id": element[0],
+        "name": element[1],
+        "description": element[2],
+        "pub_date": element[3].strftime("%B %d, %Y"),
+        "company_name": element[4],
+        "p_language": element[5],
+        "url": element[6],
+        "short_text": element[7],
+    }, vacancy_query_set)
+
+    return data
+
+
+def get_link_batch(count):
+    link_query_set = UsefulLink.objects.filter(show=True,
+                                               added_date__isnull=False,
+                                               added_date__lte=datetime.now()
+                                               ).order_by('added_date')[3 * count:3 * count + 3]. \
+        values_list("id",
+                    "name",
+                    "short_text",
+                    "url")
+    data = map(lambda element: {
+        "id": element[0],
+        "name": element[1],
+        "short_text": element[2],
+        "url": element[3],
+    }, link_query_set)
+    return data
