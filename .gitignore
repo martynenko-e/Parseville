@@ -1,2 +1,6 @@
 .idea/*
 .git/*
+migrations
+media
+parse.html
+db
