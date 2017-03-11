@@ -44,7 +44,7 @@ Link.prototype.createFromData = function (data) {
     var object = new Link;
     object.id = data.id;
     object.name = data.name;
-    object.description = data.description;
+    object.short_text = data.short_text;
     object.url = data.url;
     addLinkElement(object);
     return object;
@@ -118,7 +118,7 @@ function addLinkElement(obj) {
     var linkDiv = document.createElement("div");
     linkDiv.setAttribute("class", "col-xs-12");
     linkDiv.setAttribute("id", "link-" + obj.id);
-    linkDiv.innerHTML = '<div class="usefull-link"><a href="' + obj.url + '"><p>' + obj.name + '</p></a><h6>' + obj.description.substr(0, 200) + '...</h6></div>';
+    linkDiv.innerHTML = '<div class="usefull-link"><a href="' + obj.url + '"><p>' + obj.name + '</p></a><h6>' + obj.short_text + '...</h6></div>';
     // добавляем только что созданый элемент в дерево DOM
     document.getElementById("link-block").appendChild(linkDiv);
 }

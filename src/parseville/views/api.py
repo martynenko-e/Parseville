@@ -82,13 +82,13 @@ def get_company_batch(count):
 
 def get_vacancy_batch(count):
     vacancy_query_set = Vacancy.objects.filter(show=True,
-                                               date_of_publication__isnull=False,
-                                               date_of_publication__lte=datetime.now()
+                                               added_date__isnull=False,
+                                               added_date__lte=datetime.now()
                                                ).order_by('date_of_publication')[3 * count:3 * count + 3] \
         .values_list("id",
                      "name",
                      "description",
-                     "date_of_publication",
+                     "added_date",
                      "company__name",
                      "programming_language",
                      "url",
