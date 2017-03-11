@@ -27,50 +27,48 @@ class Command(BaseCommand):
 
 
 def test(save):
-        soup = get_soup_from_url('https://softserve.ua/ua/globalVacancies/open-globalVacancies/?tax-direction=0&tax-country=117&tax-city=121', save)
-        if soup:
-            vacancy_elements = soup.find('div', class_="col-xs-12 col-md-8").findAll('div', class_="col-xs-12")
-            if vacancy_elements:
-                for vacancy in vacancy_elements:
-                    try:
-                        vacancy_url = vacancy.a['href']
-                        vacancy_title = vacancy.h3.text
-                        soup = get_soup_from_url(vacancy_url, False)
-                        if soup:
-                            desc = soup.find('div', class_='content-vacancy')
-                            card = soup.find('div', class_='card-vacancy-prev')
-                            if card:
-                                title = card.find('h2', class_='card-vacancy-prev_title').text
-                                dd = card.findAll('dd')
-                                city = ""
-                                lang = ""
-                                if dd:
-                                    lang = dd[0].text
-                                    country = dd[1].text
-                                    city = dd[2].text
-                                    # print desc
-                                    print title, lang, country, city
-                                comp = Company.objects.get(alias="trionika")
+    soup = get_soup_from_url(
+        'https://softserve.ua/ua/vacancies/open-vacancies/?tax-direction=0&tax-country=117&tax-city=121', save)
+    if soup:
+        vacancy_elements = soup.find('div', class_="col-xs-12 col-md-8").findAll('div', class_="col-xs-12")
+        if vacancy_elements:
+            for vacancy in vacancy_elements:
+                vacancy_url = vacancy.a['href']
+                vacancy_title = vacancy.h3.text
+                soup = get_soup_from_url(vacancy_url, False)
+                if soup:
+                    desc = soup.find('div', class_='content-vacancy')
+                    card = soup.find('div', class_='card-vacancy-prev')
+                    if card:
+                        title = card.find('h2', class_='card-vacancy-prev_title').text
+                        dd = card.findAll('dd')
+                        city = ""
+                        lang = ""
+                        if dd:
+                            lang = dd[0].text
+                            country = dd[1].text
+                            city = dd[2].text
+                            # print desc
+                            print title, lang, country, city
+                        comp = Company.objects.get(alias="softserve")
 
-                                vacancy_obj, created = Vacancy.objects.get_or_create(name=title, company=comp)
-                                vacancy_obj.alias = re.sub(" ", "-", title.lower())
-                                vacancy_obj.description = desc.encode("utf-8")
-                                vacancy_obj.vacancy_url = vacancy_url
-                                vacancy_obj.extra = city + " languages " + lang
-                                vacancy_obj.save()
+                        vacancy_obj, created = Vacancy.objects.get_or_create(name=title, company=comp)
+                        vacancy_obj.alias = re.sub(" ", "-", title.lower())
+                        vacancy_obj.description = desc.encode("utf-8")
+                        vacancy_obj.vacancy_url = vacancy_url
+                        vacancy_obj.extra = city + " languages " + lang
+                        vacancy_obj.save()
 
-                                # name = models.CharField(max_length=200)
-                                # alias = models.CharField(max_length=200)
-                                # description = models.TextField(blank=True, null=True)
-                                # date_of_publication = models.DateField(blank=True, null=True)
-                                # show = models.BooleanField(default=False)
-                                # show_on_main = models.BooleanField(default=False)
-                                # vacancy_url = models.URLField(null=True, blank=True)
-                                # company = models.ForeignKey(Company)
-                                # city = models.ForeignKey(City)
-                                # programming_language = models.ForeignKey(ProgrammingLanguage, null=True, blank=True)
-                    except:
-                        pass
+                        # name = models.CharField(max_length=200)
+                        # alias = models.CharField(max_length=200)
+                        # description = models.TextField(blank=True, null=True)
+                        # date_of_publication = models.DateField(blank=True, null=True)
+                        # show = models.BooleanField(default=False)
+                        # show_on_main = models.BooleanField(default=False)
+                        # vacancy_url = models.URLField(null=True, blank=True)
+                        # company = models.ForeignKey(Company)
+                        # city = models.ForeignKey(City)
+                        # programming_language = models.ForeignKey(ProgrammingLanguage, null=True, blank=True)
 
 def get_soup_from_url(url, save):
     headers = {

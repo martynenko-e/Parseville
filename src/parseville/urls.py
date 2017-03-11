@@ -22,8 +22,7 @@ from parseville.views import main, api
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$', main.bootstrap_test, name='bootstrap'),
-    url(r'^test/', main.test, name='test'),
+    url(r'^$', main.marty, name='marty'),
     url(r'^index/', main.index, name='index'),
     url(r'^api/init/', api.api_init, name='api_init'),
     url(r'^api/link/(?P<count>[\d]+)?/?', api.api_link, name='api_link'),

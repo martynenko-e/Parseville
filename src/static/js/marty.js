@@ -12,6 +12,7 @@ Vacancy.prototype.createFromData = function (data) {
     object.id = data.id;
     object.name = data.name;
     object.description = data.description;
+    object.short_text = data.short_text;
     object.pub_date = data.pub_date;
     object.company_name = data.company_name;
     object.p_language = data.p_language;
@@ -33,6 +34,7 @@ Company.prototype.createFromData = function (data) {
     object.id = data.id;
     object.name = data.name;
     object.description = data.description;
+    object.short_text = data.short_text;
     object.logo = data.logo;
     object.site_url = data.site_url;
     addCompanyElement(object);
@@ -47,7 +49,7 @@ Link.prototype.createFromData = function (data) {
     var object = new Link;
     object.id = data.id;
     object.name = data.name;
-    object.description = data.description;
+    object.short_text = data.short_text;
     object.url = data.url;
     addLinkElement(object);
     return object;
@@ -88,7 +90,7 @@ function addVacancyElement(obj) {
     newDiv.setAttribute("style", "cursor: pointer");
     newDiv.setAttribute("id", "vacancy-" + obj.id);
 
-    newDiv.innerHTML = '<div class="title-box"><h4>' + obj.name + '</h4></div><div class="entry-container "><div class="entry-content"><p>' + obj.description.substr(0, 200) + '...</p></div></div></div>';
+    newDiv.innerHTML = '<div class="title-box"><h4>' + obj.name + '</h4></div><div class="entry-container "><div class="entry-content"><p>' + obj.short_text + '</p></div></div></div>';
     // добавляем только что созданый элемент в дерево DOM
     document.getElementById("vacancy-block").appendChild(newDiv);
 }
@@ -99,7 +101,7 @@ function addLinkElement(obj) {
     var newDiv = document.createElement("div");
     newDiv.setAttribute("class", "col-xs-12");
     newDiv.setAttribute("id", "link-" + obj.id);
-    newDiv.innerHTML = '<div class="usefull-link"><a href="' + obj.url + '"><p>' + obj.name + '</p></a><h6>' + obj.description.substr(0, 200) + '...</h6></div>';
+    newDiv.innerHTML = '<div class="usefull-link"><a href="' + obj.url + '"><p>' + obj.name + '</p></a><h6>' + obj.short_text + '</h6></div>';
     // добавляем только что созданый элемент в дерево DOM
     document.getElementById("link-block").appendChild(newDiv);
 }
@@ -155,8 +157,31 @@ function showVacancyElement(obj) {
     var newDiv = document.createElement("div");
     newDiv.setAttribute("class", "col-xs-4");
     newDiv.innerHTML = '<div class="title-box"><h4>' + obj.name + '</h4></div>' +
-        '<div><p>'+ obj.company_name +'</p></div>' +
+        '<div><p>' + obj.company_name + '</p></div>' +
         '<div class="entry-content">' + obj.description + '</div>';
     // добавляем только что созданый элемент в дерево DOM
     document.getElementById("full-view").innerHTML = newDiv.innerHTML;
+}
+
+function dataProcessing(data) {
+    var data_dict = data;
+    for (var dict_key in data_dict) {
+        switch (dict_key) {
+            case ("vacancy_list"):
+                for (var key in data_dict[dict_key]) {
+                    vacancies.push(Vacancy.prototype.createFromData(data_dict[dict_key][key]));
+                }
+                break;
+            case ("company_list"):
+                for (var key in data_dict[dict_key]) {
+                    companies.push(Company.prototype.createFromData(data_dict[dict_key][key]));
+                }
+                break;
+            case ("link_list"):
+                for (var key in data_dict[dict_key]) {
+                    links.push(Link.prototype.createFromData(data_dict[dict_key][key]));
+                }
+                break;
+        }
+    }
 }
