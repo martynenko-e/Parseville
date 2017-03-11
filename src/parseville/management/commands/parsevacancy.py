@@ -70,7 +70,6 @@ def test(save):
                         # city = models.ForeignKey(City)
                         # programming_language = models.ForeignKey(ProgrammingLanguage, null=True, blank=True)
 
-
 def get_soup_from_url(url, save):
     headers = {
         'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36'

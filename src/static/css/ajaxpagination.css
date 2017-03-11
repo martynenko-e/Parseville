@@ -18,11 +18,11 @@ padding-bottom: 1px;
 }
 
 *:first-child+html .pagination li a{ /*IE7 only CSS hack*/
-margin-right: 4px; /*IE bug causes default spacing between links to disappear, so added it explicitly in IE7 */
+margin-right: 4px; /*IE bug causes default spacing between globalLinks to disappear, so added it explicitly in IE7 */
 }
 
 * html .pagination li a{ /*IE6 and below CSS hack*/
-margin-right: 4px; /*IE bug causes default spacing between links to disappear, so added it explicitly in IE6 and below browsers*/
+margin-right: 4px; /*IE bug causes default spacing between globalLinks to disappear, so added it explicitly in IE6 and below browsers*/
 }
 
 .pagination a, .pagination a:visited, .pagination a:active{
