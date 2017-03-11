@@ -3,12 +3,12 @@ from .models import *
 
 
 class AdminCity(admin.ModelAdmin):
-    list_display = ('name', 'alias', 'show')
+    list_display = ('name_eng', 'alias', 'show')
     list_editable = ('show',)
 
 
 class AdminCountry(admin.ModelAdmin):
-    list_display = ('name', 'alias', 'show')
+    list_display = ('name_eng', 'alias', 'show')
     list_editable = ('show',)
 
 
