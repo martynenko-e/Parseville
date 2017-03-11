@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.shortcuts import render
-from api import get_company_batch, get_vacancy_batch, get_link_batch
+from api import get_company_batch, get_vacancy_batch, get_link_batch, get_office_batch
 
 import json
 
@@ -23,5 +23,10 @@ def marty(request):
         "vacancy_list": get_vacancy_batch(0),
         "link_list": get_link_batch(0),
     }
-    return render(request, 'marty-index.html', {'data_init': json.dumps(data_init)})
+
+    return render(request, 'marty-index.html',
+                  {
+                      'data_init': json.dumps(data_init),
+                      'offices': json.dumps(get_office_batch("")),
+                  })
 
