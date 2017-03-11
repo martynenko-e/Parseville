@@ -14,9 +14,10 @@ html, body {
     padding: 0 15px;
 }
 
-img {
+/*img {
     max-width: 140px;
-}
+}*/
+
 /* ======== SIDE BAR ================ */
 
 #side-bar {
@@ -54,6 +55,7 @@ img {
 .navbar-logo-img {
     float: left;
     padding: 13px 13px 0 29px;
+    max-width: 100%;
 }
 
 .navbar-text {
@@ -67,9 +69,12 @@ body {
     width: 100%;
 }
 
-
 .title-box-name {
     text-align: center;
+}
+
+.entry-logo-img {
+    max-width: 140px;
 }
 
 .company, .vacancy {
@@ -78,7 +83,7 @@ body {
     border-radius: 30px 10px;
     min-height: 260px;
     margin: 0 5px 10px;
-    width: 32%
+    padding: 20px;
 }
 
 #wrap {
@@ -116,6 +121,7 @@ body {
 /* == END of MAP ==*/
 
 @media screen and (min-width: 769px) {
+
     #side-bar {
         width: 25%;
         height: 100%;
@@ -164,4 +170,12 @@ body {
     .ads-responsive {
         height: 90px
     }
+}
+
+@media screen and (max-width: 769px) {
+
+    .entry-logo-img {
+        max-width: 90px;
+    }
+
 }

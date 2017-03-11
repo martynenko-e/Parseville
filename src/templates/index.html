@@ -135,34 +135,6 @@
     //    document.getElementById("btn-load-company").onclick = loadMoreCompany;
 
     $(document).ready(function () {
-        function postProcessing(data) {
-            var myArray = data,
-                    vacancy = new Vacancy(),
-                    company = new Company(),
-                    link = new Link();
-            for (var dict in myArray) {
-                switch (dict) {
-                    case ("vacancy_list"):
-                        for (var elem in myArray[dict]) {
-                            globalVacancies.push(vacancy.createFromData(myArray[dict][elem]));
-                        }
-                        break;
-                    case ("company_list"):
-                        for (var elem in myArray[dict]) {
-                            globalCompanies.push(company.createFromData(myArray[dict][elem]));
-                        }
-                        break;
-                    case ("link_list"):
-                        for (var elem in myArray[dict]) {
-                            globalLinks.push(link.createFromData(myArray[dict][elem]));
-                        }
-                        break;
-                    default:
-                        throw new Error('---------------------------failed to parse input data----------------------------------------');
-                }
-            }
-        }
-
         getInit();
 
         function getInit() {
