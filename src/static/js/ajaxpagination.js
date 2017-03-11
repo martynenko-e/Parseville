@@ -2,7 +2,7 @@
 //** Created Sept 14th, 07'
 //** Updated Oct 31st, 07'- Fixed bug when book only contains 1 page
 //** Updated Aug 9th 08'- Upgraded to v1.2:
-			//1) Adds ability to limit the range of the visible pagination links shown for a book with many pages
+			//1) Adds ability to limit the range of the visible pagination globalLinks shown for a book with many pages
 			//2) Adds Session only persistence to persist the last page user viewed when navigating away then returning to the webpage containing the script.
 			//3) Modified Ajax request function in IE7 to use ActiveXObject object, so script can be tested offline
 
@@ -14,7 +14,7 @@ var ajaxpageclass=new Object()
 ajaxpageclass.loadstatustext="Requesting content, please wait..." // HTML to show while requested page is being fetched:
 ajaxpageclass.ajaxbustcache=false // Bust cache when fetching pages?
 ajaxpageclass.paginatepersist=true //enable persistence of last viewed pagination link (so reloading page doesn't reset page to 1)?
-ajaxpageclass.pagerange=4 // Limit page links displayed to a specific number (useful if you have many pages in your book)?
+ajaxpageclass.pagerange=4 // Limit page globalLinks displayed to a specific number (useful if you have many pages in your book)?
 ajaxpageclass.ellipse="..." // Ellipse text (no HTML allowed)
 
 /////////////// No need to edit beyond here /////////////////////////
@@ -85,9 +85,9 @@ ajaxpageclass.createBook=function(pageinfo, divId, paginateIds){ //MAIN CONSTRUC
 
 ajaxpageclass.createBook.prototype={
 
-	buildpagination:function(selectedpage){ //build pagination links based on length of this.pageinfo.pages[]
+	buildpagination:function(selectedpage){ //build pagination globalLinks based on length of this.pageinfo.pages[]
 		this.dopagerange=(this.pageinfo.pages.length>ajaxpageclass.pagerange) //Bool: enable limitpagerange if pagerange value is less than total pages available
-		this.pagerangestyle=this.dopagerange? 'style="display:none"' : '' //if limitpagerange enabled, hide pagination links when building them
+		this.pagerangestyle=this.dopagerange? 'style="display:none"' : '' //if limitpagerange enabled, hide pagination globalLinks when building them
 		this.paginateInfo.previousrange=null //Set previousrange[start, finish] to null to start
 		if (this.pageinfo.pages.length<=1){ //no 0 or just 1 page
 			document.getElementById(this.paginateIds[0]).innerHTML=(this.pageinfo.pages.length==1)? "Page 1 of 1" : ""
@@ -115,7 +115,7 @@ ajaxpageclass.createBook.prototype={
 				this.paginateInfo.nextlink[i]=paginatelinks[paginatelinks.length-1]
 			this.paginateInfo.leftellipse[i]=ellipsespans[0]
 			this.paginateInfo.rightellipse[i]=ellipsespans[1]
-			this.paginateInfo.pagelinks[i]=[] //array to store the page links of pagination DIV
+			this.paginateInfo.pagelinks[i]=[] //array to store the page globalLinks of pagination DIV
 			for (var p=1; p<paginatelinks.length-1; p++){
 				this.paginateInfo.pagelinks[i][p-1]=paginatelinks[p]
 			}
@@ -152,35 +152,35 @@ ajaxpageclass.createBook.prototype={
 		}
 		paginateInfo.previouspage=selectedpage //Update last viewed page info
 		ajaxpageclass.setCookie(this.divId, selectedpage)
-		this.limitpagerange(selectedpage) //limit range of page links displayed (if applicable)
+		this.limitpagerange(selectedpage) //limit range of page globalLinks displayed (if applicable)
 	},
 
 	limitpagerange:function(selectedpage){
 		//reminder: selectedpage count starts at 0 (0=1st page)
 		var paginateInfo=this.paginateInfo
 		if (this.dopagerange){
-			var visiblelinks=ajaxpageclass.pagerange-1 //# of visible page links other than currently selected link
-			var visibleleftlinks=Math.floor(visiblelinks/2) //calculate # of visible links to the left of the selected page
-			var visiblerightlinks=visibleleftlinks+(visiblelinks%2==1? 1 : 0) //calculate # of visible links to the right of the selected page
-			if (selectedpage<visibleleftlinks){ //if not enough room to the left to accomodate all visible left links
+			var visiblelinks=ajaxpageclass.pagerange-1 //# of visible page globalLinks other than currently selected link
+			var visibleleftlinks=Math.floor(visiblelinks/2) //calculate # of visible globalLinks to the left of the selected page
+			var visiblerightlinks=visibleleftlinks+(visiblelinks%2==1? 1 : 0) //calculate # of visible globalLinks to the right of the selected page
+			if (selectedpage<visibleleftlinks){ //if not enough room to the left to accomodate all visible left globalLinks
 				var overage=visibleleftlinks-selectedpage
-				visibleleftlinks-=overage //remove overage links from visible left links
-				visiblerightlinks+=overage //add overage links to the visible right links
+				visibleleftlinks-=overage //remove overage globalLinks from visible left globalLinks
+				visiblerightlinks+=overage //add overage globalLinks to the visible right globalLinks
 			}
-			else if ((this.pageinfo.pages.length-selectedpage-1)<visiblerightlinks){ //else if not enough room to the left to accomodate all visible right links
+			else if ((this.pageinfo.pages.length-selectedpage-1)<visiblerightlinks){ //else if not enough room to the left to accomodate all visible right globalLinks
 				var overage=visiblerightlinks-(this.pageinfo.pages.length-selectedpage-1)
-				visiblerightlinks-=overage //remove overage links from visible right links
-				visibleleftlinks+=overage //add overage links to the visible left links
+				visiblerightlinks-=overage //remove overage globalLinks from visible right globalLinks
+				visibleleftlinks+=overage //add overage globalLinks to the visible left globalLinks
 			}
 			var currentrange=[selectedpage-visibleleftlinks, selectedpage+visiblerightlinks] //calculate indices of visible pages to show: [startindex, endindex]
 			var previousrange=paginateInfo.previousrange //retrieve previous page range
 			for (var i=0; i<paginateInfo.divs.length; i++){ //loop through paginate divs
 				if (previousrange){ //if previous range is available (not null)
-					for (var p=previousrange[0]; p<=previousrange[1]; p++){ //hide all page links
+					for (var p=previousrange[0]; p<=previousrange[1]; p++){ //hide all page globalLinks
 						paginateInfo.pagelinks[i][p].style.display="none"
 					}
 				}
-				for (var p=currentrange[0]; p<=currentrange[1]; p++){ //reveal all active page links
+				for (var p=currentrange[0]; p<=currentrange[1]; p++){ //reveal all active page globalLinks
 					paginateInfo.pagelinks[i][p].style.display="inline"
 				}
 				paginateInfo.pagelinks[i][0].style.display="inline" //always show 1st page link

@@ -1,8 +1,8 @@
 ;
 
-var links = [],
-    vacancies = [],
-    companies = [],
+var globalLinks = [],
+    globalVacancies = [],
+    globalCompanies = [],
     counter = 1;
 
 var Vacancy = function () {
@@ -54,35 +54,54 @@ Link.prototype.addToHtml = function () {
 };
 
 
-
 /*function getJsonOfVacancies() {
-    var xhr = new XMLHttpRequest(),
-        url = "http://138.68.77.7:8000/api/vacancy/";
-    xhr.open("GET", url, true);
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4) {
-            let status = xhr.status;
-            if (status >= 200 && status < 300 || status === 304) {
-                let vacancies = JSON.parse(xhr.responseText); // returns string of JSON
-                parseVacancies(vacancies);
-            } else {
-                console.log(xhr.status + ":" + xhr.statusText);
-            }
-        }
-    };
-    xhr.send(null);
+ var xhr = new XMLHttpRequest(),
+ url = "http://138.68.77.7:8000/api/vacancy/";
+ xhr.open("GET", url, true);
+ xhr.onreadystatechange = function () {
+ if (xhr.readyState === 4) {
+ let status = xhr.status;
+ if (status >= 200 && status < 300 || status === 304) {
+ let globalVacancies = JSON.parse(xhr.responseText); // returns string of JSON
+ parseVacancies(globalVacancies);
+ } else {
+ console.log(xhr.status + ":" + xhr.statusText);
+ }
+ }
+ };
+ xhr.send(null);
  }*/
 
 function addVacancyElement(obj) {
-    // создаем новый элемент div
-    // и добавляем в него немного контента
+    // create general div for Vacancy Entity
     var vacancyDiv = document.createElement("div");
-    vacancyDiv.setAttribute("class", "col-xs-4");
+    vacancyDiv.setAttribute("class", "vacancy col-xs-4");
     vacancyDiv.setAttribute("onclick", "show_more('vacancy', this.id)");
-    vacancyDiv.setAttribute("style", "cursor: pointer");
     vacancyDiv.setAttribute("id", "vacancy-" + obj.id);
 
-    vacancyDiv.innerHTML = '<div class="title-box"><h4>' + obj.name + '</h4></div><div class="entry-container "><div class="entry-content"><p>' + obj.description.substr(0, 200) + '...</p></div></div></div>';
+    //create div for vacancy Title
+    var vacancyTitleDiv = document.createElement("div");
+    vacancyTitleDiv.setAttribute("class", "title-box");
+    //create h4 for vacancy Title
+    //todo parser inserts h4 already, so do we need to create this element?
+    var vacancyTitleDivH = document.createElement("h4");
+    vacancyTitleDivH.setAttribute("class", "title-box-name");
+    vacancyTitleDivH.innerHTML = obj.name;
+    //create div for vacancy Container
+    var vacancyContainerDiv = document.createElement("div");
+    vacancyContainerDiv.setAttribute("class", "entry-container");
+    //create div for vacancy Description
+    var vacancyDescDiv = document.createElement("div");
+    vacancyDescDiv.setAttribute("class", "entry-content");
+    vacancyDescDiv.innerHTML = obj.description.substr(0, 200) + "...";
+
+    vacancyTitleDiv.appendChild(vacancyTitleDivH);
+    vacancyContainerDiv.appendChild(vacancyDescDiv);
+
+    vacancyDiv.appendChild(vacancyTitleDiv);
+    vacancyDiv.appendChild(vacancyContainerDiv);
+    /* vacancyDiv.innerHTML = '<div class="title-box"><h4>' + obj.name + '</h4></div>' +
+     '<div class="entry-container "><div class="entry-content"><p>' + obj.description.substr(0, 200) + '...</p></div></div></div>';*/
     // добавляем только что созданый элемент в дерево DOM
     document.getElementById("vacancy-block").appendChild(vacancyDiv);
 }
@@ -124,7 +143,7 @@ function addCompanyElement(obj) {
     //create div for company Description
     var companyDescDiv = document.createElement("div");
     companyDescDiv.setAttribute("class", "entry-content");
-    companyDescDiv.innerHTML = desc.substr(0, 200) + "...";
+    companyDescDiv.innerHTML = desc.substr(0, 150) + "...";
 
     companyTitleDiv.appendChild(companyTitleDivH);
     companyLogoDiv.appendChild(companyLogoDivImg);
@@ -142,16 +161,16 @@ function addCompanyElement(obj) {
 
 function show_more(type_api, id) {
     if (type_api == "vacancy") {
-        for (var vacancy in vacancies) {
-            if (vacancies[vacancy].id == id.split('-')[1]) {
-                showVacancyElement(vacancies[vacancy])
+        for (var vacancy in globalVacancies) {
+            if (globalVacancies[vacancy].id == id.split('-')[1]) {
+                showVacancyElement(globalVacancies[vacancy])
             }
         }
     }
     if (type_api == "company") {
-        for (var company in companies) {
-            if (companies[company].id == id.split('-')[1]) {
-                showCompanyElement(companies[company]);
+        for (var company in globalCompanies) {
+            if (globalCompanies[company].id == id.split('-')[1]) {
+                showCompanyElement(globalCompanies[company]);
             }
         }
     }
@@ -176,45 +195,60 @@ function showVacancyElement(obj) {
     var newDiv = document.createElement("div");
     newDiv.setAttribute("class", "col-xs-4");
     newDiv.innerHTML = '<div class="title-box"><h4>' + obj.name + '</h4></div>' +
-        '<div><p>'+ obj.company_name +'</p></div>' +
+        '<div><p>' + obj.company_name + '</p></div>' +
         '<div class="entry-content">' + obj.description + '</div>';
     // добавляем только что созданый элемент в дерево DOM
     document.getElementById("side-bar").innerHTML = newDiv.innerHTML;
 }
-// todo make below function work for vacancies and companies
-function testPostScript() {
+// todo make below function work for globalVacancies and globalCompanies
+function testPostScriptCompany() {
+    var  url = 'http://' + window.location.hostname + ":" + window.location.port + '/api/company/' + counter++;
+    showMoreEventHandler(url);
+}
+
+function testPostScriptVacancy() {
+    var url = 'http://' + window.location.hostname + ":" + window.location.port + '/api/vacancy/' + counter++;
+    showMoreEventHandler(url);
+}
+
+function showMoreEventHandler(url) {
     var xhr = new XMLHttpRequest(),
+        vacancyUrl = url.indexOf('vacancy'),
+        companyUrl = url.indexOf('company'),
+        linkUrl = url.indexOf('link');
+
+    if (vacancyUrl) {
+        url = 'http://' + window.location.hostname + ":" + window.location.port + '/api/vacancy/' + counter++;
+    } else if (companyUrl) {
         url = 'http://' + window.location.hostname + ":" + window.location.port + '/api/company/' + counter++;
+    } else if (linkUrl) {
+        url = 'for link url';
+    }
+
     xhr.open("POST", url, true);
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
             var status = xhr.status;
             if (status >= 200 && status < 300 || status === 304) {
-                var companiesJson = JSON.parse(xhr.responseText),
-                    vacancy = new Vacancy(),
-                    company = new Company(),
-                    link = new Link();
-                for (var dict in companiesJson) {
-                    switch (dict) {
-                        case ("vacancy_list"):
-                            for (var elem in companiesJson[dict]) {
-                                vacancies.push(vacancy.createFromData(companiesJson[dict][elem]));
-                            }
-                            break;
-                        case ("company_list"):
-                            for (var elem in companiesJson[dict]) {
-                                companies.push(company.createFromData(companiesJson[dict][elem]));
-                            }
-                            break;
-                        case ("link_list"):
-                            for (var elem in companiesJson[dict]) {
-                                links.push(link.createFromData(companiesJson[dict][elem]));
-                            }
-                            break;
-                        default:
-                            throw new Error('---------------------------failed to parse input data----------------------------------------');
+                if (vacancyUrl) {
+                    var vacanciesJson = JSON.parse(xhr.responseText),
+                        vacancy = new Vacancy();
+                    for (var dict in vacanciesJson) {
+                        for (var elem in vacanciesJson[dict]) {
+                            globalVacancies.push(vacancy.createFromData(vacanciesJson[dict][elem]));
+                        }
                     }
+                } else if (companyUrl) {
+                    var companiesJson = JSON.parse(xhr.responseText),
+                        company = new Vacancy();
+                    for (var dict in companiesJson) {
+                        for (var elem in companiesJson[dict]) {
+                            globalVacancies.push(company.createFromData(companiesJson[dict][elem]));
+                        }
+                    }
+                } else if (linkUrl) {
+                    url = 'for link url';
                 }
             } else {
                 console.log(xhr.status + ":" + xhr.statusText);

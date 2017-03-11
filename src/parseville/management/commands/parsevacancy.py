@@ -27,7 +27,7 @@ class Command(BaseCommand):
 
 
 def test(save):
-        soup = get_soup_from_url('https://softserve.ua/ua/vacancies/open-vacancies/?tax-direction=0&tax-country=117&tax-city=121', save)
+        soup = get_soup_from_url('https://softserve.ua/ua/globalVacancies/open-globalVacancies/?tax-direction=0&tax-country=117&tax-city=121', save)
         if soup:
             vacancy_elements = soup.find('div', class_="col-xs-12 col-md-8").findAll('div', class_="col-xs-12")
             if vacancy_elements:
