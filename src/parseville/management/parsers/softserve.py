@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import re
-from helper import get_soup_from_url, download_image
+from helper import get_soup_from_url
 from parseville.models import Company, Vacancy, Country, City, Office
 
 
