@@ -13,7 +13,7 @@ class MetaModel(models.Model):
 
 
 class Country(MetaModel):
-    name_eng = models.CharField(max_length=200, null=True, blank=True)
+    name = models.CharField(max_length=200, null=True, blank=True)
     name_ukr = models.CharField(max_length=200, null=True, blank=True)
     name_rus = models.CharField(max_length=200, null=True, blank=True)
     alias = models.CharField(max_length=200, null=True, blank=True)
@@ -21,7 +21,7 @@ class Country(MetaModel):
 
 
 class City(MetaModel):
-    name_eng = models.CharField(max_length=200, null=True, blank=True)
+    name = models.CharField(max_length=200, null=True, blank=True)
     name_ukr = models.CharField(max_length=200, null=True, blank=True)
     name_rus = models.CharField(max_length=200, null=True, blank=True)
     alias = models.CharField(max_length=200, null=True, blank=True)

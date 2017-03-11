@@ -8,12 +8,10 @@ class Command(BaseCommand):
     can_import_settings = True
 
     def handle(self, *args, **options):
-        if len(args) == 0:
-            start(False)
-        else:
-            start(True)
+        start(False)
 
 
 def start(save):
     dou.parse_company(save)
     softserve.parse_vacancy(save)
+    softserve.parse_offices(save)
