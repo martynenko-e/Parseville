@@ -187,7 +187,6 @@ function show_more(type_api, id) {
     }
 }
 
-
 function showCompanyElement(obj) {
     // создаем новый элемент div
     // и добавляем в него немного контента
@@ -211,26 +210,9 @@ function showVacancyElement(obj) {
     // добавляем только что созданый элемент в дерево DOM
     document.getElementById("side-bar").innerHTML = newDiv.innerHTML;
 }
-// todo make below function work for globalVacancies and globalCompanies
-
-function testPostScriptCompany() {
-    var  url = 'http://' + window.location.hostname + ":" + window.location.port + '/api/company/' + counter++;
-    showMoreEventHandler(url);
-}
-
-function testPostScriptVacancy() {
-    /*
-     * div. --> button vacancy  -->> onclick() --> url  --> showMoreEventHandler(url)
-     * div. --> button company  -->> onclick() --> url  --> showMoreEventHandler(url)
-     *
-     * */
-    var url = 'http://' + window.location.hostname + ":" + window.location.port + '/api/vacancy/' + counter++;
-    showMoreEventHandler(url);
-}
-
-function showMoreEventHandler(url) {
+// in doubt with naming
+function showMoreEvent(url) {
     var xhr = new XMLHttpRequest();
-
     xhr.open("POST", url, true);
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhr.onreadystatechange = function () {
@@ -273,3 +255,17 @@ function postProcessing(data) {
         }
     }
 }
+
+(function showMoreEventHandler() {
+    var companyShowMoreBtn = document.getElementById('btn-load-company'),
+        vacancySHowMoreBtn = document.getElementById('btn-load-vacancy');
+
+    vacancySHowMoreBtn.onclick = function () {
+        var url = 'http://' + window.location.hostname + ":" + window.location.port + '/api/vacancy/' + counter++;
+        showMoreEvent(url);
+    };
+    companyShowMoreBtn.onclick = function () {
+        var url = 'http://' + window.location.hostname + ":" + window.location.port + '/api/company/' + counter++;
+        showMoreEvent(url);
+    };
+})();

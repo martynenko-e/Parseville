@@ -11,6 +11,6 @@ class Command(BaseCommand):
 
 
 def start(save):
-    dou.parse_company(save)
-    softserve.parse_vacancy(save)
+    #   dou.parse_company(save)
+    #   softserve.parse_vacancy(save)
     softserve.parse_offices(save)
