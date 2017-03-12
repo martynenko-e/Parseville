@@ -42,7 +42,7 @@ class AdminEvent(admin.ModelAdmin):
 
 
 class AdminOffice(admin.ModelAdmin):
-    list_display = ('id', 'latitude', 'longitude', 'company')
+    list_display = ('name', 'latitude', 'longitude', 'company', 'city', 'phone')
 
 
 admin.site.register(Country, AdminCountry)

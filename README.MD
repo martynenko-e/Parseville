@@ -43,14 +43,14 @@ python manage.py runserver 0.0.0.0:8000
 python manage.py initialization
 ```
 
-* Parse companies info
+* Run all exists parsers
 ```cmd
-python manage.py parse
+python manage.py startparsers
 ```
 
-* Parse vacancy info
+* Start cron task for parsing
 ```cmd
-python manage.py parsevacancy
+python manage.py runscheduler
 ```
 
 ## API description
@@ -209,11 +209,36 @@ python manage.py parsevacancy
     "link_list": [
         {
             "url": "https://tproger.ru/",
-            "description": "Какие методологии разработки применяются в различных IT-компаниях — Tproger собирает рассказы представителей индустрии ...",
+            "short_text": "Какие методологии разработки применяются в различных IT-компаниях — Tproger собирает рассказы представителей индустрии ...",
             "id": 1,
             "name": "Типичный программист"
         }
     ]
 
+}
+```
+
+### Example for request /api/office/
+#### Response
+```json
+{
+    "office_list": [
+        {
+            "name": "Office Lviv HQ",
+            "company": "SoftServe",
+            "phone": "Tel: +380 32 240 9999",
+            "address": "79017, Sadova Str, 2a",
+            "lat": 49.822421080294944,
+            "lng": 23.98505925236202
+        },
+        {
+            "name": "Office №1 in V. Velykoho Str.",
+            "company": "SoftServe",
+            "phone": "Tel: +380 32 240 9999",
+            "address": "79053, V. Velykoho Str., 52",
+            "lat": 49.8118695,
+            "lng": 23.988946299999952
+        }
+    ]
 }
 ```

@@ -60,6 +60,16 @@ def api_vacancy(request, count="1"):
     return response
 
 
+@csrf_exempt
+def api_offices(request):
+    data = {
+        "office_list": get_office_batch("")
+    }
+    response = HttpResponse(json.dumps(data), content_type='application/json')
+    response["Access-Control-Allow-Origin"] = '*'
+    return response
+
+
 def get_company_batch(count):
     company_query_set = Company.objects.filter(show=True).order_by('added_date')[3 * count:3 * count + 3] \
         .values_list("id",
@@ -82,13 +92,13 @@ def get_company_batch(count):
 
 def get_vacancy_batch(count):
     vacancy_query_set = Vacancy.objects.filter(show=True,
-                                               date_of_publication__isnull=False,
-                                               date_of_publication__lte=datetime.now()
+                                               added_date__isnull=False,
+                                               added_date__lte=datetime.now()
                                                ).order_by('date_of_publication')[3 * count:3 * count + 3] \
         .values_list("id",
                      "name",
                      "description",
-                     "date_of_publication",
+                     "added_date",
                      "company__name",
                      "programming_language",
                      "url",
@@ -123,4 +133,24 @@ def get_link_batch(count):
         "short_text": element[2],
         "url": element[3],
     }, link_query_set)
+    return data
+
+
+def get_office_batch(city):
+    office_query_set = Office.objects.filter().values_list(
+        "name",
+        "address",
+        "latitude",
+        "longitude",
+        "phone",
+        "company__name"
+    )
+    data = map(lambda element: {
+        "name": element[0],
+        "address": element[1],
+        "lat": element[2],
+        "lng": element[3],
+        "phone": element[4],
+        "company": element[5],
+    }, office_query_set)
     return data
