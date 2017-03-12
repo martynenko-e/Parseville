@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
-import re
 from django.core.management.base import BaseCommand
-
-from parseville.models import City, Country, ProgrammingLanguage
+from parseville.models import City, Country, ProgrammingLanguage, UsefulLink
 
 
 class Command(BaseCommand):
@@ -13,12 +11,18 @@ class Command(BaseCommand):
 
 
 def init():
-    city_obj, created = City.objects.get_or_create(name="Kiev", alias="kiev", show=True)
     country_obj, created = Country.objects.get_or_create(name="Ukraine", alias="ukraine", show=True)
-    prog_obj_1, created = ProgrammingLanguage.objects.get_or_create(name="JavaScript", alias="javascript", show=True)
-    prog_obj_2, created = ProgrammingLanguage.objects.get_or_create(name="Java", alias="java", show=True)
-    prog_obj_3, created = ProgrammingLanguage.objects.get_or_create(name="Python", alias="python", show=True)
-    prog_obj_4, created = ProgrammingLanguage.objects.get_or_create(name="C++", alias="c++", show=True)
-    prog_obj_5, created = ProgrammingLanguage.objects.get_or_create(name="Android", alias="android", show=True)
-    prog_obj_6, created = ProgrammingLanguage.objects.get_or_create(name="HTML", alias="html", show=True)
-    prog_obj_7, created = ProgrammingLanguage.objects.get_or_create(name="CSS", alias="css", show=True)
+    City.objects.get_or_create(name="Kiev", alias="kiev", show=True, country=country_obj)
+    ProgrammingLanguage.objects.get_or_create(name="JavaScript", alias="javascript", show=True)
+    ProgrammingLanguage.objects.get_or_create(name="Java", alias="java", show=True)
+    ProgrammingLanguage.objects.get_or_create(name="Python", alias="python", show=True)
+    ProgrammingLanguage.objects.get_or_create(name="C++", alias="c++", show=True)
+    ProgrammingLanguage.objects.get_or_create(name="Android", alias="android", show=True)
+    ProgrammingLanguage.objects.get_or_create(name="HTML", alias="html", show=True)
+    ProgrammingLanguage.objects.get_or_create(name="CSS", alias="css", show=True)
+    UsefulLink.objects.get_or_create(name="Tproger",
+                                     alias="tproger",
+                                     url="https://tproger.ru/",
+                                     short_text="Типичный программист — cоздано программистами для программистов",
+                                     show=True,
+                                     show_on_main=True)

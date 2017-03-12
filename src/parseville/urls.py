@@ -22,11 +22,11 @@ from parseville.views import main, api
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$', main.bootstrap_test, name='bootstrap'),
-    url(r'^test/', main.test, name='test'),
+    url(r'^$', main.marty, name='marty'),
     url(r'^index/', main.index, name='index'),
     url(r'^api/init/', api.api_init, name='api_init'),
     url(r'^api/link/(?P<count>[\d]+)?/?', api.api_link, name='api_link'),
+    url(r'^api/office/', api.api_offices, name='api_offices'),
     url(r'^api/vacancy/(?P<count>[\d]+)?/?', api.api_vacancy, name='api_vacancy'),
     url(r'^api/company/(?P<count>[\d]+)?/?', api.api_company, name='api_company'),
     ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) \

@@ -77,7 +77,7 @@
                 </div>
                 <div class="btn-group btn-group-justified" role="group" aria-label="...">
                     <div class="btn-group" role="group">
-                        <button type="button" class="btn btn-default" id="btn-load-vacancy">More vacancies ...</button>
+                        <button type="button" class="btn btn-default" id="btn-load-vacancy" onclick="testPostScriptVacancy()">More vacancies ...</button>
                     </div>
                 </div>
                 <hr>
@@ -103,7 +103,9 @@
                 </div>
                 <div class="btn-group btn-group-justified" role="group" aria-label="...">
                     <div class="btn-group" role="group">
-                        <button type="button" class="btn btn-default" id="btn-load-company">More companies ...</button>
+                        <button type="button" class="btn btn-default" id="btn-load-company" onclick="testPostScriptCompany()">
+                            More companies ...
+                        </button>
                     </div>
                 </div>
                 </br>
@@ -133,30 +135,6 @@
     //    document.getElementById("btn-load-company").onclick = loadMoreCompany;
 
     $(document).ready(function () {
-
-        function postProcessing(data) {
-            var myArray = data;
-            for (var dict in myArray) {
-                switch (dict) {
-                    case ("vacancy_list"):
-                        for (var elem in myArray[dict]) {
-                            vacancies.push(Vacancy.prototype.createFromData(myArray[dict][elem]));
-                        }
-                        break;
-                    case ("company_list"):
-                        for (var elem in myArray[dict]) {
-                            companies.push(Company.prototype.createFromData(myArray[dict][elem]));
-                        }
-                        break;
-                    case ("link_list"):
-                        for (var elem in myArray[dict]) {
-                            links.push(Link.prototype.createFromData(myArray[dict][elem]));
-                        }
-                        break;
-                }
-            }
-        }
-
         getInit();
 
         function getInit() {
@@ -166,7 +144,7 @@
                 dataType: 'json',
                 cache: false,
                 success: postProcessing,
-                async: true,
+                async: true
             });
         }
     });

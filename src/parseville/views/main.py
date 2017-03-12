@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 from django.shortcuts import render
+from api import get_company_batch, get_vacancy_batch, get_link_batch, get_office_batch
 
-from parseville.models import *
+import json
 
 
 def index(request):
@@ -16,11 +17,16 @@ def index(request):
     )
 
 
-def test(request):
-    return render(request, 'test.html', {})
+def marty(request):
+    data_init = {
+        "company_list": get_company_batch(0),
+        "vacancy_list": get_vacancy_batch(0),
+        "link_list": get_link_batch(0),
+    }
 
-
-def bootstrap_test(request):
-    return render(request, 'marty-index.html', {
-    })
+    return render(request, 'marty-index.html',
+                  {
+                      'data_init': json.dumps(data_init),
+                      'offices': json.dumps(get_office_batch("")),
+                  })
 

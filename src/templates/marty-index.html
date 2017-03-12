@@ -12,7 +12,6 @@
     <script src="{% static 'js/marty.js' %}"></script>
 
 </head>
-
 <body style="margin-top: 60px;">
 <aside id="full-view">
     <div class="col-xs-12">
@@ -25,7 +24,6 @@
 </aside>
 <main>
     <nav class="navbar navbar-default">
-
         <div class="col-xs-12">
             <div class="navbar-header">
                 <a class="navbar-brand" href="#">
@@ -37,137 +35,46 @@
             </div>
         </div>
     </nav>
-
     <div class="content">
-
         <div class="col-xs-12">
-            <div class="row" id="link-block">
-                {% comment %}{% for link in link_list %}
-                <div class="col-xs-12">
-                    <div id="link-{{ link.id }}" class="usefull-link">
-                        <a href="{{ link.url }}"><h6>{{ link.name }}</h6></a> <p>{{link.description}}</p>
-                    </div>
-                </div>
-                {% endfor %}{% endcomment %}
-            </div>
+            <div class="row" id="link-block"></div>
             <div class="btn-group btn-group-justified" role="group" aria-label="...">
                 <div class="btn-group" role="group">
                     <button type="button" class="btn btn-default" id="btn-load-link">More usefull links ...</button>
                 </div>
             </div>
             <hr>
-            <div class="row" id="vacancy-block">
-                {% comment %}{% for vacancy in vacancy_list %}
-                <div class="col-xs-4" id="vacancy-{{ vacancy.id }}" onclick="show_more('vacancy', this.id)" style="cursor: pointer">
-                    <div class="title-box">
-                        <h4>
-                            {{ vacancy.name }}
-                        </h4>
-                    </div>
-                    <div class="entry-lank" style="">
-                        <h5>{{ vacancy.programming_language }}</h5>
-                    </div>
-                    <div class="entry-container ">
-                        <div class="entry-content"><p>{{ vacancy.description|truncatechars_html:100|safe }}</p></div>
-                    </div>
-                </div>
-                {% endfor %}{% endcomment %}
-            </div>
+            <div class="row" id="vacancy-block"></div>
             <div class="btn-group btn-group-justified" role="group" aria-label="...">
                 <div class="btn-group" role="group">
                     <button type="button" class="btn btn-default" id="btn-load-vacancy">More vacancies ...</button>
                 </div>
             </div>
             <hr>
-            <div class="row" id="company-block">
-                {% comment %}{% for company in company_list %}
-                <div class="col-xs-4" id="company-{{ company.id }}" onclick="show_more('company', this.id)" style="cursor: pointer">
-                    <div class="title-box">
-                        <h4>
-                            {{ comany.name }}
-                        </h4>
-                    </div>
-                    <div class="entry-image" style="">
-                        <img src="/media/{{ company.logo }}">
-                    </div>
-                    <div class="entry-container ">
-                        <div class="entry-content"><p>
-                            {{company.description|truncatechars_html:100|safe}}
-                        </div>
-                    </div>
-                </div>
-                {% endfor %}{% endcomment %}
-            </div>
+            <div class="row" id="company-block"></div>
             <div class="btn-group btn-group-justified" role="group" aria-label="...">
                 <div class="btn-group" role="group">
                     <button type="button" class="btn btn-default" id="btn-load-company">More companies ...</button>
                 </div>
             </div>
-            </br>
+            <br>
             <div class="map">
                 <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d2540.0244182976703!2d30.416830679721098!3d50.459269979577!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1suk!2sua!4v1478846918907"
                         width="100%" height="400" frameborder="0" style="border:0" allowfullscreen></iframe>
             </div>
         </div>
-
     </div>
     <hr>
     <footer class="footer">
-
         <div class="col-xs-12">
             <div class="copyright-text">
-                Copyright. © 2017 No Name. All rights are Outsouce. Designed by .
+                © Parseville, 2017
             </div>
         </div>
-
     </footer>
 </main>
 </body>
 <script>
-
-//    document.getElementById("btn-load-link").onclick = loadMoreLink;
-//
-//    document.getElementById("btn-load-vacancy").onclick = loadMoreVacancy;
-//
-//    document.getElementById("btn-load-company").onclick = loadMoreCompany;
-
-    $(document).ready(function () {
-
-        function postProcessing(data) {
-            var myArray = data;
-            for (var dict in myArray) {
-                switch (dict) {
-                    case ("vacancy_list"):
-                        for (var elem in myArray[dict]) {
-                            vacancies.push(Vacancy.prototype.createFromData(myArray[dict][elem]));
-                        }
-                        break;
-                    case ("company_list"):
-                        for (var elem in myArray[dict]) {
-                            companies.push(Company.prototype.createFromData(myArray[dict][elem]));
-                        }
-                        break;
-                    case ("link_list"):
-                        for (var elem in myArray[dict]) {
-                            links.push(Link.prototype.createFromData(myArray[dict][elem]));
-                        }
-                        break;
-                }
-            }
-        }
-
-        getInit();
-
-        function getInit() {
-            $.ajax({
-                url: 'http://138.68.77.7:8000/api/init/',
-                type: 'post',
-                dataType: 'json',
-                cache: false,
-                success: postProcessing,
-                async: true
-            });
-        }
-    });
+    dataProcessing({{ data_init|safe }})
 </script>
 </html>

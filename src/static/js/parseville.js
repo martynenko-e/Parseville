@@ -30,7 +30,7 @@ function parseVacancies(arrayOfVacancies) {
 }
 //todo try to use jQuery Template plug in to parse vacancy with below method
 function renderVacancyHTML(vacancy) {
-    var div = document.getElementById('vacancies'),
+    var div = document.getElementById('globalVacancies'),
         divVacancy = document.createElement('div'),
         divider = document.createElement('hr');
     divVacancy.className = 'vacancy';
