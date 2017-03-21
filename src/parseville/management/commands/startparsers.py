@@ -15,7 +15,7 @@ class Command(BaseCommand):
 
 def start(save):
     #   dou.parse_company(save)
-    #   softserve.parse_vacancy(save)
-    #   softserve.parse_offices(save)
+    #  softserve.parse_vacancy(save)
+       softserve.parse_offices(save)
     #   cogniance.parse_vacancy(save)
-    trionika.parse_vacancy(save)
+    #   trionika.parse_vacancy(save)
