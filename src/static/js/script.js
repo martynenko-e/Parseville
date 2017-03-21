@@ -3,6 +3,7 @@
 var globalLinks = [],
     globalVacancies = [],
     globalCompanies = [],
+    globalMarkers = [],
     counter = 1;
 
 var Vacancy = function () {
@@ -53,6 +54,19 @@ Link.prototype.createFromData = function (data) {
 Link.prototype.addToHtml = function () {
 };
 
+function Marker() {
+}
+
+Marker.prototype.createFromData = function (data) {
+    var object = new Marker();
+    object.name = data.name;
+    object.company = data.company;
+    object.phone = data.phone;
+    object.address = data.address;
+    object.lat = data.lat;
+    object.lng = data.lng;
+    return object;
+};
 
 /*function getJsonOfVacancies() {
  var xhr = new XMLHttpRequest(),
@@ -232,6 +246,7 @@ function postProcessing(data) {
     var myArray = data,
         vacancy = new Vacancy(),
         company = new Company(),
+        marker = new Marker(),
         link = new Link();
     for (var dict in myArray) {
         switch (dict) {
@@ -250,6 +265,11 @@ function postProcessing(data) {
                     globalLinks.push(link.createFromData(myArray[dict][elem]));
                 }
                 break;
+            case ('office_list'):
+                for (elem in myArray[dict]) {
+                    globalMarkers.push(marker.createFromData(myArray[dict][elem]));
+                }
+                break;
             default:
                 throw new Error('---------------------------failed to parse input data----------------------------------------');
         }
@@ -258,14 +278,19 @@ function postProcessing(data) {
 
 (function showMoreEventHandler() {
     var companyShowMoreBtn = document.getElementById('btn-load-company'),
-        vacancySHowMoreBtn = document.getElementById('btn-load-vacancy');
+        vacancySHowMoreBtn = document.getElementById('btn-load-vacancy'),
+        mapEventOnClick = document.getElementById('map');
 
     vacancySHowMoreBtn.onclick = function () {
-        var url = 'http://' + window.location.hostname + ":" + window.location.port + '/api/vacancy/' + counter++;
+        let url = 'http://' + window.location.hostname + ":" + window.location.port + '/api/vacancy/' + counter++;
         showMoreEvent(url);
     };
     companyShowMoreBtn.onclick = function () {
-        var url = 'http://' + window.location.hostname + ":" + window.location.port + '/api/company/' + counter++;
+        let url = 'http://' + window.location.hostname + ":" + window.location.port + '/api/company/' + counter++;
         showMoreEvent(url);
     };
+    mapEventOnClick.onclick = function () {
+        let url = "http://localhost:8000/api/office/";
+        showMoreEvent(url);
+    }
 })();
