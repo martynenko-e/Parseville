@@ -278,9 +278,7 @@ function postProcessing(data) {
 
 (function showMoreEventHandler() {
     var companyShowMoreBtn = document.getElementById('btn-load-company'),
-        vacancySHowMoreBtn = document.getElementById('btn-load-vacancy'),
-        mapEventOnClick = document.getElementById('map');
-
+        vacancySHowMoreBtn = document.getElementById('btn-load-vacancy');
     vacancySHowMoreBtn.onclick = function () {
         let url = 'http://' + window.location.hostname + ":" + window.location.port + '/api/vacancy/' + counter++;
         showMoreEvent(url);
@@ -289,8 +287,4 @@ function postProcessing(data) {
         let url = 'http://' + window.location.hostname + ":" + window.location.port + '/api/company/' + counter++;
         showMoreEvent(url);
     };
-    mapEventOnClick.onclick = function () {
-        let url = "http://localhost:8000/api/office/";
-        showMoreEvent(url);
-    }
 })();

@@ -1,6 +1,6 @@
 {% load staticfiles %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:http="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Parseville</title>
@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/indexCss.css' %}">
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/markerclusterer.js' %}"></script>
 </head>
 
 <body>
@@ -109,7 +110,10 @@
                 </br>
 
                 <div id="map"></div>
-
+                <div>
+                    <input type="button" style="margin-right: 10px" value="markers" onclick='showMoreEvent("http://localhost:8000/api/office/")'>
+                    <input type="button" value="CreateArray" onclick="filterMarkers(globalMarkers)">
+                </div>
 
             </div>
         </div>
@@ -123,8 +127,9 @@
 </main>
 
 </body>
-<script src="{% static '/js/mapInit.js' %}"></script>
 <script src="{% static 'js/script.js' %}"></script>
+<script src="{% static '/js/mapInit.js' %}"></script>
+
 <script defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBvnIFhL4lkBp6gqzbtIxP2cfZEIwBMCjw&callback=initMap">
 </script>
