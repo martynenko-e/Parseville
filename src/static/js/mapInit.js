@@ -14,13 +14,14 @@ function initMap() {
             lat: 50.4501,
             lng: 30.5234
         },
+        mapId = document.getElementById('map'),
         mapOptions = {
             zoom: 10,
             scrollwheel: false,
             center: uluru,
             fullscreenControll: true
         },
-        map = new google.maps.Map(document.getElementById('map'), mapOptions),
+        map = new google.maps.Map(mapId, mapOptions),
         labels = 'ABCDEFGIJKLMNOPQRSTUVWXYZ';
 
     var markers = globalMarkers.map(function (marker, i) {
@@ -41,4 +42,20 @@ function initMap() {
 
 
     //todo create event listeners onDruged and onZommChanged (smthing like that)..firstly create fundtions itself with "Draft data" (min and max lat lng) to be viewed in console
+    //zoom_changed
+    //drag
+    map.addListener('zoom_changed', function () {
+        // // 3 seconds after the center of the map has changed, pan back to the
+        // // marker.
+        // window.setTimeout(function () {
+        //     map.panTo(marker.getPosition());
+        // }, 3000);
+    });
+    map.addListener('drag', function () {
+        // // 3 seconds after the center of the map has changed, pan back to the
+        // // marker.
+        // window.setTimeout(function () {
+        //     map.panTo(marker.getPosition());
+        // }, 3000);
+    });
 }
