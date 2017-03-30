@@ -26,13 +26,16 @@ function initMap() {
 
     var markers = globalMarkers.map(function (marker, i) {
         console.log(marker);
-        return new google.maps.Marker({
-            position: {
-                lat: marker.lat,
-                lng: marker.lng
-            },
-            label: labels[i % labels.length]
-        });
+        //todo check error with "0" property with Eugene
+        if (marker.lat && marker.lng) {
+            return new google.maps.Marker({
+                position: {
+                    lat: marker.lat,
+                    lng: marker.lng
+                },
+                label: labels[i % labels.length]
+            });
+        }
     });
 
     let markerCluster = new MarkerClusterer(map, markers,
@@ -50,6 +53,8 @@ function initMap() {
         // window.setTimeout(function () {
         //     map.panTo(marker.getPosition());
         // }, 3000);
+        map.getAttribute('width');
+        map.getAttribute('height');
     });
     map.addListener('drag', function () {
         // // 3 seconds after the center of the map has changed, pan back to the
@@ -58,4 +63,9 @@ function initMap() {
         //     map.panTo(marker.getPosition());
         // }, 3000);
     });
+
+    function testMap(div) {
+        var wid = div.getAttribute('width'),
+            hei = div.getAttribute('height');
+    }
 }
