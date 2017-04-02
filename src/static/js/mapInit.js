@@ -13,40 +13,24 @@ function initMap() {
     });
 
     let uluru = {
-        lat: 50.4501,
-        lng: 30.5234
-    };
-
-    let mapId = document.getElementById('map');
-    let mapOptions = {
+            lat: 50.4501,
+            lng: 30.5234
+        },
+        mapId = document.getElementById('map'),
+        mapOptions = {
             zoom: 10,
             scrollwheel: false,
             center: uluru,
             fullscreenControll: true
-    };
-    let map = new google.maps.Map(mapId, mapOptions);
-    let labels = 'ABCDEFGIJKLMNOPQRSTUVWXYZ';
-    var bounds = new google.maps.LatLngBounds(uluru);
+        },
+        map = new google.maps.Map(mapId, mapOptions);
 
-    markers = globalMarkers.map(function (marker, i) {
-        return new google.maps.Marker({
-            position: {
-                lat: marker.lat,
-                lng: marker.lng
-            },
-            label: labels[i % labels.length]
-        });
-    });
-
-    for (var key in globalMarkers) {
-        var latLng = new google.maps.LatLng(globalMarkers[key].lat, globalMarkers[key].lng);
-        bounds.extend(latLng);
-    }
+    markers = markersFromOffices(globalMarkers);
 
     let markerCluster = new MarkerClusterer(map, markers,
         {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
 
-    map.fitBounds(bounds);
+    map.fitBounds(boundMap(globalMarkers));
 
     //todo create event listeners onDruged and onZommChanged (smthing like that)..firstly create fundtions itself with "Draft data" (min and max lat lng) to be viewed in console
 
@@ -58,8 +42,6 @@ function initMap() {
         // границы карты 2 точки по диагонали
         console.log(map.getBounds().getSouthWest().lat());
         console.log(map.getBounds().getSouthWest().lng());
-
-
     });
 
     map.addListener('dragend', function () {
@@ -69,6 +51,33 @@ function initMap() {
         // window.setTimeout(function () {
         //     map.panTo(marker.getPosition());
         // }, 3000);
+    });
+}
+
+function boundMap(officesArray) {
+    var bounds = getBoundsOfMap();
+    for (var key in officesArray) {
+        var latLng = new google.maps.LatLng(officesArray[key].lat, officesArray[key].lng);
+        bounds.extend(latLng);
+    }
+    return bounds;
+}
+
+function getBoundsOfMap() {
+    return new google.maps.LatLngBounds({
+        lat: 50.4501,
+        lng: 30.5234
+    });
+}
+
+function markersFromOffices(officesArray) {
+    return officesArray.map(function (marker) {
+        return new google.maps.Marker({
+            position: {
+                lat: marker.lat,
+                lng: marker.lng
+            }
+        });
     });
 }
 
