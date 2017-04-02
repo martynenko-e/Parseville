@@ -70,6 +70,16 @@ def api_offices(request):
     return response
 
 
+@csrf_exempt
+def api_get_offices(request):
+    data = {
+        "office_list": get_office_batch("kiev")
+    }
+    response = HttpResponse(json.dumps(data), content_type='application/json')
+    response["Access-Control-Allow-Origin"] = '*'
+    return response
+
+
 def get_company_batch(count):
     company_query_set = Company.objects.filter(show=True).order_by('added_date')[3 * count:3 * count + 3] \
         .values_list("id",
@@ -137,14 +147,25 @@ def get_link_batch(count):
 
 
 def get_office_batch(city):
-    office_query_set = Office.objects.filter().values_list(
-        "name",
-        "address",
-        "latitude",
-        "longitude",
-        "phone",
-        "company__name"
-    )
+    if (city):
+        office_query_set = Office.objects.filter(city__alias=city).values_list(
+                "name",
+                "address",
+                "latitude",
+                "longitude",
+                "phone",
+                "company__name"
+        )
+    else:
+        office_query_set = Office.objects.filter().values_list(
+                "name",
+                "address",
+                "latitude",
+                "longitude",
+                "phone",
+                "company__name"
+        )
+
     data = map(lambda element: {
         "name": element[0],
         "address": element[1],

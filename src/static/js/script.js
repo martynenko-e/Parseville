@@ -248,6 +248,7 @@ function postProcessing(data) {
         company = new Company(),
         marker = new Marker(),
         link = new Link();
+    //clearGlobalMarkers();
     for (var dict in myArray) {
         switch (dict) {
             case ("vacancy_list"):
@@ -273,6 +274,13 @@ function postProcessing(data) {
             default:
                 throw new Error('---------------------------failed to parse input data----------------------------------------');
         }
+    }
+}
+
+function clearGlobalMarkers() {
+    if (globalMarkers) {
+        globalMarkers = [];
+        clearMarkers(markers);
     }
 }
 
