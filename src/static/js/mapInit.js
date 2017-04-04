@@ -25,32 +25,31 @@ function initMap() {
         },
         map = new google.maps.Map(mapId, mapOptions);
 
-    markers = markersFromOffices(globalMarkers);
+    markers = markersFromOffices(globalMarkers, addInfoWindow());
+
+    /*for (var i = 0; i < markers.length; i++) {
+        google.maps.event.addListener(markers[i], 'click', function () {
+            addInfoWindow().open(map, markers[i]);
+        })
+    }*/
 
     let markerCluster = new MarkerClusterer(map, markers,
         {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
 
     map.fitBounds(boundMap(globalMarkers));
 
-    //todo create event listeners onDruged and onZommChanged (smthing like that)..firstly create fundtions itself with "Draft data" (min and max lat lng) to be viewed in console
-
     map.addListener('zoom_changed', function () {
-        console.log('zoom');
-        // границы карты 1 точки по диагонали
-        console.log(map.getBounds().getNorthEast().lat());
-        console.log(map.getBounds().getNorthEast().lng());
-        // границы карты 2 точки по диагонали
-        console.log(map.getBounds().getSouthWest().lat());
-        console.log(map.getBounds().getSouthWest().lng());
+        /*console.log('zoom');
+         // границы карты 1 точки по диагонали
+         console.log(map.getBounds().getNorthEast().lat());
+         console.log(map.getBounds().getNorthEast().lng());
+         // границы карты 2 точки по диагонали
+         console.log(map.getBounds().getSouthWest().lat());
+         console.log(map.getBounds().getSouthWest().lng());*/
     });
 
     map.addListener('dragend', function () {
-        console.log('dragend');
-        // // 3 seconds after the center of the map has changed, pan back to the
-        // // marker.
-        // window.setTimeout(function () {
-        //     map.panTo(marker.getPosition());
-        // }, 3000);
+
     });
 }
 
@@ -70,13 +69,33 @@ function getBoundsOfMap() {
     });
 }
 
-function markersFromOffices(officesArray) {
+function addInfoWindow(obj) {
+    console.log(obj);
+    var infoWindow = {};
+    var sContent = '<h2>' + obj.company + '</h2>' +
+        '<bt/>' +
+        '<p>' +
+        obj.phone + ' ' +
+        '<bt/>' +
+        obj.name + ' ' +
+        '<bt/>' +
+        obj.address +
+        '</p>';
+    infoWindow = new google.maps.InfoWindow({
+        content: sContent
+    });
+
+    return infoWindow;
+}
+
+function markersFromOffices(officesArray, func) {
     return officesArray.map(function (marker) {
         return new google.maps.Marker({
             position: {
                 lat: marker.lat,
                 lng: marker.lng
-            }
+            },
+            info: func(marker)
         });
     });
 }
