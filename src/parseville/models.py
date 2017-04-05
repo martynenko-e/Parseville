@@ -26,7 +26,7 @@ class City(MetaModel):
     name_rus = models.CharField(max_length=200, null=True, blank=True)
     alias = models.CharField(max_length=200, null=True, blank=True)
     show = models.BooleanField(default=False)
-    country = models.ForeignKey(Country, related_name="cities")
+    country = models.ForeignKey(Country, related_name="cities", null=True, blank=True)
 
 
 class ProgrammingLanguage(MetaModel):
