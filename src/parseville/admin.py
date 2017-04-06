@@ -18,12 +18,12 @@ class AdminProgram(admin.ModelAdmin):
 
 
 class AdminLink(admin.ModelAdmin):
-    list_display = ('name', 'alias', 'show', 'url', 'added_date')
+    list_display = ('name', 'alias', 'show', 'url', 'date')
     list_editable = ('show',)
 
 
 class AdminCompany(admin.ModelAdmin):
-    list_display = ('name', 'alias', 'show', 'url', 'has_logo', 'extra', 'added_date')
+    list_display = ('name', 'alias', 'show', 'url', 'has_logo', 'extra', 'date')
     list_editable = ('show',)
 
     def has_logo(self, obj):

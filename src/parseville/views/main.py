@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 from django.shortcuts import render
-from api import get_company_batch, get_vacancy_batch, get_link_batch, get_office_batch
+from parseville.models import Vacancy, Company, Event, News
 
-import json
+ROWS_IN_BLOCK = 10
 
 
 def index(request):
@@ -18,15 +18,66 @@ def index(request):
 
 
 def marty(request):
-    data_init = {
-        "company_list": get_company_batch(0),
-        "vacancy_list": get_vacancy_batch(0),
-        "link_list": get_link_batch(0),
-    }
+    # TODO get 20 latest vacancies, adjustable in settings
+    # TODO company with show_on_main
+    # TODO useful links
+    # TODO upcoming events
+    # TODO news?
 
-    return render(request, 'marty-index.html',
-                  {
-                      'data_init': json.dumps(data_init),
-                      'offices': json.dumps(get_office_batch("")),
-                  })
+    latest_vacancies = map(lambda vacancy: {
+        "name": vacancy.name,
+        "description": vacancy.short_text,
+        "date": vacancy.date,
+        "company": vacancy.company.name,
+    }, Vacancy.objects.filter().order_by("-date")[:ROWS_IN_BLOCK])
+
+    show_on_main_companies = map(lambda company: {
+        "name": company.name,
+        "description": company.short_text,
+        "image": company.get_absolute_url(),
+        "date": company.date,
+    }, Company.objects.filter(show_on_main=True).order_by("-date")[:ROWS_IN_BLOCK])
+
+    latest_events = map(lambda event: {
+        "name": event.name,
+        "description": event.short_text,
+        "date": event.date,
+    }, Event.objects.filter().order_by("-date")[:ROWS_IN_BLOCK])
+
+    latest_news = map(lambda new: {
+        "name": new.name,
+        "description": new.short_text,
+        "date": new.date,
+    }, News.objects.filter().order_by("-date")[:ROWS_IN_BLOCK])
+
+    return render(request, 'marty-index.html', {
+        'latest_vacancies': latest_vacancies,
+        'show_on_main_companies': show_on_main_companies,
+        'latest_events': latest_events,
+        'latest_news': latest_news,
+        'events_url': "/events/",
+        'event_count': Event.objects.filter().count(),
+        'vacancies_url': "/vacancies/",
+        'vacancy_count': Vacancy.objects.filter().count(),
+        'companies_url': "/companies/",
+        'company_count': Company.objects.filter().count(),
+        'news_url': "/news/",
+        'news_count': News.objects.filter().count(),
+    })
+
+
+def vacancies(request):
+    return render(request, 'temp.html', {'message': 'Coming soon! There will be list of all vacancies!'})
+
+
+def companies(request):
+    return render(request, 'temp.html', {'message': 'Coming soon! There will be list of all companies!'})
+
+
+def events(request):
+    return render(request, 'temp.html', {'message': 'Coming soon! There will be list of all events!'})
+
+
+def news(request):
+    return render(request, 'temp.html', {'message': 'Coming soon! There will be list of all news!'})
 

@@ -1,11 +1,3 @@
-a {
-    color: #d9411e;
-    text-decoration: none
-}
-
-a:hover {
-    color: #ff5a09
-}
 
 img {
     max-width: 100%
@@ -16,12 +8,16 @@ aside {
     text-align: center;
 }
 
-aside, aside a {
-    color: #fff
+aside, aside {
+    color: #f7fff3
+}
+
+aside a {
+    color: #fffc77
 }
 
 aside a:hover {
-    color: #eee
+    color: #eeee23
 }
 
 aside div {
@@ -95,4 +91,50 @@ aside div p {
     .ads-responsive {
         height: 90px
     }
+}
+
+.psv_row_indent {
+    padding-bottom: 0.5em;
+    margin-bottom: 0.5em;
+    border-bottom: solid 0.1em #efefef;
+}
+
+.psv_block_padding {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.content {
+    width: 95%;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+.psv-nav-padding {
+    padding: 0 25px;
+}
+
+.psv_left-half {
+    width: 70px;
+    float: left;
+}
+
+.psv_right-half {
+    width: calc(100% - 70px);
+    float: left;
+}
+
+.psv_default_font {
+    font-size: 0.9em;
+    color: grey;
+}
+
+.psv_link:hover {
+    color: #1029a5;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.psv_link {
+    color: #5986fa;
 }

@@ -34,8 +34,8 @@ function initMap() {
     // info Window google API for each Marker (infowindow is empty for now.....)
     for (var i = 0; i < markers.length; i++) {
         var marker = markers[i];
-        console.log('---------------------------------------------------> marker');
-        console.log(marker);
+        // console.log('---------------------------------------------------> marker');
+        // console.log(marker);
         var sContent = '<div class="marker-info">' +
             '<p>' + globalMarkers[i].company +
             '</br>' +
@@ -45,17 +45,17 @@ function initMap() {
             '</br>' +
             globalMarkers[i].address +
             '</p>' + '</div>';
-        console.log('-----------------------------------------------------------------> S Content below');
-        console.log(sContent);
+        // console.log('-----------------------------------------------------------------> S Content below');
+        // console.log(sContent);
 
-        infowindow = new google.maps.InfoWindow({
+        let infowindow = new google.maps.InfoWindow({
             // its empty for some reason
             content: sContent
         });
 
         google.maps.event.addListener(marker, 'click', function () {
-            infowindow.setContent(this.html);
-            infowindow.open(map, this);
+            infowindow.setContent(sContent);
+            infowindow.open(map, marker);
         });
     }
 

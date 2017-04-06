@@ -5,6 +5,7 @@ from helper import get_soup_from_url, download_image
 from parseville.models import Company
 
 
+# TODO fix 'NoneType' object is not callable
 def parse_company(save):
     soup = get_soup_from_url('https://jobs.dou.ua/ratings/%D0%9A%D0%B8%D0%B5%D0%B2/', save)
     if soup:

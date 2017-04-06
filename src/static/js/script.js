@@ -1,5 +1,3 @@
-;
-
 var globalLinks = [],
     globalVacancies = [],
     globalCompanies = [],
