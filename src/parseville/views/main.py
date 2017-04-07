@@ -19,11 +19,6 @@ def index(request):
 
 
 def marty(request):
-    # TODO get 20 latest vacancies, adjustable in settings
-    # TODO company with show_on_main
-    # TODO useful links
-    # TODO upcoming events
-    # TODO news?
 
     latest_vacancies = map(lambda vacancy: {
         "name": vacancy.name,
@@ -71,17 +66,53 @@ def marty(request):
 
 
 def vacancies(request):
-    return render(request, 'temp.html', {'message': 'Coming soon! There will be list of all vacancies!'})
+    data = map(lambda vacancy: {
+        "name": vacancy.name,
+        "description": vacancy.short_text,
+        "date": vacancy.date,
+        "company": vacancy.company.name,
+    }, Vacancy.objects.filter().order_by("-date"))
+    return render(request, 'temp.html', {
+        'title': 'All vacancies',
+        'data': data,
+    })
 
 
 def companies(request):
-    return render(request, 'temp.html', {'message': 'Coming soon! There will be list of all companies!'})
+    data = map(lambda company: {
+        "name": company.name,
+        "description": company.short_text,
+        "image": company.get_absolute_url(),
+        "date": company.date,
+    }, Company.objects.filter().order_by("-date"))
+    return render(request, 'temp.html', {
+        'title': 'All companies',
+        'data': data,
+    })
 
 
 def events(request):
-    return render(request, 'temp.html', {'message': 'Coming soon! There will be list of all events!'})
+    data = map(lambda event: {
+        "name": event.name,
+        "description": event.short_text,
+        "date": event.date,
+    }, Event.objects.filter().order_by("-date"))
+    return render(request, 'temp.html', {
+        'title': 'All events',
+        'data': data,
+    })
 
 
 def news(request):
-    return render(request, 'temp.html', {'message': 'Coming soon! There will be list of all news!'})
+    data = map(lambda new: {
+        "name": new.name,
+        "description": new.short_text,
+        "date": new.date,
+        "image": new.get_absolute_url(),
+        "visit_url": new.url,
+    }, News.objects.filter().order_by("-date"))
+    return render(request, 'temp.html', {
+        'title': 'All news',
+        'data': data,
+    })
 

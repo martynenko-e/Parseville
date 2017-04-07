@@ -1,4 +1,5 @@
 from django.db import models
+from parseville.settings.prod import MEDIA_URL
 
 
 class MetaModel(models.Model):
@@ -54,7 +55,7 @@ class Company(MetaModel):
 
     def get_absolute_url(self):
         if self.logo:
-            return "/media/%s/" % self.logo
+            return MEDIA_URL + "%s" % self.logo
         else:
             return None
 
@@ -120,7 +121,7 @@ class News(MetaModel):
 
     def get_absolute_url(self):
         if self.image:
-            return "/media/%s/" % self.image
+            return MEDIA_URL + "%s" % self.image
         else:
             return None
 

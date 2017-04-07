@@ -16,16 +16,29 @@
                                         <img class="psv_index_image" src="{{ element.image }}">
                                     </div>
                                     <div class="psv_right-half">
-                                        <div class="pull-right psv_default_font">{{ element.date|date:"M d, Y" }}</div>
-                                        <div class="psv_link" id="new-{{ element.id }}"
-                                             onclick="show_more('new', this.id)">{{ element.name }}</div>
-                                        <div class="psv_default_font">{{ element.description }}</div>
+                                        {% if element.date %}
+                                            <div class="pull-right psv_default_font">
+                                                {{ element.date|date:"M d, Y" }}</div>
+                                        {% endif %}
+                                        {% if element.name %}
+                                            <div class="psv_link" id="new-{{ element.id }}"
+                                                 onclick="show_more('new', this.id)">{{ element.name }}</div>
+                                        {% endif %}
+                                        {% if element.description %}
+                                            <div class="psv_default_font">{{ element.description }}</div>
+                                        {% endif %}
                                     </div>
                                 {% else %}
-                                    <div class="pull-right psv_default_font">{{ element.date|date:"M d, Y" }}</div>
-                                    <div class="psv_link" id="new-{{ element.id }}"
-                                         onclick="show_more('new', this.id)">{{ element.name }}</div>
-                                    <div class="psv_default_font">{{ element.description }}</div>
+                                    {% if element.date %}
+                                        <div class="pull-right psv_default_font">{{ element.date|date:"M d, Y" }}</div>
+                                    {% endif %}
+                                    {% if element.name %}
+                                        <div class="psv_link" id="new-{{ element.id }}"
+                                             onclick="show_more('new', this.id)">{{ element.name }}</div>
+                                    {% endif %}
+                                    {% if element.description %}
+                                        <div class="psv_default_font">{{ element.description }}</div>
+                                    {% endif %}
                                 {% endif %}
                             </div>
                             {% if forloop.last %}
@@ -54,17 +67,29 @@
                                         <img class="psv_index_image" src="{{ element.image }}">
                                     </div>
                                     <div class="psv_right-half">
-                                        <div class="pull-right psv_default_font">{{ element.date|date:"M d, Y" }}</div>
-                                        <div class="psv_link" id="event-{{ element.id }}"
-                                             onclick="show_more('event', this.id)">{{ element.name }}</div>
-                                        <div class="psv_default_font">{{ element.description }}</div>
+                                        {% if element.date %}
+                                            <div class="pull-right psv_default_font">
+                                                {{ element.date|date:"M d, Y" }}</div>
+                                        {% endif %}
+                                        {% if element.name %}
+                                            <div class="psv_link" id="new-{{ element.id }}"
+                                                 onclick="show_more('new', this.id)">{{ element.name }}</div>
+                                        {% endif %}
+                                        {% if element.description %}
+                                            <div class="psv_default_font">{{ element.description }}</div>
+                                        {% endif %}
                                     </div>
                                 {% else %}
-                                    <div class="pull-right psv_default_font">{{ element.date|date:"M d, Y" }}</div>
-                                    <div class="psv_link" id="event-{{ element.id }}"
-                                         onclick="show_more('event', this.id)">{{ element.name }}</div>
-                                    <div class="psv_default_font">{{ element.description }}</div>
-
+                                    {% if element.date %}
+                                        <div class="pull-right psv_default_font">{{ element.date|date:"M d, Y" }}</div>
+                                    {% endif %}
+                                    {% if element.name %}
+                                        <div class="psv_link" id="new-{{ element.id }}"
+                                             onclick="show_more('new', this.id)">{{ element.name }}</div>
+                                    {% endif %}
+                                    {% if element.description %}
+                                        <div class="psv_default_font">{{ element.description }}</div>
+                                    {% endif %}
                                 {% endif %}
                             </div>
                             {% if forloop.last %}
@@ -95,19 +120,29 @@
                                         <img class="psv_index_image" src="{{ element.image }}">
                                     </div>
                                     <div class="psv_right-half">
-                                        <div class="pull-right psv_default_font">{{ element.date|date:"M d, Y" }}</div>
-                                        <div class="psv_link" id="vacancy-{{ element.id }}"
-                                             onclick="show_more('vacancy', this.id)">{{ element.name }}</div>
-                                        <div class="psv_default_font">{{ element.description }}</div>
-
+                                        {% if element.date %}
+                                            <div class="pull-right psv_default_font">
+                                                {{ element.date|date:"M d, Y" }}</div>
+                                        {% endif %}
+                                        {% if element.name %}
+                                            <div class="psv_link" id="new-{{ element.id }}"
+                                                 onclick="show_more('new', this.id)">{{ element.name }}</div>
+                                        {% endif %}
+                                        {% if element.description %}
+                                            <div class="psv_default_font">{{ element.description }}</div>
+                                        {% endif %}
                                     </div>
                                 {% else %}
-
-                                    <div class="pull-right psv_default_font">{{ element.date|date:"M d, Y" }}</div>
-                                    <div class="psv_link" id="vacancy-{{ element.id }}"
-                                         onclick="show_more('vacancy', this.id)">{{ element.name }}</div>
-                                    <div class="psv_default_font">{{ element.description }}</div>
-
+                                    {% if element.date %}
+                                        <div class="pull-right psv_default_font">{{ element.date|date:"M d, Y" }}</div>
+                                    {% endif %}
+                                    {% if element.name %}
+                                        <div class="psv_link" id="new-{{ element.id }}"
+                                             onclick="show_more('new', this.id)">{{ element.name }}</div>
+                                    {% endif %}
+                                    {% if element.description %}
+                                        <div class="psv_default_font">{{ element.description }}</div>
+                                    {% endif %}
                                 {% endif %}
                             </div>
                             {% if forloop.last %}
@@ -136,16 +171,29 @@
                                         <img class="psv_index_image" src="{{ element.image }}">
                                     </div>
                                     <div class="psv_right-half">
-                                        <div class="pull-right psv_default_font">{{ element.date|date:"M d, Y" }}</div>
-                                        <div class="psv_link" id="company-{{ element.id }}"
-                                             onclick="show_more('company', this.id)">{{ element.name }}</div>
-                                        <div class="psv_default_font">{{ element.description }}</div>
+                                        {% if element.date %}
+                                            <div class="pull-right psv_default_font">
+                                                {{ element.date|date:"M d, Y" }}</div>
+                                        {% endif %}
+                                        {% if element.name %}
+                                            <div class="psv_link" id="new-{{ element.id }}"
+                                                 onclick="show_more('new', this.id)">{{ element.name }}</div>
+                                        {% endif %}
+                                        {% if element.description %}
+                                            <div class="psv_default_font">{{ element.description }}</div>
+                                        {% endif %}
                                     </div>
                                 {% else %}
-                                    <div class="pull-right psv_default_font">{{ element.date|date:"M d, Y" }}</div>
-                                    <div class="psv_link" id="company-{{ element.id }}"
-                                         onclick="show_more('company', this.id)">{{ element.name }}</div>
-                                    <div class="psv_default_font">{{ element.description }}</div>
+                                    {% if element.date %}
+                                        <div class="pull-right psv_default_font">{{ element.date|date:"M d, Y" }}</div>
+                                    {% endif %}
+                                    {% if element.name %}
+                                        <div class="psv_link" id="new-{{ element.id }}"
+                                             onclick="show_more('new', this.id)">{{ element.name }}</div>
+                                    {% endif %}
+                                    {% if element.description %}
+                                        <div class="psv_default_font">{{ element.description }}</div>
+                                    {% endif %}
                                 {% endif %}
                             </div>
                             {% if forloop.last %}

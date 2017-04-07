@@ -1,4 +1,4 @@
-from .base import *
+from parseville.settings.base import *
 
 DEBUG = False
 ALLOWED_HOSTS = [
