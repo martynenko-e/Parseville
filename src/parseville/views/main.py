@@ -3,6 +3,7 @@ from django.shortcuts import render
 from parseville.models import Vacancy, Company, Event, News
 
 ROWS_IN_BLOCK = 10
+NEWS_BLOCK = 5
 
 
 def index(request):
@@ -48,7 +49,9 @@ def marty(request):
         "name": new.name,
         "description": new.short_text,
         "date": new.date,
-    }, News.objects.filter().order_by("-date")[:ROWS_IN_BLOCK])
+        "image": new.get_absolute_url(),
+        "visit_url": new.url,
+    }, News.objects.filter().order_by("-date")[:NEWS_BLOCK])
 
     return render(request, 'marty-index.html', {
         'latest_vacancies': latest_vacancies,
@@ -63,6 +66,7 @@ def marty(request):
         'company_count': Company.objects.filter().count(),
         'news_url': "/news/",
         'news_count': News.objects.filter().count(),
+        'title': 'Parseville'
     })
 
 

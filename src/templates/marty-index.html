@@ -9,14 +9,23 @@
                 </div>
                 <div class="panel-body">
                     {% if latest_news %}
-                        {% for new in latest_news %}
+                        {% for element in latest_news %}
                             <div class="row psv_block_padding">
-                                {% if new.image %}
+                                {% if element.image %}
+                                    <div class="psv_left-half">
+                                        <img class="psv_index_image" src="{{ element.image }}">
+                                    </div>
+                                    <div class="psv_right-half">
+                                        <div class="pull-right psv_default_font">{{ element.date|date:"M d, Y" }}</div>
+                                        <div class="psv_link" id="new-{{ element.id }}"
+                                             onclick="show_more('new', this.id)">{{ element.name }}</div>
+                                        <div class="psv_default_font">{{ element.description }}</div>
+                                    </div>
                                 {% else %}
-                                    <div class="pull-right psv_default_font">{{ new.date|date:"M d, Y" }}</div>
-                                    <div class="psv_link" id="new-{{ new.id }}"
-                                         onclick="show_more('new', this.id)">{{ new.name }}</div>
-                                    <div class="psv_default_font">{{ new.description }}</div>
+                                    <div class="pull-right psv_default_font">{{ element.date|date:"M d, Y" }}</div>
+                                    <div class="psv_link" id="new-{{ element.id }}"
+                                         onclick="show_more('new', this.id)">{{ element.name }}</div>
+                                    <div class="psv_default_font">{{ element.description }}</div>
                                 {% endif %}
                             </div>
                             {% if forloop.last %}
@@ -41,12 +50,21 @@
                         {% for element in latest_events %}
                             <div class="row psv_block_padding">
                                 {% if element.image %}
-
+                                    <div class="psv_left-half">
+                                        <img class="psv_index_image" src="{{ element.image }}">
+                                    </div>
+                                    <div class="psv_right-half">
+                                        <div class="pull-right psv_default_font">{{ element.date|date:"M d, Y" }}</div>
+                                        <div class="psv_link" id="event-{{ element.id }}"
+                                             onclick="show_more('event', this.id)">{{ element.name }}</div>
+                                        <div class="psv_default_font">{{ element.description }}</div>
+                                    </div>
                                 {% else %}
                                     <div class="pull-right psv_default_font">{{ element.date|date:"M d, Y" }}</div>
                                     <div class="psv_link" id="event-{{ element.id }}"
                                          onclick="show_more('event', this.id)">{{ element.name }}</div>
                                     <div class="psv_default_font">{{ element.description }}</div>
+
                                 {% endif %}
                             </div>
                             {% if forloop.last %}
@@ -73,11 +91,23 @@
                         {% for element in latest_vacancies %}
                             <div class="row psv_block_padding">
                                 {% if element.image %}
+                                    <div class="psv_left-half">
+                                        <img class="psv_index_image" src="{{ element.image }}">
+                                    </div>
+                                    <div class="psv_right-half">
+                                        <div class="pull-right psv_default_font">{{ element.date|date:"M d, Y" }}</div>
+                                        <div class="psv_link" id="vacancy-{{ element.id }}"
+                                             onclick="show_more('vacancy', this.id)">{{ element.name }}</div>
+                                        <div class="psv_default_font">{{ element.description }}</div>
+
+                                    </div>
                                 {% else %}
+
                                     <div class="pull-right psv_default_font">{{ element.date|date:"M d, Y" }}</div>
                                     <div class="psv_link" id="vacancy-{{ element.id }}"
                                          onclick="show_more('vacancy', this.id)">{{ element.name }}</div>
                                     <div class="psv_default_font">{{ element.description }}</div>
+
                                 {% endif %}
                             </div>
                             {% if forloop.last %}
@@ -103,7 +133,7 @@
                             <div class="row psv_block_padding">
                                 {% if element.image %}
                                     <div class="psv_left-half">
-                                        <img src="{{ element.image }}" width="60px">
+                                        <img class="psv_index_image" src="{{ element.image }}">
                                     </div>
                                     <div class="psv_right-half">
                                         <div class="pull-right psv_default_font">{{ element.date|date:"M d, Y" }}</div>
@@ -131,7 +161,7 @@
             </div>
         </div>
     </div>
-{#    <div id="map"></div>#}
+    {#    <div id="map"></div>#}
 {% endblock %}
 {% block script %}
 {% endblock %}

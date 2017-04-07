@@ -43,7 +43,9 @@ class Company(MetaModel):
     short_text = models.CharField(max_length=255, blank=True, null=True)
     logo = models.ImageField(upload_to="brand", blank=True, null=True)
     url = models.URLField(null=True, blank=True)
-    vacancy_parse_url = models.URLField(null=True, blank=True)
+    vacancy_url = models.URLField(null=True, blank=True)
+    event_url = models.URLField(null=True, blank=True)
+    news_url = models.URLField(null=True, blank=True)
     show = models.BooleanField(default=False)
     show_on_main = models.BooleanField(default=False)
     has_parser = models.BooleanField(default=False)
@@ -55,12 +57,6 @@ class Company(MetaModel):
             return "/media/%s/" % self.logo
         else:
             return None
-
-    def save(self, force_insert=False, force_update=False, using=None,
-             update_fields=None):
-        if self.description:
-            self.short_text = "Short text"
-        self.save()
 
 
 class Vacancy(MetaModel):
@@ -109,15 +105,23 @@ class Event(MetaModel):
     short_text = models.CharField(max_length=255, blank=True, null=True)
     url = models.URLField(null=True, blank=True)
     upcoming_date = models.DateTimeField(null=True, blank=True)
+    company = models.ForeignKey(Company, related_name="events", null=True, blank=True)
 
 
 class News(MetaModel):
     name = models.CharField(max_length=255, null=True, blank=True)
-    date = models.DateTimeField(null=True, blank=True)
+    date = models.DateTimeField(auto_now_add=True)
+    publish_date = models.DateTimeField(null=True, blank=True)
     description = models.TextField(blank=True, null=True)
     short_text = models.CharField(max_length=255, blank=True, null=True)
     url = models.URLField(null=True, blank=True)
     image = models.ImageField(null=True, blank=True, upload_to="news")
     company = models.ForeignKey(Company, related_name="news")
+
+    def get_absolute_url(self):
+        if self.image:
+            return "/media/%s/" % self.image
+        else:
+            return None
 
 

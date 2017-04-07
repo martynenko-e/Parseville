@@ -1,6 +1,6 @@
 .idea/*
 .git/*
 migrations
-media
+src/html_static/media
 parse.html
 db

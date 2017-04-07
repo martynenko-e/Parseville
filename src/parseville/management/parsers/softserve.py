@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import re
-from helper import get_soup_from_url
+from helper import get_soup_from_url, download_image_parse
 from parseville.models import Company, Vacancy, Country, City, Office, News, Event
 
 
@@ -98,9 +98,12 @@ def parse_news(save):
             for link in news_links:
                 title = link.find("h2", class_="media-news_title").text
                 date = link.find("span", class_="media-news_date").text
+                img = "https://softserve.ua%s" % link.find("div", class_="media-news_image").img["src"]
                 description = link.find("div", class_="media-news_describe").text
-                News.objects.get_or_create(name=title,
-                                           company=company,
-                                           description=description,
-                                           short_text=description,
-                                           url=link["href"])
+                new_obj, created = News.objects.get_or_create(name=title,
+                                                              company=company,
+                                                              description=description,
+                                                              short_text=description,
+                                                              url=link["href"])
+                if created:
+                    download_image_parse(new_obj, img)

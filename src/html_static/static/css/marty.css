@@ -1,4 +1,6 @@
-
+body {
+    font-family: 'Arial', sans-serif;
+}
 img {
     max-width: 100%
 }
@@ -115,12 +117,12 @@ aside div p {
 }
 
 .psv_left-half {
-    width: 70px;
+    width: 120px;
     float: left;
 }
 
 .psv_right-half {
-    width: calc(100% - 70px);
+    width: calc(100% - 120px);
     float: left;
 }
 
@@ -137,4 +139,21 @@ aside div p {
 
 .psv_link {
     color: #5986fa;
+}
+
+.psv_index_image {
+    width: 110px;
+}
+
+#footer {
+    min-height: 70px;
+    background-color: #e7e7e7;
+}
+
+.copyright-text {
+    text-align: center;
+    font-size: 12px;
+    line-height: 24px;
+    color: black;
+    padding-top: 28px;
 }

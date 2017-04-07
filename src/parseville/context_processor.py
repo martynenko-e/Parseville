@@ -6,7 +6,8 @@ def init(request):
     for link in UsefulLink.objects.filter(show=True):
         greeting_text += '<h5><a href="' + link.url + '" target="_blank">' + link.name + '</a> - ' + link.short_text + '</h5>'
     return {
-        "caption": "IT life catalog",
+        "logo": "IT/nav",
+        "caption": "IT navigator",
         "greeting_caption": "Hello world!",
         "greeting_logo": "Logo will be here",
         "greeting_text": greeting_text
