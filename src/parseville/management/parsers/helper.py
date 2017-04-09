@@ -37,3 +37,17 @@ def download_image(self, url):
                        save=True)
     except Exception as e:
         self.logo.save(self.name.lower() + ".png", ContentFile(output_file.getvalue()), save=True)
+
+
+def download_image_parse(self, url):
+    input_file = StringIO(urllib2.urlopen(url).read())
+    output_file = StringIO()
+    img = Image.open(input_file)
+    # if img.mode != "RGB":
+    #     img = img.convert("RGB")
+    img.save(output_file, "JPEG")
+    try:
+        self.image.save(slugify(self.name).lower() + ".jpg", ContentFile(output_file.getvalue()),
+                        save=True)
+    except Exception as e:
+        self.image.save(self.name.lower() + ".jpg", ContentFile(output_file.getvalue()), save=True)

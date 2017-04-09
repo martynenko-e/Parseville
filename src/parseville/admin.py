@@ -18,13 +18,13 @@ class AdminProgram(admin.ModelAdmin):
 
 
 class AdminLink(admin.ModelAdmin):
-    list_display = ('name', 'alias', 'show', 'url', 'added_date')
+    list_display = ('name', 'alias', 'show', 'url', 'date')
     list_editable = ('show',)
 
 
 class AdminCompany(admin.ModelAdmin):
-    list_display = ('name', 'alias', 'show', 'url', 'has_logo', 'extra', 'added_date')
-    list_editable = ('show',)
+    list_display = ('name', 'alias', 'show', 'show_on_main', 'url', 'has_logo', 'extra', 'date')
+    list_editable = ('show', 'show_on_main')
 
     def has_logo(self, obj):
         return obj.logo != ""
@@ -41,6 +41,10 @@ class AdminEvent(admin.ModelAdmin):
     list_display = ('name', 'office', 'date')
 
 
+class AdminNews(admin.ModelAdmin):
+    list_display = ('name', 'date')
+
+
 class AdminOffice(admin.ModelAdmin):
     list_display = ('name', 'latitude', 'longitude', 'company', 'city', 'phone')
 
@@ -53,3 +57,4 @@ admin.site.register(Vacancy, AdminVacancy)
 admin.site.register(ProgrammingLanguage, AdminProgram)
 admin.site.register(Event, AdminEvent)
 admin.site.register(Office, AdminOffice)
+admin.site.register(News, AdminNews)
