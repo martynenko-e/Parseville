@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from django.shortcuts import render
 from parseville.models import Vacancy, Company, Event, News
+from parseville.views.api import get_company_batch, get_vacancy_batch, get_link_batch
+import json
 
 ROWS_IN_BLOCK = 10
 NEWS_BLOCK = 5
@@ -21,6 +23,7 @@ def index(request):
 def marty(request):
 
     latest_vacancies = map(lambda vacancy: {
+        'id': vacancy.id,
         "name": vacancy.name,
         "description": vacancy.short_text,
         "date": vacancy.date,
@@ -28,6 +31,7 @@ def marty(request):
     }, Vacancy.objects.filter().order_by("-date")[:ROWS_IN_BLOCK])
 
     show_on_main_companies = map(lambda company: {
+        'id': company.id,
         "name": company.name,
         "description": company.short_text,
         "image": company.get_absolute_url(),
@@ -48,6 +52,12 @@ def marty(request):
         "visit_url": new.url,
     }, News.objects.filter().order_by("-date")[:NEWS_BLOCK])
 
+    data = {
+        "company_list": get_company_batch(0),
+        "vacancy_list": get_vacancy_batch(0),
+        "link_list": get_link_batch(0),
+    }
+
     return render(request, 'marty-index.html', {
         'latest_vacancies': latest_vacancies,
         'show_on_main_companies': show_on_main_companies,
@@ -61,7 +71,8 @@ def marty(request):
         'company_count': Company.objects.filter().count(),
         'news_url': "/news/",
         'news_count': News.objects.filter().count(),
-        'title': 'Parseville'
+        'title': 'Parseville',
+        'data': json.dumps(data)
     })
 
 

@@ -81,7 +81,7 @@ def api_get_offices(request):
 
 
 def get_company_batch(count):
-    company_query_set = Company.objects.filter(show=True).order_by('added_date')[3 * count:3 * count + 3] \
+    company_query_set = Company.objects.filter(show=True).order_by('date')[3 * count:3 * count + 3] \
         .values_list("id",
                      "name",
                      "description",
@@ -102,13 +102,13 @@ def get_company_batch(count):
 
 def get_vacancy_batch(count):
     vacancy_query_set = Vacancy.objects.filter(show=True,
-                                               added_date__isnull=False,
-                                               added_date__lte=datetime.now()
-                                               ).order_by('date_of_publication')[3 * count:3 * count + 3] \
+                                               date__isnull=False,
+                                               date__lte=datetime.now()
+                                               ).order_by('date')[3 * count:3 * count + 3] \
         .values_list("id",
                      "name",
                      "description",
-                     "added_date",
+                     "date",
                      "company__name",
                      "programming_language",
                      "url",
@@ -130,9 +130,9 @@ def get_vacancy_batch(count):
 
 def get_link_batch(count):
     link_query_set = UsefulLink.objects.filter(show=True,
-                                               added_date__isnull=False,
-                                               added_date__lte=datetime.now()
-                                               ).order_by('added_date')[3 * count:3 * count + 3]. \
+                                               date__isnull=False,
+                                               date__lte=datetime.now()
+                                               ).order_by('date')[3 * count:3 * count + 3]. \
         values_list("id",
                     "name",
                     "short_text",

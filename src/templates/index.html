@@ -135,19 +135,9 @@
     //    document.getElementById("btn-load-company").onclick = loadMoreCompany;
 
     $(document).ready(function () {
-
-        getInit();
-
-        function getInit() {
-            $.ajax({
-                url: window.location.protocol + '//' + window.location.hostname + ":" + window.location.port + '/api/init/',
-                type: 'post',
-                dataType: 'json',
-                cache: false,
-                success: postProcessing,
-                async: true
-            });
-        }
+        getJsonDataViaAjax('/api/init', true);
+        getJsonDataViaAjax('/api/office/', false);
+        initMarkers();
     });
 </script>
 <script defer

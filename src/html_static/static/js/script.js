@@ -183,23 +183,24 @@ function addCompanyElement(obj) {
 }
 
 function show_more(type_api, id) {
+    console.log("adsfasdfasdf");
     if (type_api == "vacancy") {
         for (var vacancy in globalVacancies) {
             if (globalVacancies[vacancy].id == id.split('-')[1]) {
-                showVacancyElement(globalVacancies[vacancy])
+                showVacancyElementOnSideBar(globalVacancies[vacancy])
             }
         }
     }
     if (type_api == "company") {
         for (var company in globalCompanies) {
             if (globalCompanies[company].id == id.split('-')[1]) {
-                showCompanyElement(globalCompanies[company]);
+                showCompanyElementOnSideBar(globalCompanies[company]);
             }
         }
     }
 }
 
-function showCompanyElement(obj) {
+function showCompanyElementOnSideBar(obj) {
     // создаем новый элемент div
     // и добавляем в него немного контента
     var newDiv = document.createElement("div");
@@ -208,10 +209,10 @@ function showCompanyElement(obj) {
         '<div class="entry-image"><img src="' + obj.logo + '"></div>' +
         '<div class="entry-content">' + obj.description + '</div>';
     // добавляем только что созданый элемент в дерево DOM
-    document.getElementById("side-bar").innerHTML = newDiv.innerHTML;
+    document.getElementById("full-view").innerHTML = newDiv.innerHTML;
 }
 
-function showVacancyElement(obj) {
+function showVacancyElementOnSideBar(obj) {
     // создаем новый элемент div
     // и добавляем в него немного контента
     var newDiv = document.createElement("div");
@@ -220,8 +221,9 @@ function showVacancyElement(obj) {
         '<div><p>' + obj.company_name + '</p></div>' +
         '<div class="entry-content">' + obj.description + '</div>';
     // добавляем только что созданый элемент в дерево DOM
-    document.getElementById("side-bar").innerHTML = newDiv.innerHTML;
+    document.getElementById("full-view").innerHTML = newDiv.innerHTML;
 }
+
 // in doubt with naming
 function showMoreEvent(url) {
     var xhr = new XMLHttpRequest();
@@ -280,6 +282,17 @@ function clearGlobalMarkers() {
         globalMarkers = [];
         clearMarkers(markers);
     }
+}
+
+function getJsonDataViaAjax(path, async) {
+    $.ajax({
+        url: window.location.protocol + '//' + window.location.hostname + ":" + window.location.port + path,
+        type: 'post',
+        dataType: 'json',
+        cache: false,
+        success: postProcessing,
+        async: async
+    });
 }
 
 (function showMoreEventHandler() {
