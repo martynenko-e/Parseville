@@ -16,7 +16,7 @@ Vacancy.prototype.createFromData = function (data) {
     object.pub_date = data.pub_date;
     object.company_name = data.company_name;
     object.p_language = data.p_language;
-    addVacancyElement(object);
+    // addVacancyElement(object);
     return object;
 };
 
@@ -37,7 +37,7 @@ Company.prototype.createFromData = function (data) {
     object.short_text = data.short_text;
     object.logo = data.logo;
     object.site_url = data.site_url;
-    addCompanyElement(object);
+    // addCompanyElement(object);
     return object;
 };
 
@@ -51,7 +51,7 @@ Link.prototype.createFromData = function (data) {
     object.name = data.name;
     object.short_text = data.short_text;
     object.url = data.url;
-    addLinkElement(object);
+    // addLinkElement(object);
     return object;
 };
 
@@ -79,46 +79,6 @@ function getJsonOfVacancies() {
         }
     };
     xhr.send(null);
-}
-
-function addVacancyElement(obj) {
-    // создаем новый элемент div
-    // и добавляем в него немного контента
-    var newDiv = document.createElement("div");
-    newDiv.setAttribute("class", "col-xs-4");
-    newDiv.setAttribute("onclick", "show_more('vacancy', this.id)");
-    newDiv.setAttribute("style", "cursor: pointer");
-    newDiv.setAttribute("id", "vacancy-" + obj.id);
-
-    newDiv.innerHTML = '<div class="title-box"><h4>' + obj.name + '</h4></div><div class="entry-container "><div class="entry-content"><p>' + obj.short_text + '</p></div></div></div>';
-    // добавляем только что созданый элемент в дерево DOM
-    document.getElementById("vacancy-block").appendChild(newDiv);
-}
-
-function addLinkElement(obj) {
-    // создаем новый элемент div
-    // и добавляем в него немного контента
-    var newDiv = document.createElement("div");
-    newDiv.setAttribute("class", "col-xs-12");
-    newDiv.setAttribute("id", "link-" + obj.id);
-    newDiv.innerHTML = '<div class="usefull-link"><a href="' + obj.url + '"><p>' + obj.name + '</p></a><h6>' + obj.short_text + '</h6></div>';
-    // добавляем только что созданый элемент в дерево DOM
-    document.getElementById("link-block").appendChild(newDiv);
-}
-
-
-function addCompanyElement(obj) {
-    // создаем новый элемент div
-    // и добавляем в него немного контента
-    var newDiv = document.createElement("div");
-    newDiv.setAttribute("class", "col-xs-4");
-    newDiv.setAttribute("onclick", "show_more('company', this.id)");
-    newDiv.setAttribute("style", "cursor: pointer");
-    newDiv.setAttribute("id", "company-" + obj.id);
-    var desc = obj.description || '';
-    newDiv.innerHTML = '<div class="title-box"><h4>' + obj.name + '</h4></div><div class="entry-logo"><img src="' + obj.logo + '"></div><div class="entry-content">' + desc.substr(0, 200) + '...</div></div>';
-    // добавляем только что созданый элемент в дерево DOM
-    document.getElementById("company-block").appendChild(newDiv);
 }
 
 function show_more(type_api, id) {

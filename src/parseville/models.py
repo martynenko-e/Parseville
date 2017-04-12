@@ -1,5 +1,5 @@
 from django.db import models
-from parseville.settings.prod import MEDIA_URL
+from parseville.settings.base import STATIC_URL
 
 
 class MetaModel(models.Model):
@@ -33,7 +33,7 @@ class City(MetaModel):
 class ProgrammingLanguage(MetaModel):
     name = models.CharField(max_length=200, null=True, blank=True)
     alias = models.CharField(max_length=200, null=True, blank=True)
-    icon = models.ImageField(upload_to="language", blank=True, null=True)
+    icon = models.ImageField(upload_to="static/images/language", blank=True, null=True)
     show = models.BooleanField(default=False)
 
 
@@ -42,7 +42,7 @@ class Company(MetaModel):
     alias = models.CharField(max_length=200, null=True, blank=True)
     description = models.TextField(blank=True, null=True)
     short_text = models.CharField(max_length=255, blank=True, null=True)
-    logo = models.ImageField(upload_to="brand", blank=True, null=True)
+    logo = models.ImageField(upload_to="static/images/brand", blank=True, null=True)
     url = models.URLField(null=True, blank=True)
     vacancy_url = models.URLField(null=True, blank=True)
     event_url = models.URLField(null=True, blank=True)
@@ -55,7 +55,7 @@ class Company(MetaModel):
 
     def get_absolute_url(self):
         if self.logo:
-            return MEDIA_URL + "%s" % self.logo
+            return STATIC_URL + "%s" % self.logo
         else:
             return None
 
@@ -116,12 +116,12 @@ class News(MetaModel):
     description = models.TextField(blank=True, null=True)
     short_text = models.CharField(max_length=255, blank=True, null=True)
     url = models.URLField(null=True, blank=True)
-    image = models.ImageField(null=True, blank=True, upload_to="news")
+    image = models.ImageField(null=True, blank=True, upload_to="static/images/news")
     company = models.ForeignKey(Company, related_name="news")
 
     def get_absolute_url(self):
         if self.image:
-            return MEDIA_URL + "%s" % self.image
+            return STATIC_URL + "%s" % self.image
         else:
             return None
 
