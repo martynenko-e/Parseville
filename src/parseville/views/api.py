@@ -81,7 +81,7 @@ def api_get_offices(request):
 
 
 def get_company_batch(count):
-    company_query_set = Company.objects.filter().order_by('date')[:] \
+    company_query_set = Company.objects.filter(show=True).order_by('date')[3 * count:3 * count + 3] \
         .values_list("id",
                      "name",
                      "description",
@@ -101,7 +101,8 @@ def get_company_batch(count):
 
 
 def get_vacancy_batch(count):
-    vacancy_query_set = Vacancy.objects.filter(date__isnull=False,
+    vacancy_query_set = Vacancy.objects.filter(show=True,
+                                               date__isnull=False,
                                                date__lte=datetime.now()
                                                ).order_by('date')[3 * count:3 * count + 3] \
         .values_list("id",

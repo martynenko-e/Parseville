@@ -72,8 +72,8 @@
                                                 {{ element.date|date:"M d, Y" }}</div>
                                         {% endif %}
                                         {% if element.name %}
-                                            <div class="psv_link" id="new-{{ element.id }}"
-                                                 onclick="show_more('new', this.id)">{{ element.name }}</div>
+                                            <div class="psv_link" id="event-{{ element.id }}"
+                                                 onclick="show_more('event', this.id)">{{ element.name }}</div>
                                         {% endif %}
                                         {% if element.description %}
                                             <div class="psv_default_font">{{ element.description }}</div>
@@ -84,8 +84,8 @@
                                         <div class="pull-right psv_default_font">{{ element.date|date:"M d, Y" }}</div>
                                     {% endif %}
                                     {% if element.name %}
-                                        <div class="psv_link" id="new-{{ element.id }}"
-                                             onclick="show_more('new', this.id)">{{ element.name }}</div>
+                                        <div class="psv_link" id="event-{{ element.id }}"
+                                             onclick="show_more('event', this.id)">{{ element.name }}</div>
                                     {% endif %}
                                     {% if element.description %}
                                         <div class="psv_default_font">{{ element.description }}</div>
@@ -125,8 +125,8 @@
                                                 {{ element.date|date:"M d, Y" }}</div>
                                         {% endif %}
                                         {% if element.name %}
-                                            <div class="psv_link" id="new-{{ element.id }}"
-                                                 onclick="show_more('vacancy', this.id)">{{ element.name }}</div>
+                                            <div class="psv_link" id="vacancy-{{ element.id }}"
+                                                 onclick=show_more('vacancy', this.id)>{{ element.name }}</div>
                                         {% endif %}
                                         {% if element.description %}
                                             <div class="psv_default_font">{{ element.description }}</div>
@@ -212,8 +212,4 @@
     {#    <div id="map"></div>#}
 {% endblock %}
 {% block script %}
-    <script>
-        dataProcessing({{ data|safe }})
-    </script>
-
 {% endblock %}

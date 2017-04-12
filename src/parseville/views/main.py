@@ -23,7 +23,7 @@ def index(request):
 def marty(request):
 
     latest_vacancies = map(lambda vacancy: {
-        "id": vacancy.id,
+        'id': vacancy.id,
         "name": vacancy.name,
         "description": vacancy.short_text,
         "date": vacancy.date,
@@ -31,7 +31,7 @@ def marty(request):
     }, Vacancy.objects.filter().order_by("-date")[:ROWS_IN_BLOCK])
 
     show_on_main_companies = map(lambda company: {
-        "id": company.id,
+        'id': company.id,
         "name": company.name,
         "description": company.short_text,
         "image": company.get_absolute_url(),
@@ -39,7 +39,6 @@ def marty(request):
     }, Company.objects.filter(show_on_main=True).order_by("-date")[:ROWS_IN_BLOCK])
 
     latest_events = map(lambda event: {
-        "id": event.id,
         "name": event.name,
         "description": event.short_text,
         "date": event.date,
