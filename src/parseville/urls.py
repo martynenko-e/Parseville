@@ -20,6 +20,7 @@ from django.contrib import admin
 
 from parseville.views import main, api
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from django.conf.urls import handler404
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -38,3 +39,5 @@ urlpatterns = [
     ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 urlpatterns += staticfiles_urlpatterns()
+
+handler404 = main.custom_page_not_found_view
