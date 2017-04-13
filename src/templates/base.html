@@ -70,5 +70,19 @@
     </div>
 </aside>
 </body>
+<script>
+
+    //    document.getElementById("btn-load-link").onclick = loadMoreLink;
+    //
+    //    document.getElementById("btn-load-vacancy").onclick = loadMoreVacancy;
+    //
+    //    document.getElementById("btn-load-company").onclick = loadMoreCompany;
+
+    $(document).ready(function () {
+        getJsonDataViaAjax('/api/init/', true);
+        getJsonDataViaAjax('/api/office/', false);
+       // initMarkers();
+    });
+</script>
 {% block script %}{% endblock %}
 </html>

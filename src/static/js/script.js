@@ -247,6 +247,7 @@ function postProcessing(data) {
         company = new Company(),
         marker = new Marker(),
         link = new Link();
+    console.log(myArray);
     //clearGlobalMarkers();
     for (var dict in myArray) {
         switch (dict) {
@@ -294,6 +295,7 @@ function getJsonDataViaAjax(path, async) {
     });
 }
 
+/*
 (function showMoreEventHandler() {
     var companyShowMoreBtn = document.getElementById('btn-load-company'),
         vacancySHowMoreBtn = document.getElementById('btn-load-vacancy');
@@ -305,4 +307,4 @@ function getJsonDataViaAjax(path, async) {
         let url = 'http://' + window.location.hostname + ":" + window.location.port + '/api/company/' + counter++;
         showMoreEvent(url);
     };
-})();
+})();*/
