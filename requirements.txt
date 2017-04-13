@@ -3,4 +3,4 @@ requests
 Pillow
 bs4
 lxml
-schedule
+gunicorn

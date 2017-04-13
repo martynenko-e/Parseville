@@ -1,6 +1,9 @@
 .idea/*
 .git/*
 migrations
-src/html_static/media
+src/collect_static
 parse.html
 db
+src/static/images/news
+src/static/images/brands
+src/static/images/languages

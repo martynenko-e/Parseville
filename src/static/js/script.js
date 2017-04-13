@@ -15,7 +15,7 @@ Vacancy.prototype.createFromData = function (data) {
     object.pub_date = data.pub_date;
     object.company_name = data.company_name;
     object.p_language = data.p_language;
-    addVacancyElement(object);
+    // addVacancyElement(object);
     return object;
 };
 
@@ -32,7 +32,7 @@ Company.prototype.createFromData = function (data) {
     object.description = data.description;
     object.logo = data.logo;
     object.site_url = data.site_url;
-    addCompanyElement(object);
+    // addCompanyElement(object);
     return object;
 };
 
@@ -45,7 +45,7 @@ Link.prototype.createFromData = function (data) {
     object.name = data.name;
     object.short_text = data.short_text;
     object.url = data.url;
-    addLinkElement(object);
+    // addLinkElement(object);
     return object;
 };
 

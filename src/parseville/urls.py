@@ -19,6 +19,8 @@ from django.conf.urls.static import static
 from django.contrib import admin
 
 from parseville.views import main, api
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from django.conf.urls import handler404
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -34,5 +36,8 @@ urlpatterns = [
     url(r'^api/office/', api.api_offices, name='api_offices'),
     url(r'^api/vacancy/(?P<count>[\d]+)?/?', api.api_vacancy, name='api_vacancy'),
     url(r'^api/company/(?P<count>[\d]+)?/?', api.api_company, name='api_company'),
-    ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) \
-      + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+urlpatterns += staticfiles_urlpatterns()
+
+handler404 = main.custom_page_not_found_view
