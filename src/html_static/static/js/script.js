@@ -142,7 +142,6 @@ function addCompanyElement(obj) {
     companyDivWrapper.setAttribute("onclick", "show_more('company', this.id)");
     companyDivWrapper.setAttribute("id", "company-" + obj.id);
 
-
     var companyDiv = document.createElement("div");
     companyDiv.setAttribute("class", "company");
 
