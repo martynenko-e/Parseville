@@ -210,7 +210,10 @@ function show_more(type_api, id) {
 }
 
 function showCompanyElementOnSideBar(obj) {
-    // create general div for company entity on side bar
+    var newDiv = document.createElement("div");
+    newDiv.setAttribute("class", "col-xs-4");
+
+    /*// create general div for company entity on side bar
     var sideBarCompanyDiv = document.createElement("div");
     sideBarCompanyDiv.setAttribute("class", "col-xs-4");
     // create title div for general company div
@@ -239,18 +242,21 @@ function showCompanyElementOnSideBar(obj) {
         .appendChild(sideBarCompanyImageDiv)
         .appendChild(sideBarCompanyDescriptionDiv);
 
-    document.getElementById("full-view").appendChild(sideBarCompanyDiv);
+     document.getElementById("full-view").appendChild(sideBarCompanyDiv);*/
 
     // old realization below... check if works new one and in case of success  -- > delete:
-    /*newDiv.innerHTML = '<div class="title-box"><h4>' + obj.name + '</h4></div>' +
+    newDiv.innerHTML = '<div class="title-box"><h4>' + obj.name + '</h4></div>' +
         '<div class="entry-image"><img src="' + obj.logo + '"></div>' +
         '<div class="entry-content">' + obj.description + '</div>';
     // добавляем только что созданый элемент в дерево DOM
-     document.getElementById("full-view").innerHTML = newDiv.innerHTML;*/
+    document.getElementById("full-view").innerHTML = newDiv.innerHTML;
 }
 
 function showVacancyElementOnSideBar(obj) {
-    // создаем новый элемент div
+
+    var sideBarVacancyDiv = document.createElement("div");
+    sideBarVacancyDiv.setAttribute("class", "col-xs-4");
+    /*// создаем новый элемент div
     // и добавляем в него немного контента
     var sideBarVacancyDiv = document.createElement("div");
     sideBarVacancyDiv.setAttribute("class", "col-xs-4");
@@ -280,14 +286,14 @@ function showVacancyElementOnSideBar(obj) {
         .appendChild(sideBarVacancyCompanyNameDiv)
         .appendChild(sideBarVacancyDescriptionDiv);
 
-    document.getElementById("full-view").appendChild(sideBarVacancyDiv);
+     document.getElementById("full-view").appendChild(sideBarVacancyDiv);*/
 
     // old realization below... check if works new one and in case of success  -- > delete:
-    /*sideBarVacancyDiv.innerHTML = '<div class="title-box"><h4>' + obj.name + '</h4></div>' +
+    sideBarVacancyDiv.innerHTML = '<div class="title-box"><h4>' + obj.name + '</h4></div>' +
         '<div><p>' + obj.company_name + '</p></div>' +
         '<div class="entry-content">' + obj.description + '</div>';
     // добавляем только что созданый элемент в дерево DOM
-     document.getElementById("full-view").innerHTML = sideBarVacancyDiv.innerHTML;*/
+    document.getElementById("full-view").innerHTML = sideBarVacancyDiv.innerHTML;
 }
 
 // in doubt with naming
