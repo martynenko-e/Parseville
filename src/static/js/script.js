@@ -1,6 +1,8 @@
 var globalLinks = [],
     globalVacancies = [],
     globalCompanies = [],
+    globalNews = [],
+    globalEvents = [],
     globalMarkers = [],
     counter = 1;
 
@@ -86,7 +88,6 @@ Marker.prototype.createFromData = function (data) {
 
 function addVacancyElement(obj) {
     // create general div for Vacancy Entity
-
     var vacancyDivWrapper = document.createElement("div");
     vacancyDivWrapper.setAttribute("class", "col-xs-12 col-md-4");
     vacancyDivWrapper.setAttribute("onclick", "show_more('vacancy', this.id)");
@@ -114,12 +115,11 @@ function addVacancyElement(obj) {
     vacancyTitleDiv.appendChild(vacancyTitleDivH);
     vacancyContainerDiv.appendChild(vacancyDescDiv);
 
-    vacancyDiv.appendChild(vacancyTitleDiv);
-    vacancyDiv.appendChild(vacancyContainerDiv);
+    vacancyDiv.appendChild(vacancyTitleDiv)
+        .appendChild(vacancyContainerDiv);
+
     vacancyDivWrapper.appendChild(vacancyDiv);
-    /* vacancyDiv.innerHTML = '<div class="title-box"><h4>' + obj.name + '</h4></div>' +
-     '<div class="entry-container "><div class="entry-content"><p>' + obj.description.substr(0, 200) + '...</p></div></div></div>';*/
-    // добавляем только что созданый элемент в дерево DOM
+
     document.getElementById("vacancy-block").appendChild(vacancyDivWrapper);
 }
 
@@ -169,20 +169,16 @@ function addCompanyElement(obj) {
     companyTitleDiv.appendChild(companyTitleDivH);
     companyLogoDiv.appendChild(companyLogoDivImg);
 
-    companyDiv.appendChild(companyTitleDiv);
-    companyDiv.appendChild(companyLogoDiv);
-    companyDiv.appendChild(companyDescDiv);
+    companyDiv.appendChild(companyTitleDiv)
+        .appendChild(companyLogoDiv)
+        .appendChild(companyDescDiv);
+
     companyDivWrapper.appendChild(companyDiv);
-    // if not needed please delete the below
-    /*companyDiv.innerHTML = '<div class="title-box"><h4>' + obj.name + '</h4></div>' +
-     '<div class="entry-logo"><img src="' + obj.logo + '"></div>' +
-     '<div class="entry-content">' + desc.substr(0, 200) + '...</div></div>';
-     // добавляем только что созданый элемент в дерево DOM*/
+
     document.getElementById("company-block").appendChild(companyDivWrapper);
 }
 
 function show_more(type_api, id) {
-    console.log("adsfasdfasdf");
     if (type_api == "vacancy") {
         for (var vacancy in globalVacancies) {
             if (globalVacancies[vacancy].id == id.split('-')[1]) {
@@ -197,30 +193,101 @@ function show_more(type_api, id) {
             }
         }
     }
+    if (type_api == "new") {
+        for (var item in globalNews) {
+            if (globalNews[item].id == id.split('-')[1]) {
+                //do we need to show it on side bar? if yes --> what kind of info we would like to see there?
+            }
+        }
+    }
+    if (type_api == "event") {
+        for (var event in globalEvents) {
+            if (globalEvents[event].id == id.split('-')[1]) {
+                //do we need to show it on side bat?
+            }
+        }
+    }
 }
 
 function showCompanyElementOnSideBar(obj) {
-    // создаем новый элемент div
-    // и добавляем в него немного контента
-    var newDiv = document.createElement("div");
-    newDiv.setAttribute("class", "col-xs-4");
-    newDiv.innerHTML = '<div class="title-box"><h4>' + obj.name + '</h4></div>' +
+    // create general div for company entity on side bar
+    var sideBarCompanyDiv = document.createElement("div");
+    sideBarCompanyDiv.setAttribute("class", "col-xs-4");
+    // create title div for general company div
+    var sideBarCompanyTitleDiv = document.createElement('div');
+    sideBarCompanyTitleDiv.setAttribute('class', 'title-box');
+    // create h4 for title div
+    var sideBarCompanyTitleH4 = document.createElement('h4');
+    sideBarCompanyTitleH4.setAttribute('class', 'title-box-text');
+    sideBarCompanyTitleH4.innerHTML = obj.name;
+    //create img div for general div
+    var sideBarCompanyImageDiv = document.createElement('div');
+    sideBarCompanyImageDiv.setAttribute('class', 'entry-image');
+    //create img el for img div
+    var sideBarCompanyImage = document.createElement('img');
+    sideBarCompanyImage.setAttribute('class', 'entry-image-img');
+    sideBarCompanyImage.src = obj.logo;
+    //create div for description
+    var sideBarCompanyDescriptionDiv = document.createElement('div');
+    sideBarCompanyDescriptionDiv.setAttribute('class', 'entry-content');
+    sideBarCompanyDescriptionDiv.innerHTML = obj.description;
+
+    sideBarCompanyTitleDiv.appendChild(sideBarCompanyTitleH4);
+    sideBarCompanyImageDiv.appendChild(sideBarCompanyImage);
+
+    sideBarCompanyDiv.appendChild(sideBarCompanyTitleDiv)
+        .appendChild(sideBarCompanyImageDiv)
+        .appendChild(sideBarCompanyDescriptionDiv);
+
+    document.getElementById("full-view").appendChild(sideBarCompanyDiv);
+
+    // old realization below... check if works new one and in case of success  -- > delete:
+    /*newDiv.innerHTML = '<div class="title-box"><h4>' + obj.name + '</h4></div>' +
         '<div class="entry-image"><img src="' + obj.logo + '"></div>' +
         '<div class="entry-content">' + obj.description + '</div>';
     // добавляем только что созданый элемент в дерево DOM
-    document.getElementById("full-view").innerHTML = newDiv.innerHTML;
+     document.getElementById("full-view").innerHTML = newDiv.innerHTML;*/
 }
 
 function showVacancyElementOnSideBar(obj) {
     // создаем новый элемент div
     // и добавляем в него немного контента
-    var newDiv = document.createElement("div");
-    newDiv.setAttribute("class", "col-xs-4");
-    newDiv.innerHTML = '<div class="title-box"><h4>' + obj.name + '</h4></div>' +
+    var sideBarVacancyDiv = document.createElement("div");
+    sideBarVacancyDiv.setAttribute("class", "col-xs-4");
+    // create title div for general vacancy div
+    var sideBarVacancyTitleDiv = document.createElement('div');
+    sideBarVacancyTitleDiv.setAttribute('class', 'title-box');
+    //create title el for title div
+    var sideBarVacancyTitleH4 = document.createElement('h4');
+    sideBarVacancyTitleH4.setAttribute('class', 'title-box-text');
+    sideBarVacancyTitleH4.innerHTML = obj.name;
+    //create div for Company that vacancy belongs to
+    var sideBarVacancyCompanyNameDiv = document.createElement('div');
+    sideBarVacancyCompanyNameDiv.setAttribute('class', 'company-name-of-vacancy');
+    //create p el for div for Company that vacancy belongs to
+    var sideBarVacancyCompanyNameP = document.createElement('p');
+    sideBarVacancyCompanyNameP.setAttribute('class', 'company-name-of-vacancy-text');
+    sideBarVacancyCompanyNameP.innerHTML = obj.company_name;
+    //create div for description
+    var sideBarVacancyDescriptionDiv = document.createElement('div');
+    sideBarVacancyDescriptionDiv.setAttribute('class', 'entry-content');
+    sideBarVacancyDescriptionDiv.innerHTML = obj.description;
+
+    sideBarVacancyTitleDiv.appendChild(sideBarVacancyTitleH4);
+    sideBarVacancyCompanyNameDiv.appendChild(sideBarVacancyCompanyNameP);
+
+    sideBarVacancyDiv.appendChild(sideBarVacancyTitleDiv)
+        .appendChild(sideBarVacancyCompanyNameDiv)
+        .appendChild(sideBarVacancyDescriptionDiv);
+
+    document.getElementById("full-view").appendChild(sideBarVacancyDiv);
+
+    // old realization below... check if works new one and in case of success  -- > delete:
+    /*sideBarVacancyDiv.innerHTML = '<div class="title-box"><h4>' + obj.name + '</h4></div>' +
         '<div><p>' + obj.company_name + '</p></div>' +
         '<div class="entry-content">' + obj.description + '</div>';
     // добавляем только что созданый элемент в дерево DOM
-    document.getElementById("full-view").innerHTML = newDiv.innerHTML;
+     document.getElementById("full-view").innerHTML = sideBarVacancyDiv.innerHTML;*/
 }
 
 // in doubt with naming
@@ -296,15 +363,15 @@ function getJsonDataViaAjax(path, async) {
 }
 
 /*
-(function showMoreEventHandler() {
-    var companyShowMoreBtn = document.getElementById('btn-load-company'),
-        vacancySHowMoreBtn = document.getElementById('btn-load-vacancy');
-    vacancySHowMoreBtn.onclick = function () {
-        let url = 'http://' + window.location.hostname + ":" + window.location.port + '/api/vacancy/' + counter++;
-        showMoreEvent(url);
-    };
-    companyShowMoreBtn.onclick = function () {
-        let url = 'http://' + window.location.hostname + ":" + window.location.port + '/api/company/' + counter++;
-        showMoreEvent(url);
-    };
-})();*/
+ (function showMoreEventHandler() {
+ var companyShowMoreBtn = document.getElementById('btn-load-company'),
+ vacancySHowMoreBtn = document.getElementById('btn-load-vacancy');
+ vacancySHowMoreBtn.onclick = function () {
+ let url = 'http://' + window.location.hostname + ":" + window.location.port + '/api/vacancy/' + counter++;
+ showMoreEvent(url);
+ };
+ companyShowMoreBtn.onclick = function () {
+ let url = 'http://' + window.location.hostname + ":" + window.location.port + '/api/company/' + counter++;
+ showMoreEvent(url);
+ };
+ })();*/
