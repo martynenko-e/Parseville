@@ -210,10 +210,10 @@ function show_more(type_api, id) {
 }
 
 function showCompanyElementOnSideBar(obj) {
-    var newDiv = document.createElement("div");
-    newDiv.setAttribute("class", "col-xs-4");
+    /*var newDiv = document.createElement("div");
+     newDiv.setAttribute("class", "col-xs-4");*/
 
-    /*// create general div for company entity on side bar
+    // create general div for company entity on side bar
     var sideBarCompanyDiv = document.createElement("div");
     sideBarCompanyDiv.setAttribute("class", "col-xs-4");
     // create title div for general company div
@@ -242,14 +242,15 @@ function showCompanyElementOnSideBar(obj) {
         .appendChild(sideBarCompanyImageDiv)
         .appendChild(sideBarCompanyDescriptionDiv);
 
-     document.getElementById("full-view").appendChild(sideBarCompanyDiv);*/
+    /* document.getElementById("full-view").appendChild(sideBarCompanyDiv);*/
+    document.getElementById("full-view").innerHTML = sideBarCompanyDiv.innerHTML;
 
-    // old realization below... check if works new one and in case of success  -- > delete:
+    /*// old realization below... check if works new one and in case of success  -- > delete:
     newDiv.innerHTML = '<div class="title-box"><h4>' + obj.name + '</h4></div>' +
         '<div class="entry-image"><img src="' + obj.logo + '"></div>' +
         '<div class="entry-content">' + obj.description + '</div>';
     // добавляем только что созданый элемент в дерево DOM
-    document.getElementById("full-view").innerHTML = newDiv.innerHTML;
+     document.getElementById("full-view").innerHTML = newDiv.innerHTML;*/
 }
 
 function showVacancyElementOnSideBar(obj) {
