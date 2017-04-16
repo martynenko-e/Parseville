@@ -7,7 +7,7 @@ var Vacancy = function () {
 
 };
 
-Vacancy.prototype.createFromData = function (data) {
+Vacancy.prototype.createFromData = function (data, is_draw) {
     var object = new Vacancy;
     object.id = data.id;
     object.name = data.name;
@@ -16,7 +16,9 @@ Vacancy.prototype.createFromData = function (data) {
     object.pub_date = data.pub_date;
     object.company_name = data.company_name;
     object.p_language = data.p_language;
-    // addVacancyElement(object);
+    if (is_draw) {
+        // addVacancyElement(object);
+    }
     return object;
 };
 
@@ -25,61 +27,62 @@ var Company = function () {
 
 };
 
-Company.prototype.addToHtml = function () {
-
-};
-
-Company.prototype.createFromData = function (data) {
+Company.prototype.createFromData = function (data, is_draw) {
     var object = new Company;
     object.id = data.id;
     object.name = data.name;
     object.description = data.description;
     object.short_text = data.short_text;
-    object.logo = data.logo;
+    object.logo = data.image;
     object.site_url = data.site_url;
-    // addCompanyElement(object);
+    if (is_draw) {
+        // addCompanyElement(object);
+    }
     return object;
 };
 
-var Link = function () {
+var Event = function () {
 
 };
 
-Link.prototype.createFromData = function (data) {
-    var object = new Link;
+Event.prototype.createFromData = function (data, is_draw) {
+    var object = new Event;
     object.id = data.id;
     object.name = data.name;
+    object.company_name = data.company_name;
+    object.description = data.description;
     object.short_text = data.short_text;
     object.url = data.url;
-    // addLinkElement(object);
+    if (is_draw) {
+        // addEventElement(object);
+    }
     return object;
 };
 
-Link.prototype.addToHtml = function () {
+var Article = function () {
 
 };
 
-var links = [];
+Article.prototype.createFromData = function (data, is_draw) {
+    var object = new Article;
+    object.id = data.id;
+    object.name = data.name;
+    object.company_name = data.company_name;
+    object.description = data.description;
+    object.short_text = data.short_text;
+    object.url = data.url;
+    if (is_draw) {
+        // addEventElement(object);
+    }
+    return object;
+};
+
+
+var events = [];
+var news = [];
 var vacancies = [];
 var companies = [];
 
-function getJsonOfVacancies() {
-    var xhr = new XMLHttpRequest(),
-        url = "http://138.68.77.7:8000/api/vacancy/";
-    xhr.open("GET", url, true);
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4) {
-            var status = xhr.status;
-            if (status >= 200 && status < 300 || status === 304) {
-                var vacancies = JSON.parse(xhr.responseText); // returns string of JSON
-                parseVacancies(vacancies);
-            } else {
-                console.log(xhr.status + ":" + xhr.statusText);
-            }
-        }
-    };
-    xhr.send(null);
-}
 
 function show_more(type_api, id) {
     if (type_api == "vacancy") {
@@ -93,6 +96,20 @@ function show_more(type_api, id) {
         for (var company in companies) {
             if (companies[company].id == id.split('-')[1]) {
                 showCompanyElement(companies[company]);
+            }
+        }
+    }
+    if (type_api == "event") {
+        for (var event in events) {
+            if (events[event].id == id.split('-')[1]) {
+                showEventElement(events[event]);
+            }
+        }
+    }
+    if (type_api == "article") {
+        for (var article in news) {
+            if (news[article].id == id.split('-')[1]) {
+                showArticleElement(news[article]);
             }
         }
     }
@@ -123,23 +140,52 @@ function showVacancyElement(obj) {
     document.getElementById("full-view").innerHTML = newDiv.innerHTML;
 }
 
-function dataProcessing(data) {
+function showEventElement(obj) {
+    // создаем новый элемент div
+    // и добавляем в него немного контента
+    var newDiv = document.createElement("div");
+    newDiv.setAttribute("class", "col-xs-4");
+    newDiv.innerHTML = '<div class="title-box"><h4>' + obj.name + '</h4></div>' +
+        '<div><p>' + obj.company_name + '</p></div>' +
+        '<div class="entry-content">' + obj.description + '</div>';
+    // добавляем только что созданый элемент в дерево DOM
+    document.getElementById("full-view").innerHTML = newDiv.innerHTML;
+}
+
+function showArticleElement(obj) {
+    // создаем новый элемент div
+    // и добавляем в него немного контента
+    var newDiv = document.createElement("div");
+    newDiv.setAttribute("class", "col-xs-4");
+    newDiv.innerHTML = '<div class="title-box"><h4>' + obj.name + '</h4></div>' +
+        '<div><p>' + obj.company_name + '</p></div>' +
+        '<div class="entry-content">' + obj.description + '</div>';
+    // добавляем только что созданый элемент в дерево DOM
+    document.getElementById("full-view").innerHTML = newDiv.innerHTML;
+}
+
+function dataProcessing(data, is_draw) {
     var data_dict = data;
     for (var dict_key in data_dict) {
         switch (dict_key) {
-            case ("vacancy_list"):
+            case ("vacancies"):
                 for (var key in data_dict[dict_key]) {
-                    vacancies.push(Vacancy.prototype.createFromData(data_dict[dict_key][key]));
+                    vacancies.push(Vacancy.prototype.createFromData(data_dict[dict_key][key], is_draw));
                 }
                 break;
-            case ("company_list"):
+            case ("companies"):
                 for (var key in data_dict[dict_key]) {
-                    companies.push(Company.prototype.createFromData(data_dict[dict_key][key]));
+                    companies.push(Company.prototype.createFromData(data_dict[dict_key][key], is_draw));
                 }
                 break;
-            case ("link_list"):
+            case ("events"):
                 for (var key in data_dict[dict_key]) {
-                    links.push(Link.prototype.createFromData(data_dict[dict_key][key]));
+                    events.push(Event.prototype.createFromData(data_dict[dict_key][key], is_draw));
+                }
+                break;
+            case ("news"):
+                for (var key in data_dict[dict_key]) {
+                    news.push(Article.prototype.createFromData(data_dict[dict_key][key], is_draw));
                 }
                 break;
         }

@@ -55,7 +55,7 @@ class Company(MetaModel):
 
     def get_absolute_url(self):
         if self.logo:
-            return STATIC_URL + "%s" % self.logo
+            return "%s" % self.logo
         else:
             return None
 
@@ -68,11 +68,17 @@ class Vacancy(MetaModel):
     show = models.BooleanField(default=False)
     show_on_main = models.BooleanField(default=False)
     url = models.URLField(null=True, blank=True)
-    company = models.ForeignKey(Company)
+    company = models.ForeignKey(Company, related_name="vacancies")
     city = models.ForeignKey(City, null=True, blank=True)
     programming_language = models.ForeignKey(ProgrammingLanguage, null=True, blank=True)
     date = models.DateTimeField(auto_now_add=True)
     extra = models.TextField(null=True, blank=True)
+
+    def get_company_name(self):
+        if self.company:
+            return self.company.name
+        else:
+            return ""
 
 
 class UsefulLink(MetaModel):
@@ -97,6 +103,12 @@ class Office(MetaModel):
     longitude = models.FloatField(null=True, blank=True)
     city = models.ForeignKey(City, related_name="offices")
 
+    def get_company_name(self):
+        if self.company:
+            return self.company.name
+        else:
+            return ""
+
 
 class Event(MetaModel):
     name = models.CharField(max_length=255, null=True, blank=True)
@@ -107,6 +119,12 @@ class Event(MetaModel):
     url = models.URLField(null=True, blank=True)
     upcoming_date = models.DateTimeField(null=True, blank=True)
     company = models.ForeignKey(Company, related_name="events", null=True, blank=True)
+
+    def get_company_name(self):
+        if self.company:
+            return self.company.name
+        else:
+            return ""
 
 
 class News(MetaModel):
@@ -121,8 +139,14 @@ class News(MetaModel):
 
     def get_absolute_url(self):
         if self.image:
-            return STATIC_URL + "%s" % self.image
+            return "%s" % self.image
         else:
             return None
+
+    def get_company_name(self):
+        if self.company:
+            return self.company.name
+        else:
+            return ""
 
 

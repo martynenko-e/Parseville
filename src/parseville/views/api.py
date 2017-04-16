@@ -6,6 +6,8 @@ from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from parseville.models import *
 
+BATCH_SIZE = 10
+
 
 @csrf_exempt
 def api_init(request):
@@ -81,11 +83,12 @@ def api_get_offices(request):
 
 
 def get_company_batch(count):
-    company_query_set = Company.objects.filter(show=True).order_by('date')[3 * count:3 * count + 3] \
+    company_query_set = Company.objects.filter(show=False).order_by('-date')[BATCH_SIZE * count:BATCH_SIZE * count + BATCH_SIZE] \
         .values_list("id",
                      "name",
                      "description",
                      "logo",
+                     "date",
                      "url",
                      "short_text")
 
@@ -93,18 +96,19 @@ def get_company_batch(count):
         "id": element[0],
         "name": element[1],
         "description": element[2],
-        "logo": "/media/" + element[3],
-        "url": element[4],
-        "short_text": element[5],
+        "image": "/" + element[3],
+        "date": element[4].strftime("%B %d, %Y"),
+        "url": element[5],
+        "short_text": element[6],
     }, company_query_set)
     return data
 
 
 def get_vacancy_batch(count):
-    vacancy_query_set = Vacancy.objects.filter(show=True,
+    vacancy_query_set = Vacancy.objects.filter(show=False,
                                                date__isnull=False,
                                                date__lte=datetime.now()
-                                               ).order_by('date')[3 * count:3 * count + 3] \
+                                               ).order_by('date')[BATCH_SIZE * count:BATCH_SIZE * count + BATCH_SIZE] \
         .values_list("id",
                      "name",
                      "description",
@@ -118,7 +122,7 @@ def get_vacancy_batch(count):
         "id": element[0],
         "name": element[1],
         "description": element[2],
-        "pub_date": element[3].strftime("%B %d, %Y"),
+        "date": element[3].strftime("%B %d, %Y"),
         "company_name": element[4],
         "p_language": element[5],
         "url": element[6],
@@ -129,10 +133,10 @@ def get_vacancy_batch(count):
 
 
 def get_link_batch(count):
-    link_query_set = UsefulLink.objects.filter(show=True,
+    link_query_set = UsefulLink.objects.filter(show=False,
                                                date__isnull=False,
                                                date__lte=datetime.now()
-                                               ).order_by('date')[3 * count:3 * count + 3]. \
+                                               ).order_by('-date')[BATCH_SIZE * count:BATCH_SIZE * count + BATCH_SIZE]. \
         values_list("id",
                     "name",
                     "short_text",
@@ -143,6 +147,52 @@ def get_link_batch(count):
         "short_text": element[2],
         "url": element[3],
     }, link_query_set)
+    return data
+
+
+def get_event_batch(count):
+    event_query_set = Event.objects.filter(
+                                           date__isnull=False,
+                                           date__lte=datetime.now()
+                                           ).order_by('-date')[BATCH_SIZE * count:BATCH_SIZE * count + BATCH_SIZE]. \
+        values_list("id",
+                    "name",
+                    "short_text",
+                    "description",
+                    "url",
+                    "company__name")
+    data = map(lambda element: {
+        "id": element[0],
+        "name": element[1],
+        "short_text": element[2],
+        "description": element[3],
+        "url": element[4],
+        "company_name": element[5],
+    }, event_query_set)
+    return data
+
+
+def get_article_batch(count):
+    article_query_set = News.objects.filter(
+                                            date__isnull=False,
+                                            date__lte=datetime.now()
+                                            ).order_by('-date')[BATCH_SIZE * count:BATCH_SIZE * count + BATCH_SIZE]. \
+        values_list("id",
+                    "name",
+                    "short_text",
+                    "description",
+                    "url",
+                    "image",
+                    "company__name")
+    data = map(lambda element: {
+        "id": element[0],
+        "name": element[1],
+        "short_text": element[2],
+        "description": element[3],
+        "url": element[4],
+        "image": "/" + element[5],
+        "company_name": element[6],
+    }, article_query_set)
     return data
 
 
