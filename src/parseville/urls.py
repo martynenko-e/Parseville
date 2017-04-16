@@ -36,6 +36,8 @@ urlpatterns = [
     url(r'^api/office/', api.api_offices, name='api_offices'),
     url(r'^api/vacancy/(?P<count>[\d]+)?/?', api.api_vacancy, name='api_vacancy'),
     url(r'^api/company/(?P<count>[\d]+)?/?', api.api_company, name='api_company'),
+    url(r'^api/event/(?P<count>[\d]+)?/?', api.api_event, name='api_event'),
+    url(r'^api/article/(?P<count>[\d]+)?/?', api.api_article, name='api_article'),
     ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 urlpatterns += staticfiles_urlpatterns()

@@ -9,7 +9,6 @@ from parseville.models import *
 BATCH_SIZE = 10
 
 
-@csrf_exempt
 def api_init(request):
     data = {
         "company_list": get_company_batch(0),
@@ -21,7 +20,6 @@ def api_init(request):
     return response
 
 
-@csrf_exempt
 def api_link(request, count=1):
     if not count:
         count = 1
@@ -35,7 +33,6 @@ def api_link(request, count=1):
     return response
 
 
-@csrf_exempt
 def api_company(request, count=1):
     if not count:
         count = 1
@@ -47,13 +44,11 @@ def api_company(request, count=1):
     return response
 
 
-@csrf_exempt
 def api_vacancy(request, count="1"):
     if not count:
         count = 1
     else:
         count = int(count)
-
     data = {
         "vacancy_list": get_vacancy_batch(count)
     }
@@ -62,7 +57,32 @@ def api_vacancy(request, count="1"):
     return response
 
 
-@csrf_exempt
+def api_event(request, count="1"):
+    if not count:
+        count = 1
+    else:
+        count = int(count)
+    data = {
+        "event_list": get_event_batch(count)
+    }
+    response = HttpResponse(json.dumps(data), content_type='application/json')
+    response["Access-Control-Allow-Origin"] = '*'
+    return response
+
+
+def api_article(request, count="1"):
+    if not count:
+        count = 1
+    else:
+        count = int(count)
+    data = {
+        "article_list": get_article_batch(count)
+    }
+    response = HttpResponse(json.dumps(data), content_type='application/json')
+    response["Access-Control-Allow-Origin"] = '*'
+    return response
+
+
 def api_offices(request):
     data = {
         "office_list": get_office_batch("")
@@ -72,7 +92,6 @@ def api_offices(request):
     return response
 
 
-@csrf_exempt
 def api_get_offices(request):
     data = {
         "office_list": get_office_batch("kiev")
