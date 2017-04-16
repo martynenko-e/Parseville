@@ -1,8 +1,7 @@
 /**
  * Created by Martynenko on 03.02.2017.
  */
-;
-
+var counter = 1;
 var Vacancy = function () {
 
 };
@@ -10,6 +9,7 @@ var Vacancy = function () {
 Vacancy.prototype.createFromData = function (data, is_draw) {
     var object = new Vacancy;
     object.id = data.id;
+    object.date = data.date;
     object.name = data.name;
     object.description = data.description;
     object.short_text = data.short_text;
@@ -17,7 +17,7 @@ Vacancy.prototype.createFromData = function (data, is_draw) {
     object.company_name = data.company_name;
     object.p_language = data.p_language;
     if (is_draw) {
-        // addVacancyElement(object);
+        draw_html(object, "vacancy");
     }
     return object;
 };
@@ -31,15 +31,17 @@ Company.prototype.createFromData = function (data, is_draw) {
     var object = new Company;
     object.id = data.id;
     object.name = data.name;
+    object.date = data.date;
     object.description = data.description;
     object.short_text = data.short_text;
     object.logo = data.image;
     object.site_url = data.site_url;
     if (is_draw) {
-        // addCompanyElement(object);
+        draw_html(object, "company");
     }
     return object;
 };
+
 
 var Event = function () {
 
@@ -48,13 +50,14 @@ var Event = function () {
 Event.prototype.createFromData = function (data, is_draw) {
     var object = new Event;
     object.id = data.id;
+    object.date = data.date;
     object.name = data.name;
     object.company_name = data.company_name;
     object.description = data.description;
     object.short_text = data.short_text;
     object.url = data.url;
     if (is_draw) {
-        // addEventElement(object);
+        draw_html(object, "event");
     }
     return object;
 };
@@ -66,13 +69,15 @@ var Article = function () {
 Article.prototype.createFromData = function (data, is_draw) {
     var object = new Article;
     object.id = data.id;
+    object.date = data.date;
     object.name = data.name;
+    object.image = data.image;
     object.company_name = data.company_name;
     object.description = data.description;
     object.short_text = data.short_text;
     object.url = data.url;
     if (is_draw) {
-        // addEventElement(object);
+        draw_html(object, "article");
     }
     return object;
 };
@@ -83,6 +88,61 @@ var news = [];
 var vacancies = [];
 var companies = [];
 
+
+function draw_html(obj, type) {
+    // create general div for Company Entity
+    var main_div = document.createElement("div");
+    main_div.setAttribute("class", "row psv_block_padding");
+
+    var separate_div = document.createElement("div");
+    separate_div.setAttribute("class", "psv_row_indent");
+
+    var date_div = document.createElement("div");
+    date_div.setAttribute("class", "pull-right psv_default_font");
+    date_div.innerHTML = obj.date;
+
+    var link_div = document.createElement("div");
+    link_div.setAttribute("class", "psv_link");
+    link_div.setAttribute("id", type + "-" + obj.id);
+    link_div.setAttribute("onclick", 'show_more("' + type + '", this.id)');
+    link_div.innerHTML = obj.name;
+
+    var short_text = document.createElement("div");
+    short_text.setAttribute("class", "psv_default_font");
+    short_text.innerHTML = obj.short_text;
+
+    if (obj.logo || obj.image) {
+        var left_div = document.createElement("div");
+        left_div.setAttribute("class", "psv_left-half");
+
+        var image = document.createElement("img");
+        image.setAttribute("class", "psv_index_image");
+        if (obj.logo) {
+            image.setAttribute("src", obj.logo);
+        } else {
+            image.setAttribute("src", obj.image);
+        }
+
+
+        left_div.appendChild(image);
+
+        var right_div = document.createElement("div");
+        right_div.setAttribute("class", "psv_right-half");
+        right_div.appendChild(date_div);
+        right_div.appendChild(link_div);
+        right_div.appendChild(short_text);
+
+        main_div.appendChild(separate_div);
+        main_div.appendChild(left_div);
+        main_div.appendChild(right_div);
+    } else {
+        main_div.appendChild(separate_div);
+        main_div.appendChild(date_div);
+        main_div.appendChild(link_div);
+        main_div.appendChild(short_text);
+    }
+    document.getElementById("element-list").appendChild(main_div);
+}
 
 function show_more(type_api, id) {
     if (type_api == "vacancy") {
@@ -191,3 +251,4 @@ function dataProcessing(data, is_draw) {
         }
     }
 }
+

@@ -22,6 +22,7 @@
     <script src="{% static 'js/jquery-1.12.4.min.js' %}"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
     <script src="{% static 'js/marty.js' %}"></script>
+    {% block script %}{% endblock %}
 </head>
 <body>
 <main>
@@ -70,5 +71,5 @@
     </div>
 </aside>
 </body>
-{% block script %}{% endblock %}
+{% block bottom_script %}{% endblock %}
 </html>

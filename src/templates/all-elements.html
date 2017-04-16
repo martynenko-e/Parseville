@@ -1,17 +1,33 @@
 {% extends "base.html" %}
 {% load static %}
+{% block script %}
+    <script src="{% static 'js/load.js' %}" defer></script>
+{% endblock %}
 {% block content %}
     <div class="row">
         <div class="col-xs-9">
             <h4>{{ title }}</h4>
             <br>
-            {% for element in data %}
-                <div class="row psv_block_padding">
-                    {% if element.image and element.image != 'null' %}
-                        <div class="psv_left-half">
-                            <img class="psv_index_image" src="{{ element.image }}">
-                        </div>
-                        <div class="psv_right-half">
+            <div id="element-list">
+                {% for element in data %}
+                    <div class="row psv_block_padding">
+                        {% if element.image and element.image != 'null' %}
+                            <div class="psv_left-half">
+                                <img class="psv_index_image" src="{{ element.image }}">
+                            </div>
+                            <div class="psv_right-half">
+                                {% if element.date %}
+                                    <div class="pull-right psv_default_font">{{ element.date }}</div>
+                                {% endif %}
+                                {% if element.name %}
+                                    <div class="psv_link" id="{{ type }}-{{ element.id }}"
+                                         onclick="show_more('{{ type }}', this.id)">{{ element.name }}</div>
+                                {% endif %}
+                                {% if element.short_text %}
+                                    <div class="psv_default_font">{{ element.short_text }}</div>
+                                {% endif %}
+                            </div>
+                        {% else %}
                             {% if element.date %}
                                 <div class="pull-right psv_default_font">{{ element.date }}</div>
                             {% endif %}
@@ -22,25 +38,14 @@
                             {% if element.short_text %}
                                 <div class="psv_default_font">{{ element.short_text }}</div>
                             {% endif %}
-                        </div>
+                        {% endif %}
+                    </div>
+                    {% if forloop.last %}
                     {% else %}
-                        {% if element.date %}
-                            <div class="pull-right psv_default_font">{{ element.date }}</div>
-                        {% endif %}
-                        {% if element.name %}
-                            <div class="psv_link" id="{{ type }}-{{ element.id }}"
-                                 onclick="show_more('{{ type }}', this.id)">{{ element.name }}</div>
-                        {% endif %}
-                        {% if element.short_text %}
-                            <div class="psv_default_font">{{ element.short_text }}</div>
-                        {% endif %}
+                        <div class="psv_row_indent"></div>
                     {% endif %}
-                </div>
-                {% if forloop.last %}
-                {% else %}
-                    <div class="psv_row_indent"></div>
-                {% endif %}
-            {% endfor %}
+                {% endfor %}
+            </div>
             <br>
             <div class="btn-group btn-group-justified" role="group" aria-label="...">
                 <div class="btn-group" role="group">
@@ -68,10 +73,12 @@
             </div>
         </div>
     </div>
-
+    {% if type == 'company' %}
+            <div id="map">Hello map</div>
+    {% endif %}
 {% endblock %}
-{% block script %}
+{% block bottom_script %}
     <script>
-        dataProcessing({{ init_data|safe }}, false)
+        dataProcessing({{ init_data|safe }}, false);
     </script>
 {% endblock %}

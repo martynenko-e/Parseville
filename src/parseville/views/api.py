@@ -6,9 +6,10 @@ from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from parseville.models import *
 
-BATCH_SIZE = 10
+BATCH_SIZE = 5
 
 
+@csrf_exempt
 def api_init(request):
     data = {
         "company_list": get_company_batch(0),
@@ -20,6 +21,7 @@ def api_init(request):
     return response
 
 
+@csrf_exempt
 def api_link(request, count=1):
     if not count:
         count = 1
@@ -33,56 +35,61 @@ def api_link(request, count=1):
     return response
 
 
+@csrf_exempt
 def api_company(request, count=1):
     if not count:
         count = 1
     else:
         count = int(count)
-    data = {"company_list": get_company_batch(count)}
+    data = {"companies": get_company_batch(count)}
     response = HttpResponse(json.dumps(data), content_type='application/json')
     response["Access-Control-Allow-Origin"] = '*'
     return response
 
 
+@csrf_exempt
 def api_vacancy(request, count="1"):
     if not count:
         count = 1
     else:
         count = int(count)
     data = {
-        "vacancy_list": get_vacancy_batch(count)
+        "vacancies": get_vacancy_batch(count)
     }
     response = HttpResponse(json.dumps(data), content_type='application/json')
     response["Access-Control-Allow-Origin"] = '*'
     return response
 
 
+@csrf_exempt
 def api_event(request, count="1"):
     if not count:
         count = 1
     else:
         count = int(count)
     data = {
-        "event_list": get_event_batch(count)
+        "events": get_event_batch(count)
     }
     response = HttpResponse(json.dumps(data), content_type='application/json')
     response["Access-Control-Allow-Origin"] = '*'
     return response
 
 
+@csrf_exempt
 def api_article(request, count="1"):
     if not count:
         count = 1
     else:
         count = int(count)
     data = {
-        "article_list": get_article_batch(count)
+        "news": get_article_batch(count)
     }
     response = HttpResponse(json.dumps(data), content_type='application/json')
     response["Access-Control-Allow-Origin"] = '*'
     return response
 
 
+@csrf_exempt
 def api_offices(request):
     data = {
         "office_list": get_office_batch("")
@@ -92,6 +99,7 @@ def api_offices(request):
     return response
 
 
+@csrf_exempt
 def api_get_offices(request):
     data = {
         "office_list": get_office_batch("kiev")
@@ -159,12 +167,14 @@ def get_link_batch(count):
         values_list("id",
                     "name",
                     "short_text",
+                    "date",
                     "url")
     data = map(lambda element: {
         "id": element[0],
         "name": element[1],
         "short_text": element[2],
-        "url": element[3],
+        "date": element[3].strftime("%B %d, %Y"),
+        "url": element[4],
     }, link_query_set)
     return data
 
@@ -179,6 +189,7 @@ def get_event_batch(count):
                     "short_text",
                     "description",
                     "url",
+                    "date",
                     "company__name")
     data = map(lambda element: {
         "id": element[0],
@@ -186,7 +197,8 @@ def get_event_batch(count):
         "short_text": element[2],
         "description": element[3],
         "url": element[4],
-        "company_name": element[5],
+        "date": element[5].strftime("%B %d, %Y"),
+        "company_name": element[6],
     }, event_query_set)
     return data
 
@@ -202,6 +214,7 @@ def get_article_batch(count):
                     "description",
                     "url",
                     "image",
+                    "date",
                     "company__name")
     data = map(lambda element: {
         "id": element[0],
@@ -210,7 +223,8 @@ def get_article_batch(count):
         "description": element[3],
         "url": element[4],
         "image": "/" + element[5],
-        "company_name": element[6],
+        "date": element[6].strftime("%B %d, %Y"),
+        "company_name": element[7],
     }, article_query_set)
     return data
 
