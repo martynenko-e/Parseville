@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
 from django.shortcuts import render
 from parseville.models import Vacancy, Company, Event, News
-from parseville.views.api import get_company_batch, get_vacancy_batch, get_link_batch
+from parseville.views.api import get_company_batch, get_vacancy_batch, get_event_batch, get_article_batch
 import json
 
 ROWS_IN_BLOCK = 10
 NEWS_BLOCK = 5
+SITE_NAME = 'Parseville'
 
 
 def index(request):
@@ -21,41 +22,49 @@ def index(request):
 
 
 def marty(request):
-
     latest_vacancies = map(lambda vacancy: {
         'id': vacancy.id,
         "name": vacancy.name,
-        "description": vacancy.short_text,
-        "date": vacancy.date,
-        "company": vacancy.company.name,
+        "short_text": vacancy.short_text,
+        "description": vacancy.description,
+        "date": vacancy.date.strftime("%B %d, %Y"),
+        "company_name": vacancy.get_company_name(),
     }, Vacancy.objects.filter().order_by("-date")[:ROWS_IN_BLOCK])
 
     show_on_main_companies = map(lambda company: {
         'id': company.id,
         "name": company.name,
-        "description": company.short_text,
+        "short_text": company.short_text,
+        "description": company.description,
         "image": company.get_absolute_url(),
-        "date": company.date,
+        "date": company.date.strftime("%B %d, %Y"),
     }, Company.objects.filter(show_on_main=True).order_by("-date")[:ROWS_IN_BLOCK])
 
     latest_events = map(lambda event: {
+        "id": event.id,
         "name": event.name,
-        "description": event.short_text,
-        "date": event.date,
+        "short_text": event.short_text,
+        "description": event.description,
+        "date": event.date.strftime("%B %d, %Y"),
+        "company_name": event.get_company_name(),
     }, Event.objects.filter().order_by("-date")[:ROWS_IN_BLOCK])
 
     latest_news = map(lambda new: {
+        "id": new.id,
         "name": new.name,
-        "description": new.short_text,
-        "date": new.date,
+        "short_text": new.short_text,
+        "description": new.description,
+        "date": new.date.strftime("%B %d, %Y"),
         "image": new.get_absolute_url(),
         "visit_url": new.url,
+        "company_name": new.get_company_name(),
     }, News.objects.filter().order_by("-date")[:NEWS_BLOCK])
 
     data = {
-        "company_list": get_company_batch(0),
-        "vacancy_list": get_vacancy_batch(0),
-        "link_list": get_link_batch(0),
+        "companies": show_on_main_companies,
+        "vacancies": latest_vacancies,
+        "events": latest_events,
+        "news": latest_news,
     }
 
     return render(request, 'marty-index.html', {
@@ -71,60 +80,61 @@ def marty(request):
         'company_count': Company.objects.filter().count(),
         'news_url': "/news/",
         'news_count': News.objects.filter().count(),
-        'title': 'Parseville',
-        'data': json.dumps(data)
+        'title': SITE_NAME,
+        'data': json.dumps(data),
+        'index_data': data
     })
 
 
 def vacancies(request):
-    data = map(lambda vacancy: {
-        "name": vacancy.name,
-        "description": vacancy.short_text,
-        "date": vacancy.date,
-        "company": vacancy.company.name,
-    }, Vacancy.objects.filter().order_by("-date"))
-    return render(request, 'temp.html', {
-        'title': 'All vacancies',
+    data = get_vacancy_batch(0)
+    init_data = {
+        'vacancies': data,
+    }
+    return render(request, 'all-elements.html', {
+        'title': SITE_NAME + ' - all vacancies',
         'data': data,
+        'type': 'vacancy',
+        'init_data': json.dumps(init_data)
     })
 
 
 def companies(request):
-    data = map(lambda company: {
-        "name": company.name,
-        "description": company.short_text,
-        "image": company.get_absolute_url(),
-        "date": company.date,
-    }, Company.objects.filter().order_by("-date"))
-    return render(request, 'temp.html', {
-        'title': 'All companies',
+    data = get_company_batch(0)
+    init_data = {
+        'companies': data,
+    }
+    return render(request, 'all-elements.html', {
+        'title': SITE_NAME + ' - all companies',
         'data': data,
+        'init_data': json.dumps(init_data),
+        'type': 'company'
     })
 
 
 def events(request):
-    data = map(lambda event: {
-        "name": event.name,
-        "description": event.short_text,
-        "date": event.date,
-    }, Event.objects.filter().order_by("-date"))
-    return render(request, 'temp.html', {
-        'title': 'All events',
+    data = get_event_batch(0)
+    init_data = {
+        'events': data,
+    }
+    return render(request, 'all-elements.html', {
+        'title': SITE_NAME + ' - all events',
         'data': data,
+        'type': 'event',
+        'init_data': json.dumps(init_data),
     })
 
 
 def news(request):
-    data = map(lambda new: {
-        "name": new.name,
-        "description": new.short_text,
-        "date": new.date,
-        "image": new.get_absolute_url(),
-        "visit_url": new.url,
-    }, News.objects.filter().order_by("-date"))
-    return render(request, 'temp.html', {
-        'title': 'All news',
+    data = get_article_batch(0)
+    init_data = {
+        'news': data,
+    }
+    return render(request, 'all-elements.html', {
+        'title': SITE_NAME + ' - all news',
         'data': data,
+        'type': 'article',
+        'init_data': json.dumps(init_data)
     })
 
 

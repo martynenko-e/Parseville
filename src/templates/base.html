@@ -21,7 +21,8 @@
     <link rel="stylesheet" href="{% static 'css/marty.css' %}">
     <script src="{% static 'js/jquery-1.12.4.min.js' %}"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
-    <script src="{% static 'js/script.js' %}"></script>
+    <script src="{% static 'js/marty.js' %}"></script>
+    {% block script %}{% endblock %}
 </head>
 <body>
 <main>
@@ -70,19 +71,5 @@
     </div>
 </aside>
 </body>
-<script>
-
-    //    document.getElementById("btn-load-link").onclick = loadMoreLink;
-    //
-    //    document.getElementById("btn-load-vacancy").onclick = loadMoreVacancy;
-    //
-    //    document.getElementById("btn-load-company").onclick = loadMoreCompany;
-
-    $(document).ready(function () {
-        getJsonDataViaAjax('/api/init/', true);
-        getJsonDataViaAjax('/api/office/', false);
-       // initMarkers();
-    });
-</script>
-{% block script %}{% endblock %}
+{% block bottom_script %}{% endblock %}
 </html>

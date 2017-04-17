@@ -145,6 +145,11 @@ aside div p {
     width: 110px;
 }
 
+.psv_pointer:hover {
+    cursor: pointer;
+    /*background: #b0d9cd;*/
+}
+
 #footer {
     min-height: 70px;
     background-color: #e7e7e7;
