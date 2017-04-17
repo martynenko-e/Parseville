@@ -144,3 +144,10 @@ function clearMarkers(markers) {
     }
     markers.length = 0;
 }
+
+function clearGlobalMarkers() {
+    if (globalMarkers) {
+        globalMarkers = [];
+        clearMarkers(markers);
+    }
+}

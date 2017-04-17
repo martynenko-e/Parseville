@@ -74,11 +74,17 @@
         </div>
     </div>
     {% if type == 'company' %}
-            <div id="map">Hello map</div>
+        <div id="map"></div>
     {% endif %}
 {% endblock %}
 {% block bottom_script %}
     <script>
         dataProcessing({{ init_data|safe }}, false);
     </script>
+    {% if type == 'company' %}
+        <script defer
+                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBvnIFhL4lkBp6gqzbtIxP2cfZEIwBMCjw&callback=initMap">
+        </script>
+        <script src="{% static '/js/mapInit.js' %}"></script>
+    {% endif %}
 {% endblock %}

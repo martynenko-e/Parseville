@@ -8,7 +8,6 @@ ROWS_IN_BLOCK = 10
 NEWS_BLOCK = 5
 SITE_NAME = 'Parseville'
 
-
 def index(request):
     """
     View function for home page of site.
@@ -67,7 +66,7 @@ def marty(request):
         "news": latest_news,
     }
 
-    return render(request, 'marty-index.html', {
+    return render(request, 'index.html', {
         'latest_vacancies': latest_vacancies,
         'show_on_main_companies': show_on_main_companies,
         'latest_events': latest_events,

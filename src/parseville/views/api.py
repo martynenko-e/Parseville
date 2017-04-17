@@ -110,7 +110,7 @@ def api_get_offices(request):
 
 
 def get_company_batch(count):
-    company_query_set = Company.objects.filter(show=False).order_by('-date')[BATCH_SIZE * count:BATCH_SIZE * count + BATCH_SIZE] \
+    company_query_set = Company.objects.filter(show=True).order_by('-date')[BATCH_SIZE * count:BATCH_SIZE * count + BATCH_SIZE] \
         .values_list("id",
                      "name",
                      "description",
