@@ -2,6 +2,7 @@
 from django.core.management.base import BaseCommand
 from parseville.management.parsers import dou, softserve
 from parseville.management.parsers import cogniance
+from parseville.management.parsers import leviNine
 
 from parseville.management.parsers import trionika
 
@@ -16,7 +17,8 @@ class Command(BaseCommand):
 def start(save):
     # dou.parse_company(save)
     try:
-        pass
+        leviNine.parse_events(False)
+        # leviNine.parse_offices(False)
         # softserve.parse_events(save)
         # softserve.parse_news(save)
         # softserve.parse_vacancy(save)

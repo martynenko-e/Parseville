@@ -19,7 +19,7 @@ def parse_vacancy(save):
                     print comp.name
                     vacancy_obj, created = Vacancy.objects.get_or_create(name=title.text, company=comp)
                     vacancy_obj.alias = re.sub(' ', "-", title.text.lower())
-                    vacancy_obj.description = ' '
+                    vacancy_obj.description = desc
                     vacancy_obj.url = vacancy_url
                     vacancy_obj.extra = ' '
                     vacancy_obj.save()
