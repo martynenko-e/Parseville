@@ -192,51 +192,151 @@ function show_more(type_api, id) {
 
 
 function showCompanyElement(obj) {
-    // создаем новый элемент div
-    // и добавляем в него немного контента
-    var newDiv = document.createElement("div");
-    newDiv.setAttribute("class", "col-xs-4");
-    newDiv.innerHTML = '<div class="title-box"><h4>' + obj.name + '</h4></div>' +
-        '<div class="entry-image"><img src="' + obj.logo + '"></div>' +
-        '<div class="entry-content">' + obj.description + '</div>';
-    // добавляем только что созданый элемент в дерево DOM
-    document.getElementById("full-view").innerHTML = newDiv.innerHTML;
+    // create new Div for Company
+    var companyDiv = document.createElement("div");
+    companyDiv.setAttribute("class", "col-xs-4");
+    //create div for title
+    var companyTitleDiv = document.createElement('div');
+    companyTitleDiv.setAttribute('class', 'title-box');
+    //create title h4 tag
+    var companyTitleH4 = document.createElement('h4');
+    companyTitleH4.innerHTML = obj.name;
+    //create div for Img
+    var companyImgDiv = document.createElement('div');
+    companyImgDiv.setAttribute('class', 'entry-image');
+    //create img tag
+    var companyImg = document.createElement('img');
+    companyImg.src = obj.logo;
+    //create div for description
+    var companyDescDiv = document.createElement('div');
+    companyDescDiv.setAttribute('class', 'entry-content');
+    companyDescDiv.innerHTML = obj.description;
+
+    companyTitleDiv.appendChild(companyTitleH4);
+    companyImgDiv.appendChild(companyImg);
+
+    companyDiv
+        .appendChild(companyTitleDiv)
+        .appendChild(companyImgDiv)
+        .appendChild(companyDescDiv);
+
+    document.getElementById("full-view").innerHTML = companyDiv.innerHTML;
 }
 
 function showVacancyElement(obj) {
-    // создаем новый элемент div
-    // и добавляем в него немного контента
-    var newDiv = document.createElement("div");
-    newDiv.setAttribute("class", "col-xs-4");
-    newDiv.innerHTML = '<div class="title-box"><h4>' + obj.name + '</h4></div>' +
+    // create new Div for Vacancy
+    var vacancyDiv = document.createElement("div");
+    vacancyDiv.setAttribute("class", "col-xs-4");
+    //create div for title
+    var vacancyTitleDiv = document.createElement('div');
+    vacancyTitleDiv.setAttribute('class', 'title-box');
+    //create title h4 tag
+    var vacancyTitleH4 = document.createElement('h4');
+    vacancyTitleH4.innerHTML = obj.name;
+    //create div for company Name
+    var vacancyCompanyNameDiv = document.createElement('div');
+    vacancyCompanyNameDiv.setAttribute('class', 'additional-info');
+    //create p tag for company name
+    var vacancyCompanyNameP = document.createElement('p');
+    vacancyCompanyNameP.innerHTML = obj.company_name;
+    //create div for description
+    var vacancyDescDiv = document.createElement('div');
+    vacancyDescDiv.setAttribute('class', 'entry-content');
+    vacancyDescDiv.innerHTML = obj.description;
+
+    vacancyTitleDiv.appendChild(vacancyTitleH4);
+    vacancyCompanyNameDiv.appendChild(vacancyCompanyNameP);
+
+    vacancyDiv
+        .appendChild(vacancyTitleDiv)
+        .appendChild(vacancyCompanyNameDiv)
+        .appendChild(vacancyDescDiv);
+
+    document.getElementById("full-view").innerHTML = vacancyDiv.innerHTML;
+
+    /*vacancyDiv.innerHTML = '<div class="title-box"><h4>' + obj.name + '</h4></div>' +
         '<div><p>' + obj.company_name + '</p></div>' +
         '<div class="entry-content">' + obj.description + '</div>';
     // добавляем только что созданый элемент в дерево DOM
-    document.getElementById("full-view").innerHTML = newDiv.innerHTML;
+    document.getElementById("full-view").innerHTML = vacancyDiv.innerHTML;*/
 }
 
 function showEventElement(obj) {
-    // создаем новый элемент div
-    // и добавляем в него немного контента
-    var newDiv = document.createElement("div");
-    newDiv.setAttribute("class", "col-xs-4");
-    newDiv.innerHTML = '<div class="title-box"><h4>' + obj.name + '</h4></div>' +
+    // create new Div for Event
+    var eventDiv = document.createElement("div");
+    eventDiv.setAttribute("class", "col-xs-4");
+    //create div for title
+    var eventTitleDiv = document.createElement('div');
+    eventTitleDiv.setAttribute('class', 'title-box');
+    //create title h4 tag
+    var eventTitleH4 = document.createElement('h4');
+    eventTitleH4.innerHTML = obj.name;
+    //create div for company Name
+    var eventCompanyNameDiv = document.createElement('div');
+    eventCompanyNameDiv.setAttribute('class', 'additional-info');
+    //create p tag for company name
+    var eventCompanyNameP = document.createElement('p');
+    eventCompanyNameP.innerHTML = obj.company_name;
+    //create div for description
+    var eventDescDiv = document.createElement('div');
+    eventDescDiv.setAttribute('class', 'entry-content');
+    eventDescDiv.innerHTML = obj.description;
+
+    eventTitleDiv.appendChild(eventTitleH4);
+    eventCompanyNameDiv.appendChild(eventCompanyNameP);
+
+    eventDiv
+        .appendChild(eventTitleDiv)
+        .appendChild(eventCompanyNameDiv)
+        .appendChild(eventDescDiv);
+
+    document.getElementById("full-view").innerHTML = eventDiv.innerHTML;
+
+
+    /*eventDiv.innerHTML = '<div class="title-box"><h4>' + obj.name + '</h4></div>' +
         '<div><p>' + obj.company_name + '</p></div>' +
         '<div class="entry-content">' + obj.description + '</div>';
     // добавляем только что созданый элемент в дерево DOM
-    document.getElementById("full-view").innerHTML = newDiv.innerHTML;
+    document.getElementById("full-view").innerHTML = eventDiv.innerHTML;*/
 }
 
 function showArticleElement(obj) {
-    // создаем новый элемент div
-    // и добавляем в него немного контента
-    var newDiv = document.createElement("div");
-    newDiv.setAttribute("class", "col-xs-4");
-    newDiv.innerHTML = '<div class="title-box"><h4>' + obj.name + '</h4></div>' +
+    // create new Div for Article
+    var articleDiv = document.createElement("div");
+    articleDiv.setAttribute("class", "col-xs-4");
+    //create div for title
+    var articleTitleDiv = document.createElement('div');
+    articleTitleDiv.setAttribute('class', 'title-box');
+    //create title h4 tag
+    var articleTitleH4 = document.createElement('h4');
+    articleTitleH4.innerHTML = obj.name;
+    //create div for company Name
+    var articleCompanyNameDiv = document.createElement('div');
+    articleCompanyNameDiv.setAttribute('class', 'additional-info');
+    //create p tag for company name
+    var articleCompanyNameP = document.createElement('p');
+    articleCompanyNameP.innerHTML = obj.company_name;
+    //create div for description
+    var articleDescDiv = document.createElement('div');
+    articleDescDiv.setAttribute('class', 'entry-content');
+    articleDescDiv.innerHTML = obj.description;
+
+    articleTitleDiv.appendChild(articleTitleH4);
+    articleCompanyNameDiv.appendChild(articleCompanyNameP);
+
+    articleDiv
+        .appendChild(articleTitleDiv)
+        .appendChild(articleCompanyNameDiv)
+        .appendChild(articleDescDiv);
+
+    document.getElementById("full-view").innerHTML = articleDiv.innerHTML;
+
+
+    /*articleDiv.innerHTML = '<div class="title-box"><h4>' + obj.name + '</h4></div>' +
         '<div><p>' + obj.company_name + '</p></div>' +
         '<div class="entry-content">' + obj.description + '</div>';
     // добавляем только что созданый элемент в дерево DOM
-    document.getElementById("full-view").innerHTML = newDiv.innerHTML;
+    document.getElementById("full-view").innerHTML = articleDiv.innerHTML;*/
 }
 
 function dataProcessing(data, is_draw) {

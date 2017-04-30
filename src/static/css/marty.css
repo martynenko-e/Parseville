@@ -40,9 +40,15 @@ aside div p {
     margin: 0 0 15px;
     font-size: .92em
 }
+
+.btn-group {
+    padding: 20px 0;
+}
+
 #map {
     height: 400px;
     width: 100%;
+    margin-bottom: 25px;
 }
 
 
@@ -151,7 +157,7 @@ aside div p {
 }
 
 #footer {
-    min-height: 70px;
+    min-height: 79px;
     background-color: #e7e7e7;
 }
 

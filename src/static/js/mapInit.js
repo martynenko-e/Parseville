@@ -16,6 +16,9 @@ function initMap() {
             fullscreenControll: true
         };
     map = new google.maps.Map(mapId, mapOptions);
+    console.log(markers);
+    initMarkers();
+    console.log(markers);
     /*
      * =============================================================== *
      * create separate functions for Events of Map
@@ -131,10 +134,12 @@ function fetchNewBounds(neLat, neLng, swLat, swLng) {
             swLng: swLng
         },
         cache: false,
-        success: postProcessing,
+        success: dataProcessing,
         async: true
     });
 }
+
+
 //future functionality. Disabled for now
 function clearMarkers(markers) {
     if (markers) {
