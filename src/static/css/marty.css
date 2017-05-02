@@ -51,56 +51,6 @@ aside div p {
     margin-bottom: 25px;
 }
 
-
-
-@media screen and (min-width: 769px) {
-    aside {
-        width: 25%;
-        height: 100%;
-        position: fixed;
-        top: 0;
-        left: 0;
-        overflow-y: auto;
-    }
-
-    aside div {
-        padding: 10px 10px
-    }
-
-    aside div nav ul li {
-        padding: 0 !important;
-        display: block
-    }
-
-    aside div ul.social {
-        padding-top: 32px
-    }
-
-    main {
-        width: 75%;
-        height: 100%;
-        position: absolute;
-        top: 0;
-        left: 25%
-    }
-
-    main article.single {
-        min-height: 80%
-    }
-
-    main article ul.list li {
-        padding: 2px
-    }
-
-    .ads-aside {
-        height: 250px
-    }
-
-    .ads-responsive {
-        height: 90px
-    }
-}
-
 .psv_row_indent {
     padding-bottom: 0.5em;
     margin-bottom: 0.5em;
@@ -167,4 +117,52 @@ aside div p {
     line-height: 24px;
     color: black;
     padding-top: 28px;
+}
+
+@media screen and (min-width: 769px) {
+    aside {
+        width: 25%;
+        height: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        overflow-y: auto;
+    }
+
+    aside div {
+        padding: 10px 10px
+    }
+
+    aside div nav ul li {
+        padding: 0 !important;
+        display: block
+    }
+
+    aside div ul.social {
+        padding-top: 32px
+    }
+
+    main {
+        width: 75%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 25%
+    }
+
+    main article.single {
+        min-height: 80%
+    }
+
+    main article ul.list li {
+        padding: 2px
+    }
+
+    .ads-aside {
+        height: 250px
+    }
+
+    .ads-responsive {
+        height: 90px
+    }
 }

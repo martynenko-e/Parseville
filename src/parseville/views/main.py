@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.shortcuts import render
-from parseville.models import Vacancy, Company, Event, News
+from parseville.models import Vacancy, Company, Event, News, Office
 from parseville.views.api import get_company_batch, get_vacancy_batch, get_event_batch, get_article_batch
 import json
 
@@ -8,15 +8,16 @@ ROWS_IN_BLOCK = 10
 NEWS_BLOCK = 5
 SITE_NAME = 'Parseville'
 
+
 def index(request):
     """
     View function for home page of site.
     """
     # Render the HTML template index.html with the data in the context variable
     return render(
-        request,
-        'index.html',
-        context={'header': 'header'},
+            request,
+            'index.html',
+            context={'header': 'header'},
     )
 
 
@@ -100,8 +101,20 @@ def vacancies(request):
 
 def companies(request):
     data = get_company_batch(0)
+    offices = map(lambda office: {
+        "id": office.id,
+        "name": office.name,
+        "address": office.address,
+        "company": office.company.name,
+        "phone": office.phone,
+        "email": office.email,
+        "latitude": office.latitude,
+        "longitude": office.longitude,
+        "city": office.city.name
+    }, Office.objects.filter())
     init_data = {
         'companies': data,
+        'offices': offices
     }
     return render(request, 'all-elements.html', {
         'title': SITE_NAME + ' - all companies',

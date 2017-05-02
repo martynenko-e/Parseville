@@ -99,8 +99,8 @@ Marker.prototype.createFromData = function (data) {
     object.company = data.company;
     object.phone = data.phone;
     object.address = data.address;
-    object.lat = data.lat;
-    object.lng = data.lng;
+    object.lat = data.latitude;
+    object.lng = data.longitude;
     return object;
 };
 
@@ -344,21 +344,31 @@ function dataProcessing(data, is_draw) {
     for (var dict_key in data_dict) {
         switch (dict_key) {
             case ("vacancies"):
+                console.log('vacancy came');
                 for (var key in data_dict[dict_key]) {
                     vacancies.push(Vacancy.prototype.createFromData(data_dict[dict_key][key], is_draw));
                 }
                 break;
             case ("companies"):
+                console.log('company came');
                 for (var key in data_dict[dict_key]) {
                     companies.push(Company.prototype.createFromData(data_dict[dict_key][key], is_draw));
                 }
                 break;
             case ("events"):
+                console.log('event came');
                 for (var key in data_dict[dict_key]) {
                     events.push(Event.prototype.createFromData(data_dict[dict_key][key], is_draw));
                 }
                 break;
+            case ("offices"):
+                console.log('office came');
+                for (var key in data_dict[dict_key]) {
+                    globalMarkers.push(Marker.prototype.createFromData(data_dict[dict_key][key]));
+                }
+                break;
             case ("news"):
+                console.log('new came');
                 for (var key in data_dict[dict_key]) {
                     news.push(Article.prototype.createFromData(data_dict[dict_key][key], is_draw));
                 }

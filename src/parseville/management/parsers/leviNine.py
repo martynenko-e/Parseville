@@ -18,7 +18,7 @@ def parse_vacancy(save):
                 desc = vacancy.find('div', class_="panel-body").find('div', class_="row").find('div',
                                                                                                class_="col-md-6 info-text")
                 print desc
-                comp = Company.objects.get(alias='levinine')
+                comp = Company.objects.get(alias='levi9 ukraine')
                 print comp.name
                 vacancy_obj, created = Vacancy.objects.get_or_create(name=vacancy_title, company=comp)
                 vacancy_obj.alias = 'levinine'
@@ -29,7 +29,7 @@ def parse_vacancy(save):
 
 
 def parse_offices(save):
-    company = Company.objects.get(alias='levinine')
+    company = Company.objects.get(alias='levi9 ukraine')
     soup = get_soup_from_url('https://ukraine.levi9.jobs/contact/', False)
     if soup:
         list_of_offices = soup.find('div', id='contact').find('div', class_='row').findAll('div', class_='col-sm-6')
@@ -70,7 +70,7 @@ def parse_offices(save):
 
 
 def parse_events(save):
-    company = Company.objects.get(alias='levinine')
+    company = Company.objects.get(alias='levi9 ukraine')
     soup = get_soup_from_url(
         'https://ukraine.levi9.jobs/news/', save)
     if soup:

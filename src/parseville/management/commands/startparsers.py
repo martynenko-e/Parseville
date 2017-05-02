@@ -18,7 +18,7 @@ def start(save):
     # dou.parse_company(save)
     try:
         leviNine.parse_events(False)
-        # leviNine.parse_offices(False)
+        leviNine.parse_offices(False)
         # softserve.parse_events(save)
         # softserve.parse_news(save)
         # softserve.parse_vacancy(save)

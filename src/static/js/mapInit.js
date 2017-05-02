@@ -16,9 +16,8 @@ function initMap() {
             fullscreenControll: true
         };
     map = new google.maps.Map(mapId, mapOptions);
-    console.log(markers);
     initMarkers();
-    console.log(markers);
+
     /*
      * =============================================================== *
      * create separate functions for Events of Map
@@ -46,13 +45,14 @@ function initMarkers() {
         infowindow = null;
 
     //pass map into function is necessity otherwise it takes 'map' as come class from Python
-    fitBounds(map);
+    //fitBounds(map);
 
     // info Window google API for each Marker (infowindow is empty for now.....)
     for (var i = 0; i < markers.length; i++) {
         var marker = markers[i];
         console.log('---------------------------------------------------> marker');
         console.log(marker);
+
         var sContent = '<div class="marker-info">' +
             '<p>' + globalMarkers[i].company +
             '</br>' +
@@ -74,7 +74,6 @@ function initMarkers() {
             infowindow.open(map, marker);
         });
     }
-
 }
 
 function fitBounds(map) {
