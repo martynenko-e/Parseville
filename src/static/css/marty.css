@@ -41,6 +41,11 @@ aside div p {
     font-size: .92em
 }
 
+.wrapper {
+    min-height: 100%;
+    margin-bottom: 50px;
+}
+
 .btn-group {
     padding: 20px 0;
 }

@@ -26,34 +26,35 @@
 </head>
 <body>
 <main>
-    <nav class="navbar navbar-default">
-        <div class="psv-nav-padding">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                        data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="/">
-                    <img alt="Brand" src="{% static 'images/parseville.png' %}">
-                </a>
-                <i>
-                    <div class="navbar-text tm-navbar-text">{{ caption }}</div>
-                </i>
-            </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <div class="wrapper">
+        <nav class="navbar navbar-default">
+            <div class="psv-nav-padding">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                            data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/">
+                        <img alt="Brand" src="{% static 'images/parseville.png' %}">
+                    </a>
+                    <i>
+                        <div class="navbar-text tm-navbar-text">{{ caption }}</div>
+                    </i>
+                </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
-            </div><!-- /.navbar-collapse -->
-        </div><!-- /.container -->
-    </nav>
-    <div class="content">
-        {% block content %}{% endblock %}
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container -->
+        </nav>
+        <div class="content">
+            {% block content %}{% endblock %}
+        </div>
     </div>
-
     <footer id="footer">
         <div class="copyright-text">
             <p class="copyright-text-signature">Parseville. © 2017</p>

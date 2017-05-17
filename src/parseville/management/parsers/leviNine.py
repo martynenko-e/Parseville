@@ -82,9 +82,11 @@ def parse_events(save):
                     event.a['href'], save)
                 if link:
                     # todo description is given with tags, get rid of tags
-                    description = link.find('div', class_='col-lg-8 col-md-7 content').find('p')
+                    description = link.find('div', class_='col-lg-8 col-md-7 content').find('p').text
+
+                    print u"%s" % description
                     # todo data has to be formated before saving
-                    # data = link.find('h6').text[6:]
+                    # date = link.find('h6').text[6:]
                     #if link.find('div', class_='text_exposed_show'):
                     #    office = link.find('div', class_='text_exposed_show').find('p')
                     #else:
