@@ -1,6 +1,7 @@
 body {
     font-family: 'Arial', sans-serif;
 }
+
 img {
     max-width: 100%
 }
@@ -114,14 +115,20 @@ aside div p {
 #footer {
     min-height: 79px;
     background-color: #e7e7e7;
+    position: relative;
 }
 
 .copyright-text {
+    position: absolute;
+    width: 100%;
     text-align: center;
-    font-size: 12px;
-    line-height: 24px;
-    color: black;
-    padding-top: 28px;
+    bottom: 15%;
+}
+
+.copyright-text-signature {
+    letter-spacing: 0.5px;
+    font-size: 1.2em;
+    font-family: 'Conv_BebasNeue_Regular',sans-serif;
 }
 
 @media screen and (min-width: 769px) {
