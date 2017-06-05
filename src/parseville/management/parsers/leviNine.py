@@ -8,7 +8,7 @@ def parse_vacancy(save):
     soup = get_soup_from_url(
         'https://ukraine.levi9.jobs/open-positions/', save)
     if soup:
-        vacancy_elements = soup.find('div', id_="accordion").findAlll('div', class_="panel panel-default")
+        vacancy_elements = soup.find('div', id_="accordion").findAll('div', class_="panel")
         if vacancy_elements:
             for vacancy in vacancy_elements:
                 # could be that levi9 have no direct url to vacancy, so below url can be deleted
@@ -33,8 +33,8 @@ def parse_offices(save):
     soup = get_soup_from_url('https://ukraine.levi9.jobs/contact/', False)
     if soup:
         list_of_offices = soup.find('div', id='contact').find('div', class_='row').findAll('div', class_='col-sm-6')
-        office_phone = soup.find('div', class_='contact_box_footer').findAll('div', class_='col-md-4 col-sm-6')[3].a[
-            'href']
+        office_phone = soup.find('div', class_='contact_box_footer') \
+            .findAll('div', class_='col-md-4 col-sm-6')[3].a['href']
         # print office_phone -->
         # print list_of_offices --> ok
         if list_of_offices:
@@ -74,26 +74,21 @@ def parse_events(save):
     soup = get_soup_from_url(
         'https://ukraine.levi9.jobs/news/', save)
     if soup:
-        event_blocks = soup.find('div', id='news_loop').findAll('div', class_='col-md-4 col-sm-6 col-xs-12')
+        event_blocks = soup.find('div', id='news_loop').findAll('div', class_='col-md-4')
         if event_blocks:
             for event in event_blocks:
                 title = event.find('h3').find('a').text
-                link = get_soup_from_url(
-                    event.a['href'], save)
-                if link:
-                    # todo description is given with tags, get rid of tags
-                    description = link.find('div', class_='col-lg-8 col-md-7 content').find('p').text
-
-                    print u"%s" % description
-                    # todo data has to be formated before saving
-                    # date = link.find('h6').text[6:]
-                    #if link.find('div', class_='text_exposed_show'):
-                    #    office = link.find('div', class_='text_exposed_show').find('p')
-                    #else:
-                    #    office = 'we don\'t know where event will take place'
-                    Event.objects.get_or_create(name=title,
-                                                description=" ",
-                                                short_text=" ")
-
+                # link = get_soup_from_url(event.a['href'], save)
+                link = event.find('a')['href']
+                #date = event.find('h6').text
+                # if link.find('div', class_='text_exposed_show'):
+                #   office = link.find('div', class_='text_exposed_show').find('p')
+                # else:
+                #    office = 'we don\'t know where event will take place'
+                Event.objects.get_or_create(company=company,
+                                            name=title,
+                                            description=" ",
+                                            short_text=" ",
+                                            url=link)
 
 # News are included to Events in Levi Nine and there is no flag in order to separate them

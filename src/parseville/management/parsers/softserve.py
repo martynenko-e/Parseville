@@ -83,7 +83,8 @@ def parse_events(save):
             for link in event_links:
                 title = link.find("h2", class_="media-event_title").text
                 description = link.find("span", class_="media-event_describe").text
-                Event.objects.get_or_create(name=title,
+                Event.objects.get_or_create(company=company,
+                                            name=title,
                                             description=description,
                                             short_text=description)
 
