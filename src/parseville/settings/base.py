@@ -127,5 +127,8 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'collect_static/static')
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'), # <= don't forget a comma here
+    os.path.join(BASE_DIR, 'static'),  # <= don't forget a comma here
 ]
+
+# auth parameters
+LOGIN_REDIRECT_URL = '/'
