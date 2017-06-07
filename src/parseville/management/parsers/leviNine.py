@@ -5,27 +5,28 @@ from parseville.models import Company, Vacancy, Country, City, Office, News, Eve
 
 
 def parse_vacancy(save):
+    company = Company.objects.get(alias='levi9 ukraine')
     soup = get_soup_from_url(
         'https://ukraine.levi9.jobs/open-positions/', save)
     if soup:
-        vacancy_elements = soup.find('div', id_="accordion").findAll('div', class_="panel")
+        vacancy_elements = soup.find('div', id="accordion").findAll('div', class_="panel")
         if vacancy_elements:
             for vacancy in vacancy_elements:
                 # could be that levi9 have no direct url to vacancy, so below url can be deleted
                 vacancy_url = vacancy.find('div', class_="panel-heading").a['href']
                 vacancy_title = vacancy.find('div', class_="panel-heading").h4.text
-                print vacancy_title
-                desc = vacancy.find('div', class_="panel-body").find('div', class_="row").find('div',
-                                                                                               class_="col-md-6 info-text")
-                print desc
-                comp = Company.objects.get(alias='levi9 ukraine')
-                print comp.name
-                vacancy_obj, created = Vacancy.objects.get_or_create(name=vacancy_title, company=comp)
-                vacancy_obj.alias = 'levinine'
-                vacancy_obj.description = desc
-                vacancy_obj.url = vacancy_url
-                vacancy_obj.extra = ' '
-                vacancy_obj.save()
+                # print vacancy_title -- > ok
+                # desc_requirements = vacancy.find('div', class_="panel-body")\
+                #                           .find('div', class_="row")\
+                #                           .find('div', class_="info-text").findAll('ul')[0].findAll('li')
+                Vacancy.objects.get_or_create(name=vacancy_title,
+                                              company=company,
+                                              alias='levin9ne',
+                                              description='',
+                                              short_text='',
+                                              url=vacancy_url,
+                                              extra=''
+                                              )
 
 
 def parse_offices(save):
@@ -80,7 +81,7 @@ def parse_events(save):
                 title = event.find('h3').find('a').text
                 # link = get_soup_from_url(event.a['href'], save)
                 link = event.find('a')['href']
-                #date = event.find('h6').text
+                # date = event.find('h6').text
                 # if link.find('div', class_='text_exposed_show'):
                 #   office = link.find('div', class_='text_exposed_show').find('p')
                 # else:
