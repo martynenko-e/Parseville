@@ -4,6 +4,8 @@ from parseville.models import Vacancy, Company, Event, News, Office
 from parseville.views.api import get_company_batch, get_vacancy_batch, get_event_batch, get_article_batch
 import json
 
+from django.contrib.auth import authenticate, login, logout
+
 ROWS_IN_BLOCK = 10
 NEWS_BLOCK = 5
 SITE_NAME = 'Parseville'
@@ -15,9 +17,9 @@ def index(request):
     """
     # Render the HTML template index.html with the data in the context variable
     return render(
-            request,
-            'index.html',
-            context={'header': 'header'},
+        request,
+        'index.html',
+        context={'header': 'header'},
     )
 
 
@@ -152,3 +154,18 @@ def news(request):
 
 def custom_page_not_found_view(request):
     return render(request, "404.html", status=404)
+
+
+def login_view(request):
+    username = request.POST['username']
+    password = request.POST['password']
+    user = authenticate(request, username=username, password=password)
+    if user is not None:
+        if user.is_active:
+            login(request, user)
+    else:
+        print 'invalid credentials'
+
+
+def logout_view(request):
+    logout(request)
