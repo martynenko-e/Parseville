@@ -3,7 +3,7 @@ import re
 from helper import get_soup_from_url, download_image_parse
 from parseville.models import Company, Vacancy, Country, City, Office, News, Event
 
-
+#Problem: get() returned more than one Vacancy -- it returned 2!
 def parse_vacancy(save):
     company = Company.objects.get(alias='levi9 ukraine')
     soup = get_soup_from_url(
@@ -19,14 +19,13 @@ def parse_vacancy(save):
                 # desc_requirements = vacancy.find('div', class_="panel-body")\
                 #                           .find('div', class_="row")\
                 #                           .find('div', class_="info-text").findAll('ul')[0].findAll('li')
-                Vacancy.objects.get_or_create(name=vacancy_title,
-                                              company=company,
-                                              alias='levin9ne',
-                                              description='',
-                                              short_text='',
-                                              url=vacancy_url,
-                                              extra=''
-                                              )
+                print vacancy_title
+                vacancy_obj, created = Vacancy.objects.get_or_create(name=vacancy_title, company=company)
+                vacancy_obj.alias = re.sub(" ", "-", vacancy_title.lower())
+                vacancy_obj.description = ''.encode("utf-8")
+                vacancy_obj.url = vacancy_url
+                vacancy_obj.extra = ''
+                vacancy_obj.save()
 
 
 def parse_offices(save):

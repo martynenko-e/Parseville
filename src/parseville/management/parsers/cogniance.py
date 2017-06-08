@@ -21,12 +21,13 @@ def parse_vacancy(save):
                     if card:
                         title = card.find('strong', id='job-position').text
                         city = card.find('div', id='job-location').text
-                        lang = ''
-                        Vacancy.objects.get_or_create(name=title, company=company,
-                                                      alias='cogniance',
-                                                      description=desc.encode('utf-8'),
-                                                      url=vacancy_url,
-                                                      extra=city + ' languages ' + lang)
+                        print title, city
+                        vacancy_obj, created = Vacancy.objects.get_or_create(name=title, company=company)
+                        vacancy_obj.alias = re.sub(" ", "-", title.lower())
+                        vacancy_obj.description = desc.encode("utf-8")
+                        vacancy_obj.url = vacancy_url
+                        vacancy_obj.extra = city
+                        vacancy_obj.save()
 
 
 def parse_offices(save):
