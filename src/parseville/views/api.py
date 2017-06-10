@@ -132,7 +132,7 @@ def get_company_batch(count):
 
 
 def get_vacancy_batch(count):
-    vacancy_query_set = Vacancy.objects.filter(show=False,
+    vacancy_query_set = Vacancy.objects.filter(show=True,
                                                date__isnull=False,
                                                date__lte=datetime.now()
                                                ).order_by('date')[BATCH_SIZE * count:BATCH_SIZE * count + BATCH_SIZE] \
