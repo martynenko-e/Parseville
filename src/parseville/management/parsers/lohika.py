@@ -29,3 +29,16 @@ def parse_vacancy(save):
         vacancy_obj.extra = short_text
         vacancy_obj.date = date
         vacancy_obj.save()
+
+
+# parse.html is empty. nothing to parse
+def parse_offices(save):
+    company = Company.objects.get(alias='lohika')
+    Office.objects.get_or_create(name='Kiev office',
+                                 city='Kiev',
+                                 company=company,
+                                 latitude=50.434043,
+                                 longiitude=30.509147,
+                                 address='35 Zhylianska Street,5 floor',
+                                 phone='0445938080',
+                                 email='job_kyiv@lohika.com')
