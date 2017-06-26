@@ -31,6 +31,7 @@ def start(save):
         # trionika.parse_offices(save)
         # trionika.parse_events(save)
         # lohika.parse_vacancy(save)
-        lohika.parse_offices(save)
+        # lohika.parse_offices(save)
+        lohika.parse_events(save)
     except Exception as e:
         print "Problem: %s" % e
