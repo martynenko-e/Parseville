@@ -5,6 +5,7 @@ from parseville.management.parsers import cogniance
 from parseville.management.parsers import leviNine
 from parseville.management.parsers import trionika
 from parseville.management.parsers import lohika
+from parseville.management.parsers import ciklum
 
 
 class Command(BaseCommand):
@@ -32,6 +33,7 @@ def start(save):
         # trionika.parse_events(save)
         # lohika.parse_vacancy(save)
         # lohika.parse_offices(save)
-        lohika.parse_events(save)
+        # lohika.parse_events(save)
+        ciklum.parse_vacancy(save)
     except Exception as e:
         print "Problem: %s" % e
