@@ -6,6 +6,7 @@ from parseville.management.parsers import leviNine
 from parseville.management.parsers import trionika
 from parseville.management.parsers import lohika
 from parseville.management.parsers import ciklum
+from parseville.management.parsers import betlab
 
 
 class Command(BaseCommand):
@@ -36,6 +37,7 @@ def start(save):
         # lohika.parse_events(save)
         # ciklum.parse_vacancy(save)
         # ciklum.parse_offices(save)
-        ciklum.parse_news(save)
+        # ciklum.parse_news(save) <-- not use
+        betlab.parse_vacancy(save)
     except Exception as e:
         print "Problem: %s" % e
