@@ -35,3 +35,43 @@ def parse_vacancy(save):
             vacancy_obj.extra = vacancy_city
             vacancy_obj.date = vacancy_date
             vacancy_obj.save()
+
+
+def parse_offices(save):
+    company = Company.objects.get(alias='ciklum')
+    Office.objects.get_or_create(name='Kiev Office-Amosova',
+                                 city='Kiev',
+                                 company=company,
+                                 latitude=50.422822,
+                                 longitute=30.505266,
+                                 address='12 Amosova street',
+                                 phone='044 545 7745',
+                                 email='')
+    Office.objects.get_or_create(name='Kiev Office-Gulliver',
+                                 city='Kiev',
+                                 company=company,
+                                 latitude=50.438728,
+                                 longitude=30.523173,
+                                 address='1-A, Sportyvna sq',
+                                 phone='',
+                                 email='')
+
+
+'''
+def parse_news(save):
+    company = Company.objects.get(alias='ciklum')
+    soup = get_soup_from_url('https://www.ciklum.com/press-center/', save)
+    if soup:
+ # the link below is not responses with any info... it gives ---> 'None' but html has this elements
+#news_wrapper = soup \
+#    .find('main', class_='posts-list blog') \
+#    .find('div', class_='container') \
+#    .find('row', class_='row') \
+#    .find('div', class_='col-sm-8 col-sm-offset-2')
+
+news_wrapper = soup.find('main', class_='posts-list blog') \
+    .find('div', class_='container') \
+    .find('div', class_='row') \
+    .find('div', class_='post-separator')
+print news_wrapper
+'''

@@ -34,6 +34,8 @@ def start(save):
         # lohika.parse_vacancy(save)
         # lohika.parse_offices(save)
         # lohika.parse_events(save)
-        ciklum.parse_vacancy(save)
+        # ciklum.parse_vacancy(save)
+        # ciklum.parse_offices(save)
+        ciklum.parse_news(save)
     except Exception as e:
         print "Problem: %s" % e
