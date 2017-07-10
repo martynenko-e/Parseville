@@ -26,3 +26,15 @@ def parse_vacancy(save):
         vacancy_obj.extra = short_text
         vacancy_obj.date = date
         vacancy_obj.save()
+
+
+def parse_office(save):
+    company = Company.objects.get(alias='betlab')
+    Office.objects.get(name='Kiev Office',
+                       city='Kiev',
+                       company=company,
+                       latitude=50.449004,
+                       longitute=30.540783,
+                       address='16a Parkovaya Doroga Street',
+                       phone='',
+                       email='')
