@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.shortcuts import render
-from parseville.models import Vacancy, Company, Event, News, Office
-from parseville.views.api import get_company_batch, get_vacancy_batch, get_event_batch, get_article_batch
+# from parseville.models import Vacancy, Company, Event, News, Office
+# from parseville.views.api import get_company_batch, get_vacancy_batch, get_event_batch, get_article_batch
 import json
 
 from django.contrib.auth import authenticate, login, logout

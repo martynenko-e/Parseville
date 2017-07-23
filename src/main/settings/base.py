@@ -24,10 +24,24 @@ SECRET_KEY = 'e6j#wd9xv#&v)prdxdu#c91fmc&3h88=-r5u2=r6o#$ka2y07c'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        # 'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ],
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE': 10,
+    'DATETIME_FORMAT': "%Y-%m-%d",
+}
+
 ALLOWED_HOSTS = [
+    "127.0.0.1",
+    "localhost",
     "web",
-    "localhost"
 ]
+
+SITE_ID = 1
 
 # Application definition
 
@@ -38,8 +52,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
 
+    # My applications
     'parseville',
+
+    # Third party applications
+    'rest_framework',
+    
 ]
 
 MIDDLEWARE = [
@@ -52,7 +72,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'parseville.urls'
+ROOT_URLCONF = 'main.urls'
 
 TEMPLATES = [
     {
@@ -66,13 +86,14 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
 
-                'parseville.context_processor.init'
+                # My own context processors
+                # 'main.context_processor.init'
             ],
         },
     },
 ]
 
-WSGI_APPLICATION = 'parseville.wsgi.application'
+WSGI_APPLICATION = 'main.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases

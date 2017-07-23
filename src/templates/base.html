@@ -51,14 +51,14 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right iac-navbar-right">
                         <li>
-                            <a href="{% url 'login' %}">Login</a>
+                           <a href="{% url 'snippet-index' %}">Snippets</a>
                         </li>
                     </ul>
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container -->
         </nav>
         <div class="content">
-            {% block content %}{% endblock %}
+            {% block content %}{% endblock %}    
         </div>
     </div>
     <footer id="footer">

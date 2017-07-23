@@ -1,0 +1,6 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% for snippet in snippets %}
+     {{ snippet.highlighted|safe }}
+    {% endfor %}
+{% endblock content %}

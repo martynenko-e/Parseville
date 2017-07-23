@@ -6,23 +6,21 @@ from parseville.management.parsers import leviNine
 from parseville.management.parsers import trionika
 from parseville.management.parsers import lohika
 from parseville.management.parsers import ciklum
-from parseville.management.parsers import betlab
-from parseville.management.parsers import grammarly
 
 
 class Command(BaseCommand):
     can_import_settings = True
 
     def handle(self, *args, **options):
-        start(True)
+        start(False)
 
 
 def start(save):
     # dou.parse_company(save)
     try:
-        # leviNine.parse_vacancy(False)
-        # leviNine.parse_events(False)
-        # leviNine.parse_offices(False)
+        leviNine.parse_vacancy(False)
+        leviNine.parse_events(False)
+        leviNine.parse_offices(False)
         # softserve.parse_events(save)
         # softserve.parse_news(save)
         # softserve.parse_vacancy(save)
@@ -37,9 +35,5 @@ def start(save):
         # lohika.parse_offices(save)
         # lohika.parse_events(save)
         # ciklum.parse_vacancy(save)
-        # ciklum.parse_offices(save)
-        # ciklum.parse_news(save) <-- not use
-        # betlab.parse_vacancy(save)
-        grammarly.parse_vacancy(save)
     except Exception as e:
         print "Problem: %s" % e

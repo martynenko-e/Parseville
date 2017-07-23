@@ -21,7 +21,7 @@ def parse_vacancy(save):
                 #                           .find('div', class_="info-text").findAll('ul')[0].findAll('li')
                 print vacancy_title
                 vacancy_obj, created = Vacancy.objects.get_or_create(name=vacancy_title, company=company)
-                vacancy_obj.alias = re.sub(" ", "-", vacancy_title.lower())
+                vacancy_obj.alias = re.sub(" ", "-", vacancy_title.lower().strip())
                 vacancy_obj.description = ''.encode("utf-8")
                 vacancy_obj.url = vacancy_url
                 vacancy_obj.extra = ''

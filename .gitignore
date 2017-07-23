@@ -7,3 +7,4 @@ db
 src/static/images/news
 src/static/images/brands
 src/static/images/languages
+*.pyc

@@ -2,7 +2,7 @@
 import re
 import urllib, json
 
-from dateutil import parser
+# from dateutil import parser
 from helper import get_soup_from_url
 from parseville.models import Company, Vacancy, Country, City, Event, Office, News
 

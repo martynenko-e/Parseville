@@ -4,3 +4,5 @@ Pillow
 bs4
 lxml
 gunicorn
+djangorestframework
+Pygments

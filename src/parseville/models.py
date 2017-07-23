@@ -1,5 +1,9 @@
+from __future__ import unicode_literals
+
 from django.db import models
-from parseville.settings.base import STATIC_URL
+
+# TODO get static url from settings
+STATIC_URL = ""
 
 
 class MetaModel(models.Model):
@@ -50,7 +54,7 @@ class Company(MetaModel):
     show = models.BooleanField(default=False)
     show_on_main = models.BooleanField(default=False)
     has_parser = models.BooleanField(default=False)
-    date = models.DateTimeField(auto_now_add=True)
+    date = models.DateTimeField( auto_now_add=True)
     extra = models.TextField(null=True, blank=True)
 
     def get_absolute_url(self):
@@ -79,6 +83,11 @@ class Vacancy(MetaModel):
             return self.company.name
         else:
             return ""
+
+    # TODO
+    # def save(self):
+    #     if self.name:
+    #         self.alias = re.sub("\w+", "-", self.name)
 
 
 class UsefulLink(MetaModel):
@@ -148,5 +157,3 @@ class News(MetaModel):
             return self.company.name
         else:
             return ""
-
-
