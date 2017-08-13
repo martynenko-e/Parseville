@@ -2,6 +2,19 @@
     width: 70%;
 }
 
+a.spoiler {
+    margin-top: 20px;
+}
+
+
+a.spoiler:after {
+	content: ' [-]';
+}
+		
+a.spoiler.collapsed:after {
+	content: ' [+]';
+}
+
 @media screen and (min-width: 769px) {
     aside {
         width: 25%;
