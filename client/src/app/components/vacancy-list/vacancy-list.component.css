@@ -6,6 +6,9 @@ a.spoiler {
     margin-top: 20px;
 }
 
+a.spoiler {
+    color: white;
+}
 
 a.spoiler:after {
 	content: ' [-]';
