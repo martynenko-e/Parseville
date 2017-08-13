@@ -1,0 +1,16 @@
+<div class="card">
+  <div class="card-header text-center">
+    <strong>Vacancies</strong>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item" *ngFor="let vacancy of vacancies">
+      <div class="d-flex w-100 justify-content-between">
+        <h6 class="mb-1">{{vacancy.name}}</h6>
+        <small>Company: {{vacancy.company_name}}</small>
+      </div>
+      <p class="mb-1">{{vacancy.description.substr(0, 140) + '...'}}</p>      
+      <small><a href="{{vacancy.url}}">Link</a></small>
+    </li>
+  </ul>
+  <a routerLink="/vacancies" routerLinkActive="active" class="btn btn-primary btn-block">All Vacancies</a>
+</div>

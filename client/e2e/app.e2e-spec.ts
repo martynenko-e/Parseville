@@ -1,14 +1,14 @@
-import { ClientPage } from './app.po';
+import { AngularProjectScratchPage } from './app.po';
 
-describe('client App', () => {
-  let page: ClientPage;
+describe('angular-project-scratch App', function() {
+  let page: AngularProjectScratchPage;
 
   beforeEach(() => {
-    page = new ClientPage();
+    page = new AngularProjectScratchPage();
   });
 
-  it('should display welcome message', () => {
+  it('should display message saying app works', () => {
     page.navigateTo();
-    expect(page.getParagraphText()).toEqual('Welcome to app!');
+    expect(page.getParagraphText()).toEqual('app works!');
   });
 });

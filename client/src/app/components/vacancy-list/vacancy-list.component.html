@@ -1,0 +1,84 @@
+<div class="container">
+  <div class="row">
+    <main>
+      <div class="card-columns">
+        <div class="card" *ngFor="let vacancy of vacancies">
+          <div class="card-header">
+            {{vacancy.name}}
+          </div>
+          <div class="card-block">
+            <h4 class="card-title">{{vacancy.company_name}}</h4>
+            <p class="card-text">{{vacancy.short_text}}</p>
+            <!-- <p class="card-text"> {{vacancy.description.substr(0, vacancy.description.length / 4)}}</p> -->
+            <small>Date: {{vacancy.date}}</small>
+            <div>
+              <small><a href="{{vacancy.url}}">Link</a></small>
+            </div>
+          </div>
+          <div class="card-footer">
+            <button class="btn btn-primary" data-toggle="modal" data-target="#details" (click)="selectVacancy(vacancy.id)">Details</button>
+            <div id="details" class="modal fade" *ngIf="selectedVacancy">
+              <app-vacancy-modal [selectedVacancy]="selectedVacancy"></app-vacancy-modal>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <div class="row">
+          <button class="btn btn-info btn-block" (click)="showMoreVacancies()">Show More</button>
+        </div>
+      </div>
+    </main>
+    <aside>
+      <input class="form-control" type="text" placeholder="Search ..."><i class="fa fa-search" aria-hidden="true"></i>
+    </aside>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--<div class="card-columns">
+  <div class="card" *ngFor="let vacancy of vacancies">
+    <div class="card-header">
+      {{vacancy.name}}
+    </div>
+    <div class="card-block">
+      <h4 class="card-title">{{vacancy.company_name}}</h4>
+      <p class="card-text">{{vacancy.short_text}}</p>
+      <small>Date: {{vacancy.date}}</small>
+      <div>
+        <small><a href="{{vacancy.url}}">Link</a></small>
+      </div>
+    </div>
+    <div class="card-footer">
+      <button class="btn btn-primary"
+      data-toggle="modal"
+      data-target="#details"
+      (click)="selectVacancy(vacancy.id)">Details</button>
+      <div id="details" class="modal fade" *ngIf="selectedVacancy">
+        <app-vacancy-modal [selectedVacancy]="selectedVacancy"></app-vacancy-modal>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <button class="btn btn-info btn-block" (click)="showMoreVacancies()">Show More</button>
+  </div>
+</div>-->

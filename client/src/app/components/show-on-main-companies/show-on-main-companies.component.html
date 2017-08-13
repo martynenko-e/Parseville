@@ -1,0 +1,16 @@
+<div class="card">
+  <div class="card-header text-center">
+    <strong>Companies</strong>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item" *ngFor="let company of companies">
+      <div class="d-flex w-100 justify-content-between">
+        <h6 class="mb-1">{{company.name}}</h6>
+        <small>{{company.image}}</small>
+      </div>
+      <p class="mb-1">Short text esli 4e --> {{company.short_text + '...'}}</p>      
+      <small><a href="{{company.url}}">Link</a></small>
+    </li>
+  </ul>
+  <a routerLink="/companies" routerLinkActive="active" class="btn btn-primary btn-block">All Companies</a>
+</div>

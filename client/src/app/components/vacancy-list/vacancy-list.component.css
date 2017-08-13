@@ -1,0 +1,21 @@
+.form-control {
+    width: 70%;
+}
+
+@media screen and (min-width: 769px) {
+    aside {
+        width: 25%;
+        height: 100%;
+        position: fixed;
+        left: 75%; 
+        overflow-y: auto;
+    } 
+
+    main {
+        width: 75%; 
+        height: 100%;
+        top: 0;
+     /* position: absolute; */
+        right: 25%
+    } 
+}

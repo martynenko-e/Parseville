@@ -1,0 +1,19 @@
+<div class="modal-dialog modal-lg">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h4 class="modal-title text-center">{{selectedCompany.name}}</h4>
+      <input class="close" type="button" data-dismiss="modal" value="&times;">
+    </div>
+    <div class="modal-body">
+      <small>{{selectedCompany.image}}</small>
+      <p>{{selectedCompany.short_text}}</p>
+      Date: <small>{{selectedCompany.date}}</small>
+      <div>
+        <small><a href="{{selectedCompany.url}}">Link</a></small>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-danger" type="button" data-dismiss="modal">Cancel</button>
+    </div>
+  </div>
+</div>
