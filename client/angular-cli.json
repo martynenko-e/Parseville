@@ -18,15 +18,7 @@
       "tsconfig": "tsconfig.json",
       "prefix": "app",
       "styles": [
-        "../node_modules/bootstrap/dist/css/bootstrap-reboot.css",
-        "../node_modules/bootstrap/dist/css/bootstrap-grid.css",
         "../node_modules/bootstrap/dist/css/bootstrap.css",
-        "../node_modules/font-awesome/css/font-awesome.css",
-        "../node_module/font-awesome/fonts/fontawesome-webfont.eot",
-        "../node_module/font-awesome/fonts/fontawesome-webfont.svg",
-        "../node_module/font-awesome/fonts/fontawesome-webfont.ttf",
-        "../node_module/font-awesome/fonts/fontawesome-webfont.woff",
-        "../node_module/font-awesome/fonts/fontawesome-webfont.woff2",
         "styles.css"
       ],
       "scripts": [
