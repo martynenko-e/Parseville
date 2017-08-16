@@ -15,11 +15,14 @@ import { ShowOnMainCompaniesComponent } from './components/show-on-main-companie
 import { NavComponent } from './components/nav/nav.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { MainComponent } from './components/main/main.component';
+import { NewsComponent } from './components/news/news.component';
+import { EventsComponent } from './components/events/events.component';
 
 import { VacancyListService } from './services/vacancy-list.service';
 import { CompanyListService } from './services/company-list.service';
 import { ShowOnMainVacancyService } from './services/show-on-main-vacancy.service';
 import { ShowOnMainCompanyService } from './services/show-on-main-company.service';
+import { VacancyListPipePipe } from './pipes/vacancy-list-pipe.pipe';
 
 
 @NgModule({
@@ -34,7 +37,10 @@ import { ShowOnMainCompanyService } from './services/show-on-main-company.servic
     PageNotFoundComponent,
     NavComponent,
     FooterComponent,
-    MainComponent
+    MainComponent,
+    NewsComponent,
+    EventsComponent,
+    VacancyListPipePipe
   ],
   imports: [
     BrowserModule,

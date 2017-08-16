@@ -1,8 +1,19 @@
 <div class="container">
   <div class="row">
+    <aside>
+      <form id="filter">
+        <input [(ngModel)]="term" class="form-control" name="lol" type="text" placeholder="Search ..."><i class="fa fa-search" aria-hidden="true"></i>
+        <a href="#advanced" class="btn btn-info spoiler collapsed" data-toggle="collapse">Show Advanced</a>
+        <div class="collapse" id="advanced">
+          <div class="well">
+            <p>To be added...</p>
+          </div>
+        </div>
+      </form>
+    </aside>
     <main>
       <div class="card-columns">
-        <div class="card" *ngFor="let vacancy of vacancies">
+        <div class="card" *ngFor="let vacancy of vacancies | vacancyListPipe: term">
           <div class="card-header">
             {{vacancy.name}}
           </div>
@@ -29,15 +40,7 @@
         </div>
       </div>
     </main>
-    <aside>
-      <input class="form-control" type="text" placeholder="Search ..."><i class="fa fa-search" aria-hidden="true"></i>
-      <a href="#advanced" class="btn btn-info spoiler collapsed" data-toggle="collapse">Show Advanced</a>
-      <div class="collapse" id="advanced">
-        <div class="well">
-          <p>To be added...</p>
-        </div>
-      </div>
-    </aside>
+
   </div>
 </div>
 

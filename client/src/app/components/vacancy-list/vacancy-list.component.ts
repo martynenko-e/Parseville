@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 import { Vacancy } from '../../classes/vacancy';
 import { VacancyListService } from '../../services/vacancy-list.service';
+import { VacancyListPipePipe } from '../../pipes/vacancy-list-pipe.pipe';
 
 @Component({
   selector: 'app-vacancy-list',
@@ -9,6 +10,9 @@ import { VacancyListService } from '../../services/vacancy-list.service';
   styleUrls: ['./vacancy-list.component.css']
 })
 export class VacancyListComponent implements OnInit {
+
+  /* @Input() 
+  term:any; */
 
   vacancies: Vacancy[];
   counter: number = 1;
