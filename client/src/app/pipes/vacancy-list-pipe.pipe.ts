@@ -13,4 +13,5 @@ export class VacancyListPipePipe implements PipeTransform {
       return vacancy.name.toLowerCase().includes(term.toLowerCase());
     });
 
+  }
 }
