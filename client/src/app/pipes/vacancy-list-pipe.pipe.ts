@@ -12,6 +12,5 @@ export class VacancyListPipePipe implements PipeTransform {
     return vacancies.filter(vacancy => {
       return vacancy.name.toLowerCase().includes(term.toLowerCase());
     });
-  }
 
 }
