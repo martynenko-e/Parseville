@@ -1,3 +1,19 @@
-<p>
-  news works!
-</p>
+<div class="card">
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item flex-column" *ngFor="let new of news">
+      <a href="{{new.url}}" class="list-group-item
+         list-group-item-action
+         flex-column
+         align-items-start">
+        <div class="d-flex w-100 justify-content-between">
+          <h6 class="mb-1">{{new.name}}</h6>
+          <small>{{new.date}}</small>
+        </div>
+        <div class="container">
+          <p class="mb-1">{{new.short_text}}</p>
+        </div>
+        <small>Company: {{new.company_name}} </small>
+      </a>
+    </li>
+  </ul>
+</div>

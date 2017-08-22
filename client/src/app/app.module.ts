@@ -20,6 +20,8 @@ import { EventsComponent } from './components/events/events.component';
 
 import { VacancyListService } from './services/vacancy-list.service';
 import { CompanyListService } from './services/company-list.service';
+import { NewsService } from './services/news.service';
+import { EventsService } from './services/events.service';
 import { ShowOnMainVacancyService } from './services/show-on-main-vacancy.service';
 import { ShowOnMainCompanyService } from './services/show-on-main-company.service';
 import { VacancyListPipePipe } from './pipes/vacancy-list-pipe.pipe';
@@ -52,7 +54,10 @@ import { VacancyListPipePipe } from './pipes/vacancy-list-pipe.pipe';
     VacancyListService,
     ShowOnMainVacancyService,
     CompanyListService,
-    ShowOnMainCompanyService],
+    ShowOnMainCompanyService,
+    NewsService,
+    EventsService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
