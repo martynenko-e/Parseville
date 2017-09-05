@@ -1,24 +1,39 @@
-<!-- Nav tabs -->
-<ul class="nav nav-tabs" role="tablist">
-    <li class="nav-item">
-        <a class="nav-link active" data-toggle="tab" href="#news" role="tab">News</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" data-toggle="tab" href="#events" role="tab">Events</a>
-    </li>
-</ul>
+<!-- accordion -->
 
-<!-- Tab panes -->
-<div class="tab-content">
-    <div class="tab-pane active" id="news" role="tabpanel">
-        <app-news></app-news>
-    </div>
-    <div class="tab-pane" id="events" role="tabpanel">
-        <app-events></app-events>
+<div id="accordion" role="tablist" aria-multiselectable="true">
+    <div class="card">
+        <div class="card-header" role="tab" id="headingOne">
+            <h5 class="mb-0">
+                <a class="accordion-link" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                    News and Events
+                </a>
+            </h5>
+        </div>
+
+        <div id="collapseOne" class="collapse" role="tabpanel" aria-labelledby="headingOne">
+            <div class="card-block">
+                <!-- nav tabs -->
+                <ul class="nav nav-tabs" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" data-toggle="tab" href="#news" role="tab">News</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#events" role="tab">Events</a>
+                    </li>
+                </ul>
+                <!-- tab content -->
+                <div class="tab-content">
+                    <div class="tab-pane active" id="news" role="tabpanel">
+                        <app-news></app-news>
+                    </div>
+                    <div class="tab-pane" id="events" role="tabpanel">
+                        <app-events></app-events>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
-
-
 <hr>
 <app-show-on-main-companies></app-show-on-main-companies>
 <hr>

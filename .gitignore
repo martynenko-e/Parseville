@@ -10,3 +10,4 @@ src/static/images/languages
 *.pyc
 run.sh
 src/static/ang
+client/packahe-lock.json

@@ -4,9 +4,9 @@ if [ "$1" == "-b" ]; then
     docker build -t parseville .
 fi
 
-SOURCE_VOLUME="/Users/yevhenmartynenko/_projects/Parseville/src"
-STATIC_VOLUME="/Users/yevhenmartynenko/_projects/Parseville/src/collect_static"
-NGINX_VOLUME="/Users/yevhenmartynenko/_projects/Parseville/config/nginx"
+SOURCE_VOLUME="/Users/vladimir/FE/js/Projects/Parseville/Parseville/src"
+STATIC_VOLUME="/Users/vladimir/FE/js/Projects/Parseville/Parseville/src/collect_static"
+NGINX_VOLUME="/Users/vladimir/FE/js/Projects/Parseville/Parseville/config/nginx"
 EXPOSE_PORT=8001
 
 if [ "$2" == "-p" ]; then
