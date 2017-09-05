@@ -16,6 +16,8 @@ if [ "$2" == "-p" ]; then
     EXPOSE_PORT=8000
 fi
 
+# test comment
+
 echo $SOURCE_VOLUME
 
 docker run -d --name parseville -v $SOURCE_VOLUME:/code parseville

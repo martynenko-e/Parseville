@@ -8,6 +8,6 @@ src/static/images/news
 src/static/images/brands
 src/static/images/languages
 *.pyc
-run.sh
+../run.sh
 src/static/ang
-client/packahe-lock.json
+client/package-lock.json
