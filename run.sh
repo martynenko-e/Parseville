@@ -17,6 +17,7 @@ if [ "$2" == "-p" ]; then
 fi
 
 # test comment
+# test comment 2
 
 echo $SOURCE_VOLUME
 
