@@ -2,7 +2,10 @@
   <div class="modal-content">
     <div class="modal-header">
       <h4 class="modal-title text-center">{{selectedVacancy.name}}</h4>
-      <input class="close" type="button" data-dismiss="modal" value="&times;">
+      <button type="button" class="close cross" data-dismiss="modal">
+        <span aria-hidden="true" class="">&times;</span>
+        <span class="sr-only">Close</span>
+      </button>
     </div>
     <div class="modal-body">
       Company: <small>{{selectedVacancy.company_name}}</small>
