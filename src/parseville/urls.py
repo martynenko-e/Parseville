@@ -20,7 +20,8 @@ from .views import (
 )
 
 urlpatterns = [
-    url(r'^$', index, name='index'),
+    url(r'^$', index, name='ang_index'),
+    #url(r'^$', index, name='index'),
     # url(r'^add-point/$', AddPoint.as_view(), name='add-point'),
 ]
 
